@@ -1,0 +1,17 @@
+namespace: "theforeman"
+name: "operations"
+description: Foreman operations tasks such as install, upgrade and maintenance
+authors:
+version: "0.0.1"
+license:
+  - "GPL-3.0-or-later"
+tags:
+  - foreman
+  - katello
+  - satellite
+  - orcharhino
+readme: "README.md"
+homepage: "https://theforeman.org/"
+repository: "https://github.com/theforeman/foreman-operations-collection"
+documentation: "https://theforeman.org/plugins/foreman-operations-collection/"
+issues: "https://github.com/theforeman/foreman-operations-collection/issues"
