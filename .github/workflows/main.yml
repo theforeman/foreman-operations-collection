@@ -110,3 +110,32 @@ jobs:
         with:
           name: collection
           path: theforeman-operations-*.tar.gz
+
+  molecule:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        ansible:
+          - stable-2.9
+          - stable-2.10
+          - devel
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.7"
+      - name: Install Ansible
+        run: pip install --upgrade git+https://github.com/ansible/ansible.git@${{ matrix.ansible }}
+      - name: Install dependencies
+        run: make test-setup
+      - name: Run tests
+        env:
+          DRIVER_NAME: docker
+        run: |
+          for roledir in roles/*/molecule; do
+            pushd $(dirname $roledir)
+            molecule test
+            popd
+          done

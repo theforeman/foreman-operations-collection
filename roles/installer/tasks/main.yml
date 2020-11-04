@@ -1,0 +1,29 @@
+---
+- name: Check that necessary variables are defined
+  assert:
+    that:
+      - installer_scenario is defined
+
+- name: Check if initial install has happened
+  stat:
+    path: /etc/foreman-installer/scenarios.d/.installed
+  register: installed
+
+- name: 'Check if changes are needed by running installer in noop mode'
+  command: >
+    {{ installer_command }}
+    --scenario {{ installer_scenario }}
+    --noop
+  register: installer_noop
+  changed_when: false
+  failed_when: installer_noop.rc not in [0, 2]
+  when: installed.stat.exists
+
+- name: 'Run installer'
+  command: >
+    {{ installer_command }}
+    --scenario {{ installer_scenario }}
+    {{ (installer_verbose|bool) | ternary("-v", "") }}
+    {{ (installer_no_colors|bool) | ternary("--no-colors", "") }}
+    {{ installer_options | join(' ') }}
+  when: installer_noop.rc is not defined or installer_noop.rc == 2

@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: false
+  vars:
+    installer_scenario: foreman
+    installer_verbose: true
+    installer_no_colors: false
+  roles:
+    - installer

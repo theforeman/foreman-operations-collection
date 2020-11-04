@@ -1,0 +1,22 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: true
+  become: true
+  tasks:
+    - name: 'Setup Foreman latest repository'
+      yum:
+        name: https://yum.theforeman.org/releases/latest/el{{ ansible_distribution_major_version }}/x86_64/foreman-release.rpm
+        disable_gpg_check: true
+        state: present
+
+    - name: 'Setup Puppet 6 Repository'
+      yum:
+        name: https://yum.puppet.com/puppet6-release-el-{{ ansible_distribution_major_version }}.noarch.rpm
+        disable_gpg_check: true
+        state: present
+
+    - name: Install foreman-installer
+      package:
+        name: foreman-installer
+        state: present

@@ -1,0 +1,5 @@
+---
+installer_command: foreman-installer
+installer_verbose: true
+installer_no_colors: false
+installer_options: []
