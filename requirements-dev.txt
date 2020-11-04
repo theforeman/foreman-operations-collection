@@ -1,9 +1,3 @@
-pytest
-pytest-xdist
-vcrpy
-ansible_runner
-python-debian
-rpm-py-installer
 docker
 cryptography<3.1; python_version < '3.6'
 -r requirements-lint.txt
@@ -12,3 +6,4 @@ cryptography<3.1; python_version < '3.6'
 -r https://github.com/ansible/ansible/raw/devel/test/lib/ansible_test/_data/requirements/sanity.rstcheck.txt
 -r https://github.com/ansible/ansible/raw/devel/test/lib/ansible_test/_data/requirements/sanity.yamllint.txt
 -r https://github.com/ansible/ansible/raw/devel/test/lib/ansible_test/_data/requirements/sanity.validate-modules.txt
+molecule[docker]
