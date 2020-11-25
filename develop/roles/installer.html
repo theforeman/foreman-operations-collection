@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Role Index &mdash; Foreman Operations Collection  documentation</title>
+  <title>theforeman.operations.installer &mdash; Foreman Operations Collection  documentation</title>
   
 
   
@@ -36,9 +36,7 @@
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Testing Foreman Operations Collection" href="../testing.html" />
-    <link rel="prev" title="Foreman Operations Collection" href="../README.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,9 +82,9 @@
             
             
               <p class="caption"><span class="caption-text">User documentation</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../README.html">Foreman Operations Collection </a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Role Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Role Index</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer documentation</span></p>
 <ul>
@@ -138,13 +136,13 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Role Index</li>
+      <li>theforeman.operations.installer</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/roles/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/roles/installer.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -157,13 +155,35 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="role-index">
-<h1>Role Index<a class="headerlink" href="#role-index" title="Permalink to this headline">¶</a></h1>
-<blockquote>
-<div><ul class="simple">
-<li><p><a class="reference internal" href="installer.html"><span class="doc">theforeman.operations.installer</span></a></p></li>
+  <div class="section" id="theforeman-operations-installer">
+<h1>theforeman.operations.installer<a class="headerlink" href="#theforeman-operations-installer" title="Permalink to this headline">¶</a></h1>
+<p>Run the foreman-installer</p>
+<div class="section" id="role-variables">
+<h2>Role Variables<a class="headerlink" href="#role-variables" title="Permalink to this headline">¶</a></h2>
+<p>Required:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">installer_scenario</span></code>: The installer scenario to run, this is required to be set</p></li>
 </ul>
-</div></blockquote>
+<p>Optional:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">installer_options</span></code>: Array of options to pass to the installer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">installer_verbose</span></code>: Enables verbose output mode in the installer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">installer_no_colors</span></code>: Disables color output from the installer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">installer_command</span></code>: Installer command to run, can be used by derivative projects to specify a branded command</p></li>
+</ul>
+</div>
+<div class="section" id="example-playbooks">
+<h2>Example Playbooks<a class="headerlink" href="#example-playbooks" title="Permalink to this headline">¶</a></h2>
+<p>Run the installer setting the initial admin password:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">hosts</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">target-host</span>
+  <span class="nt">roles</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">role</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">theforeman.operations.installer</span>
+      <span class="nt">vars</span><span class="p">:</span>
+        <span class="nt">installer_options</span><span class="p">:</span>
+          <span class="p p-Indicator">-</span> <span class="s">&#39;--foreman-initial-admin-password</span><span class="nv"> </span><span class="s">changeme&#39;</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -171,15 +191,6 @@
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../testing.html" class="btn btn-neutral float-right" title="Testing Foreman Operations Collection" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../README.html" class="btn btn-neutral float-left" title="Foreman Operations Collection" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
