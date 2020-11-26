@@ -1,4 +1,4 @@
-# Foreman Operations Collection ![Build Status](https://github.com/theforeman/foreman-collection-operations/workflows/CI/badge.svg)
+# Foreman Operations Collection ![Build Status](https://github.com/theforeman/foreman-operations-collection/workflows/CI/badge.svg)
 
 Ansible assets for managing Foreman operations such as install, upgrade or maintenance tasks.
 
