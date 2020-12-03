@@ -2,7 +2,10 @@ namespace: "theforeman"
 name: "operations"
 description: Foreman operations tasks such as install, upgrade and maintenance
 authors:
-version: "0.0.1"
+ - "Eric D. Helms <ericdhelms@gmail.com>"
+ - "Evgeni Golov <evgeni@golov.de>"
+ - "Matthias Dellweg <2500@gmx.de>"
+version: "0.1.0"
 license:
   - "GPL-3.0-or-later"
 tags:
