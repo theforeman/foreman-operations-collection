@@ -4,6 +4,11 @@
     that:
       - installer_scenario is defined
 
+- name: "Install {{ installer_package }}"
+  package:
+    name: "{{ installer_package }}"
+    state: present
+
 - name: 'Run installer'
   command: >
     {{ installer_command }}

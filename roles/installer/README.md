@@ -12,6 +12,7 @@ Required:
 
 Optional:
 
+- `installer_package`: Package containing the installer scenario
 - `installer_options`: Array of options to pass to the installer
 - `installer_verbose`: Enables verbose output mode in the installer
 - `installer_no_colors`: Disables color output from the installer
