@@ -15,8 +15,3 @@
         name: https://yum.puppet.com/puppet6-release-el-{{ ansible_distribution_major_version }}.noarch.rpm
         disable_gpg_check: true
         state: present
-
-    - name: Install foreman-installer
-      package:
-        name: foreman-installer
-        state: present

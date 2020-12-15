@@ -4,6 +4,11 @@
     that:
       - installer_scenario is defined
 
+- name: Install foreman-installer
+  package:
+    name: "{{ installer_package }}"
+    state: present
+
 - name: Check if initial install has happened
   stat:
     path: /etc/foreman-installer/scenarios.d/.installed
