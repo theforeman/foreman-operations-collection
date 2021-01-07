@@ -32,3 +32,13 @@
     {{ (installer_no_colors|bool) | ternary("--no-colors", "") }}
     {{ installer_options | join(' ') }}
   when: installer_noop.rc is not defined or installer_noop.rc == 2
+
+- name: Wait for satellite to be running
+  uri:
+    url: "https://{{ ansible_fqdn }}"
+    status_code: 200
+    validate_certs: false
+  register: result
+  until: result.status == 200
+  retries: 90
+  delay: 10
