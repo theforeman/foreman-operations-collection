@@ -13,7 +13,9 @@
   command: >
     {{ installer_command }}
     --scenario {{ installer_scenario }}
+    {{ installer_options | join(' ') }}
     --noop
+    --detailed-exitcodes
   register: installer_noop
   changed_when: false
   failed_when: installer_noop.rc not in [0, 2]
