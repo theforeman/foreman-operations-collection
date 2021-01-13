@@ -4,7 +4,13 @@
   gather_facts: false
   vars:
     installer_scenario: foreman
-    installer_options:
-      - '--foreman-initial-admin-password changeme'
   roles:
-    - installer
+    - role: installer
+      vars:
+        installer_options:
+          - '--foreman-initial-admin-password changeme'
+    - role: installer
+      vars:
+        installer_options:
+          - '--foreman-initial-admin-password changeme'
+          - '--enable-foreman-plugin-tasks'
