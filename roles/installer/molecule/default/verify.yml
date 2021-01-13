@@ -8,3 +8,12 @@
     installer_no_colors: false
   roles:
     - installer
+  tasks:
+    - name: find tasks config file
+      stat:
+        path: /etc/foreman/plugins/foreman-tasks.yaml
+      register: foreman_tasks_yaml
+    - name: check tasks config file exists
+      assert:
+        that:
+          - foreman_tasks_yaml.stat.exists
