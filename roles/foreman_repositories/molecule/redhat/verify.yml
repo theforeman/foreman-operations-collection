@@ -1,0 +1,44 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Ensure foreman-release is installed
+      package:
+        name: foreman-release
+        state: present
+
+    - name: Ensure katello-repos is installed
+      package:
+        name: katello-repos
+        state: present
+
+    - name:
+      stat:
+        path: /etc/yum.repos.d/foreman.repo
+      register: foreman_repo
+
+    - name: check foreman_repo file exists
+      assert:
+        that:
+          - foreman_repo.stat.exists
+
+    - name:
+      stat:
+        path: /etc/yum.repos.d/foreman-plugins.repo
+      register: foreman_plugins_repo
+
+    - name: check foreman_plugins_repo file exists
+      assert:
+        that:
+          - foreman_plugins_repo.stat.exists
+
+    - name:
+      stat:
+        path: /etc/yum.repos.d/katello.repo
+      register: katello_repo
+
+    - name: check katello_repo file exists
+      assert:
+        that:
+          - katello_repo.stat.exists

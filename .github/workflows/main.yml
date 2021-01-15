@@ -136,6 +136,6 @@ jobs:
         run: |
           for roledir in roles/*/molecule; do
             pushd $(dirname $roledir)
-            molecule test
+            molecule test --all
             popd
           done

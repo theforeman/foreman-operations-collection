@@ -1,0 +1,22 @@
+---
+- name: 'Install GPG package'
+  package:
+    name: 'gpg'
+    state: present
+    update_cache: yes
+  tags:
+    - packages
+
+- name: 'Install Foreman GPG key'
+  apt_key:
+    url: https://deb.theforeman.org/foreman.asc
+
+- name: 'Setup Foreman {{ foreman_repositories_version }} repository'
+  apt_repository:
+    repo: deb http://deb.theforeman.org {{ ansible_distribution_release }} {{ foreman_repositories_version }}
+    state: present
+
+- name: 'Setup Foreman {{ foreman_repositories_version }} plugins repository'
+  apt_repository:
+    repo: deb http://deb.theforeman.org plugins {{ foreman_repositories_version }}
+    state: present
