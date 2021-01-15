@@ -1,0 +1,15 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name:
+      slurp:
+        path: /etc/apt/sources.list.d/deb_theforeman_org.list
+      register: repos
+
+    - name: check foreman repos exists
+      assert:
+        that:
+          - "'deb http://deb.theforeman.org buster 2.3' in repos['content'] | b64decode"
+          - "'deb http://deb.theforeman.org plugins 2.3' in repos['content'] | b64decode"
