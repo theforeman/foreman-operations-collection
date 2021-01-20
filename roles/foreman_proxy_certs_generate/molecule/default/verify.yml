@@ -1,0 +1,14 @@
+---
+- name: verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: find tasks config file
+      stat:
+        path: /root/proxy.example.com.tar.gz
+      register: cert_tarball
+
+    - name: check tasks config file exists
+      assert:
+        that:
+          - cert_tarball.stat.exists

@@ -1,0 +1,19 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: true
+  become: true
+  vars:
+    foreman_repositories_version: nightly
+    foreman_repositories_katello_version: nightly
+  roles:
+    - foreman_repositories
+    - puppet_repositories
+  post_tasks:
+    - include_role:
+        name: installer
+      vars:
+        installer_scenario: katello
+        installer_package: foreman-installer-katello
+        installer_options:
+          - '--disable-system-checks'

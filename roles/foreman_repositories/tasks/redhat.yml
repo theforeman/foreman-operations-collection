@@ -24,3 +24,32 @@
     disable_gpg_check: true
     state: present
   when: foreman_repositories_katello_version is defined
+
+- when:
+    - foreman_repositories_katello_version is defined
+    - ansible_distribution_major_version == '8'
+  block:
+    - name: Install dnf-config-manager
+      package:
+        name: dnf-plugins-core
+        state: present
+
+    - name: Get pki-core module info
+      command: dnf module list --enabled
+      register: enabled_modules
+      changed_when: false
+
+    - name: Enable pki-core module
+      command: dnf module enable pki-core -y
+      when: "'pki-core' not in enabled_modules.stdout"
+
+    - name: List disabled repositories
+      command: dnf repolist --disabled
+      register: disabled_repos
+      changed_when: false
+
+    - name: Enable powertools
+      command: dnf config-manager --set-enabled powertools
+      when:
+        - ansible_distribution == 'CentOS'
+        - "'powertools' in disabled_repos.stdout"

@@ -1,0 +1,4 @@
+---
+foreman_proxy_certs_generate_options: []
+foreman_proxy_certs_generate_tarball: /root/{{ foreman_proxy_certs_generate_fqdn }}.tar.gz
+foreman_proxy_certs_generate_command: foreman-proxy-certs-generate
