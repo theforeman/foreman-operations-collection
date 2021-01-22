@@ -1,0 +1,9 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Ensure puppet release RPM is installed
+      package:
+        name: puppet6-release
+        state: present

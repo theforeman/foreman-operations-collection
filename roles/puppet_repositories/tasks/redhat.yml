@@ -1,0 +1,6 @@
+---
+- name: 'Setup Puppet repository'
+  yum:
+    name: https://yum.puppet.com/puppet{{ puppet_repositories_version }}-release-el-{{ ansible_distribution_major_version }}.noarch.rpm
+    disable_gpg_check: True
+    state: present
