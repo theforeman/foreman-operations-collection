@@ -1,0 +1,14 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name:
+      slurp:
+        path: /etc/apt/sources.list.d/puppet6.list
+      register: repos
+
+    - name: check puppet repo exists
+      assert:
+        that:
+          - "'deb http://apt.puppetlabs.com buster puppet6' in repos['content'] | b64decode"

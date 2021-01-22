@@ -1,0 +1,10 @@
+---
+- name: 'Install GPG package'
+  package:
+    name: 'gpg'
+    state: present
+    update_cache: yes
+
+- name: 'Install Puppet repository'
+  apt:
+    deb: https://apt.puppet.com/puppet{{ puppet_repositories_version }}-release-{{ ansible_distribution_release }}.deb
