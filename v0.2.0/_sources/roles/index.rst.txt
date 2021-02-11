@@ -1,0 +1,7 @@
+Role Index
+==========
+
+
+ * :doc:`foreman_repositories`
+ * :doc:`installer`
+ * :doc:`puppet_repositories`
