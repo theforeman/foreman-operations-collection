@@ -3,7 +3,7 @@
   package:
     name: 'gpg'
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: 'Install Puppet repository'
   apt:
