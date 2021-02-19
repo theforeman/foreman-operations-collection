@@ -1,0 +1,64 @@
+---
+- name: Ensure running on EL8
+  assert:
+    that:
+      - ansible_os_family == "RedHat"
+      - ansible_distribution_major_version == '8'
+    fail_msg: "This role is only supported on EL8"
+
+- name: Get version from the PostgreSQL data directory
+  slurp:
+    path: /var/lib/pgsql/data/PG_VERSION
+  register: pg_version
+
+- when:
+    - "'10' in pg_version['content']|b64decode"
+  block:
+    - name: Start postgresql
+      service:
+        name: postgresql
+        state: started
+
+    - name: Collect postgres data
+      shell: psql --list --tuples-only | grep -E "^\s+postgres"
+      become: true
+      become_user: postgres
+      register: postgres_output
+
+    - name: Set collate and ctype facts
+      set_fact:
+        collate: "{{ postgres_output.stdout.split('|')[3] | trim }}"
+        ctype: "{{ postgres_output.stdout.split('|')[4] | trim }}"
+
+    - name: Stop postgresql
+      service:
+        name: postgresql
+        state: stopped
+
+    - name: Update postgresq.conf data directory
+      lineinfile:
+        path: /var/lib/pgsql/data/postgresql.conf
+        regexp: '^data_directory ='
+        line: ''
+
+    - name: Enable postgresql:12 module
+      dnf:
+        name: '@postgresql:12'
+        state: present
+
+    - name: Update postgresql packages  # noqa package-latest
+      dnf:
+        name:
+          - postgresql-server
+          - postgresql-upgrade
+        state: latest
+
+    - name: Run postgresql-setup --upgrade
+      command: postgresql-setup --upgrade
+      environment:
+        PGSETUP_INITDB_OPTIONS: "--lc-collate={{ collate }} --lc-ctype={{ ctype }} --locale={{ collate }}"
+
+    - name: Start postgresql
+      service:
+        name: postgresql
+        state: started

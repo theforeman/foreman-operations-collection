@@ -1,0 +1,12 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: true
+  roles:
+    - puppet_repositories
+    - role: foreman_repositories
+      vars:
+        foreman_repositories_version: 2.3
+    - role: installer
+      vars:
+        installer_scenario: foreman
