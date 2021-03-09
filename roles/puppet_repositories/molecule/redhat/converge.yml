@@ -2,5 +2,7 @@
 - name: Converge
   hosts: all
   gather_facts: true
+  vars:
+    puppet_repositories_version: 6
   roles:
     - puppet_repositories
