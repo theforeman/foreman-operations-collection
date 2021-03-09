@@ -3,7 +3,12 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: Ensure puppet release RPM is installed
+    - name: Ensure puppet5-release RPM is absent
+      package:
+        name: puppet5-release
+        state: absent
+
+    - name: Ensure puppet6-release RPM is installed
       package:
         name: puppet6-release
         state: present

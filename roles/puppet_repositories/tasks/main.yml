@@ -1,3 +1,9 @@
 ---
+- name: Remove any existing Puppet release packages for versions other than {{ puppet_repositories_version }}
+  package:
+    name: "puppet{{ item }}-release"
+    state: absent
+  loop: "{{ puppet_repositories_supported_versions | difference([puppet_repositories_version | string]) }}"
+
 - name: 'Include {{ ansible_os_family }}'
   include_tasks: '{{ ansible_os_family|lower }}.yml'
