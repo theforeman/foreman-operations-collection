@@ -1,10 +1,8 @@
-theforeman.operations.installer
-===============================
+# theforeman.operations.installer
 
 Run the foreman-installer
 
-Role Variables
---------------
+## Role Variables
 
 Required:
 
@@ -17,8 +15,7 @@ Optional:
 - `installer_no_colors`: Disables color output from the installer
 - `installer_command`: Installer command to run, can be used by derivative projects to specify a branded command
 
-Example Playbooks
------------------
+## Example Playbooks
 
 Run the installer setting the initial admin password:
 

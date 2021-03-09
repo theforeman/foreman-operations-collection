@@ -1,21 +1,18 @@
-theforeman.operations.puppet_repositories
-=========================================
+# theforeman.operations.puppet_repositories
 
 Sets up Puppet repositories
 
-Role Variables
---------------
+## Role Variables
 
 Optional:
 
 - `puppet_repositories_version`: Version of Puppet to setup repositories for (default: 6)
 
-Example Playbooks
------------------
+## Example Playbooks
 
 Setup repositories for default Puppet 6 for use by installer:
 
-```
+```yaml
 ---
 - hosts: all
   gather_facts: true
@@ -25,7 +22,7 @@ Setup repositories for default Puppet 6 for use by installer:
 
 Setup repositories for Puppet 7:
 
-```
+```yaml
 ---
 - hosts: all
   gather_facts: true
