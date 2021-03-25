@@ -4,4 +4,5 @@ Role Index
 
  * :doc:`foreman_repositories`
  * :doc:`installer`
+ * :doc:`postgresql_upgrade`
  * :doc:`puppet_repositories`
