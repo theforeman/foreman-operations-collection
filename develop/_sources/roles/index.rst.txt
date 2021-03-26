@@ -2,6 +2,7 @@ Role Index
 ==========
 
 
+ * :doc:`foreman_proxy_certs_generate`
  * :doc:`foreman_repositories`
  * :doc:`installer`
  * :doc:`postgresql_upgrade`
