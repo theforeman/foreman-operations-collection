@@ -7,4 +7,4 @@
 
 - name: 'Install Puppet repository'
   apt:
-    deb: https://apt.puppet.com/puppet{{ puppet_repositories_version }}-release-{{ ansible_distribution_release }}.deb
+    deb: https://apt.puppet.com/puppet{{ foreman_puppet_repositories_version }}-release-{{ ansible_distribution_release }}.deb

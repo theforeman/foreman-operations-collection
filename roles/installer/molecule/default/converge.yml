@@ -3,10 +3,10 @@
   hosts: all
   gather_facts: false
   vars:
-    installer_scenario: foreman
+    foreman_installer_scenario: foreman
   roles:
     - role: installer
     - role: installer
       vars:
-        installer_options:
+        foreman_installer_options:
           - '--enable-foreman-plugin-tasks'
