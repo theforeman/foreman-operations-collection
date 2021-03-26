@@ -2,21 +2,21 @@
 - name: Check that necessary variables are defined
   assert:
     that:
-      - installer_scenario is defined
+      - foreman_installer_scenario is defined
 
-- name: "Install {{ installer_package }}"
+- name: "Install {{ foreman_installer_package }}"
   package:
-    name: "{{ installer_package }}"
+    name: "{{ foreman_installer_package }}"
     state: present
 
 - name: 'Run installer'
   command: >
-    {{ installer_command }}
-    --scenario {{ installer_scenario }}
-    {{ (installer_verbose|bool) | ternary("-v", "") }}
-    {{ (installer_no_colors|bool) | ternary("--no-colors", "") }}
-    {{ installer_options | join(' ') }}
+    {{ foreman_installer_command }}
+    --scenario {{ foreman_installer_scenario }}
+    {{ (foreman_installer_verbose|bool) | ternary("-v", "") }}
+    {{ (foreman_installer_no_colors|bool) | ternary("--no-colors", "") }}
+    {{ foreman_installer_options | join(' ') }}
     --detailed-exitcodes
-  register: installer_run
-  changed_when: installer_run.rc == 2
-  failed_when: installer_run.rc not in [0, 2]
+  register: foreman_installer_run
+  changed_when: foreman_installer_run.rc == 2
+  failed_when: foreman_installer_run.rc not in [0, 2]

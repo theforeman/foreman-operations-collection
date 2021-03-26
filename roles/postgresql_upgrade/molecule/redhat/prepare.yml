@@ -9,4 +9,4 @@
         foreman_repositories_version: 2.3
     - role: installer
       vars:
-        installer_scenario: foreman
+        foreman_installer_scenario: foreman
