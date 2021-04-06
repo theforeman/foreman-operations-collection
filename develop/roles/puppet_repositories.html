@@ -166,7 +166,7 @@
 <h2>Role Variables<a class="headerlink" href="#role-variables" title="Permalink to this headline">¶</a></h2>
 <p>Optional:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">puppet_repositories_version</span></code>: Version of Puppet to setup repositories for (default: 6)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_puppet_repositories_version</span></code>: Version of Puppet to setup repositories for (default: 6)</p></li>
 </ul>
 </div>
 <div class="section" id="example-playbooks">
@@ -184,7 +184,7 @@
 <span class="p p-Indicator">-</span> <span class="nt">hosts</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span>
   <span class="nt">gather_facts</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
   <span class="nt">vars</span><span class="p">:</span>
-    <span class="nt">puppet_repositories_version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">7</span>
+    <span class="nt">foreman_puppet_repositories_version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">7</span>
   <span class="nt">roles</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">puppet_repositories</span>
 </pre></div>

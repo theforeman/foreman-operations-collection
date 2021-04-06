@@ -166,15 +166,15 @@
 <h2>Role Variables<a class="headerlink" href="#role-variables" title="Permalink to this headline">¶</a></h2>
 <p>Required:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">installer_scenario</span></code>: The installer scenario to run, this is required to be set</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_scenario</span></code>: The installer scenario to run, this is required to be set</p></li>
 </ul>
 <p>Optional:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">installer_package</span></code>: Package containing the installer scenario</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">installer_options</span></code>: Array of options to pass to the installer</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">installer_verbose</span></code>: Enables verbose output mode in the installer</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">installer_no_colors</span></code>: Disables color output from the installer</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">installer_command</span></code>: Installer command to run, can be used by derivative projects to specify a branded command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_package</span></code>: Package containing the installer scenario</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_options</span></code>: Array of options to pass to the installer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_verbose</span></code>: Enables verbose output mode in the installer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_no_colors</span></code>: Disables color output from the installer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_command</span></code>: Installer command to run, can be used by derivative projects to specify a branded command</p></li>
 </ul>
 </div>
 <div class="section" id="example-playbooks">
@@ -184,7 +184,7 @@
   <span class="nt">roles</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="nt">role</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">theforeman.operations.installer</span>
       <span class="nt">vars</span><span class="p">:</span>
-        <span class="nt">installer_options</span><span class="p">:</span>
+        <span class="nt">foreman_installer_options</span><span class="p">:</span>
           <span class="p p-Indicator">-</span> <span class="s">&#39;--foreman-initial-admin-password</span><span class="nv"> </span><span class="s">changeme&#39;</span>
 </pre></div>
 </div>
