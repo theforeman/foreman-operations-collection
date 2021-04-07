@@ -2,5 +2,7 @@
 - name: Converge
   hosts: all
   gather_facts: true
+  vars:
+    foreman_repositories_version: 2.4
   roles:
     - foreman_repositories
