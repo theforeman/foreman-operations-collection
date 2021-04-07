@@ -4,6 +4,22 @@
     that:
       - foreman_installer_scenario is defined
 
+- when:
+    - ansible_distribution_major_version == '8'
+    - ansible_os_family == 'RedHat'
+  block:
+    - name: Get foreman-installer version
+      dnf:
+        list: foreman-installer
+      register: package_info
+
+    - name: Enable ruby:2.7 module
+      dnf:
+        name: '@ruby:2.7'
+        state: present
+      when:
+        - (package_info.results | map(attribute='version') | max) is version("2.5", ">=")
+
 - name: "Install {{ foreman_installer_package }}"
   package:
     name: "{{ foreman_installer_package }}"

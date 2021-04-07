@@ -1,7 +1,7 @@
 ---
 - name: Converge
   hosts: all
-  gather_facts: false
+  gather_facts: true
   vars:
     foreman_installer_scenario: foreman
   roles:
