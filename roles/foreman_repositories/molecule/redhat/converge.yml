@@ -3,6 +3,6 @@
   hosts: all
   gather_facts: true
   vars:
-    foreman_repositories_katello_version: "nightly"
+    foreman_repositories_katello_version: "4.0"
   roles:
     - foreman_repositories
