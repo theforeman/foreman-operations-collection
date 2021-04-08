@@ -1,14 +1,22 @@
 ---
-- name: Converge
+- name: Verify
   hosts: all
   gather_facts: false
-  vars:
-    foreman_installer_scenario: foreman
-    foreman_installer_verbose: true
-    foreman_installer_no_colors: false
-  roles:
-    - installer
   tasks:
+    - name: Foreman is installed
+      package:
+        name: foreman
+        state: present
+
+    - name: find installer flag file
+      stat:
+        path: /etc/foreman-installer/scenarios.d/.installed
+      register: installed_file
+    - name: assert installer flag file exists
+      assert:
+        that:
+          - installed_file.stat.exists
+
     - name: find tasks config file
       stat:
         path: /etc/foreman/plugins/foreman-tasks.yaml
