@@ -15,7 +15,7 @@ Example Playbooks
 
 Setup repositories for default Puppet 6 for use by installer:
 
-```
+```yaml
 ---
 - hosts: all
   gather_facts: true
@@ -25,7 +25,7 @@ Setup repositories for default Puppet 6 for use by installer:
 
 Setup repositories for Puppet 7:
 
-```
+```yaml
 ---
 - hosts: all
   gather_facts: true
