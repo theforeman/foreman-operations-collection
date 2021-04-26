@@ -16,7 +16,7 @@ Example Playbooks
 
 Setup repositories for Foreman 2.4:
 
-```
+```yaml
 ---
 - hosts: all
   gather_facts: true
@@ -28,7 +28,7 @@ Setup repositories for Foreman 2.4:
 
 Setup repositories for Katello 4.0 and Foreman 2.4:
 
-```
+```yaml
 ---
 - hosts: all
   gather_facts: true
