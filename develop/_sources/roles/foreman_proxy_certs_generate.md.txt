@@ -20,7 +20,7 @@ Example Playbooks
 
 Generate a certificate bundle for the hostname proxy.example.com:
 
-```
+```yaml
 ---
 - hosts: all
   gather_facts: false
