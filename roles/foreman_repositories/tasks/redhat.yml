@@ -11,7 +11,7 @@
     - ansible_distribution_major_version == '7'
 
 - name: 'Setup Foreman {{ foreman_repositories_version }} Repository'
-  yum:
+  yum_repository:
     name: https://yum.theforeman.org/releases/{{ foreman_repositories_version }}/el{{ ansible_distribution_major_version }}/x86_64/foreman-release.rpm
     disable_gpg_check: true
     state: present
@@ -20,7 +20,7 @@
     - packages
 
 - name: 'Setup Katello {{ foreman_repositories_katello_version }} Repository'
-  yum:
+  yum_repository:
     name: https://yum.theforeman.org/katello/{{ foreman_repositories_katello_version }}/katello/el{{ ansible_distribution_major_version }}/x86_64/katello-repos-latest.rpm
     disable_gpg_check: true
     state: present
