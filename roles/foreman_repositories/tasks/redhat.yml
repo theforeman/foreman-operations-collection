@@ -15,6 +15,7 @@
     name: https://yum.theforeman.org/releases/{{ foreman_repositories_version }}/el{{ ansible_distribution_major_version }}/x86_64/foreman-release.rpm
     disable_gpg_check: true
     state: present
+    file: foreman
   tags:
     - packages
 
@@ -23,6 +24,7 @@
     name: https://yum.theforeman.org/katello/{{ foreman_repositories_katello_version }}/katello/el{{ ansible_distribution_major_version }}/x86_64/katello-repos-latest.rpm
     disable_gpg_check: true
     state: present
+    file: katello
   when: foreman_repositories_katello_version is defined
 
 - when:
