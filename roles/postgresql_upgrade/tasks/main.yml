@@ -35,6 +35,7 @@
         name: postgresql
         state: stopped
 
+    # https://bugzilla.redhat.com/show_bug.cgi?id=1935301
     - name: Update postgresq.conf data directory
       lineinfile:
         path: /var/lib/pgsql/data/postgresql.conf
