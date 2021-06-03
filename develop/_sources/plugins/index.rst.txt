@@ -1,0 +1,27 @@
+
+.. _plugins_in_theforeman.operations:
+
+Theforeman.Operations
+=====================
+
+Collection version 0.4.0-dev
+
+.. toctree::
+    :maxdepth: 1
+
+
+Plugin Index
+------------
+
+There are no plugins in the theforeman.operations collection with automatically generated documentation.
+
+
+
+.. seealso::
+
+    List of :ref:`collections <list_of_collections>` with docs hosted here.
+
+.. toctree::
+    :maxdepth: 1
+    :hidden:
+

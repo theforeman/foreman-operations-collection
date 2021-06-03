@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>theforeman.operations.postgresql_upgrade &mdash; Foreman Operations Collection  documentation</title>
+  <title>Theforeman.Operations &mdash; Foreman Operations Collection  documentation</title>
   
 
   
@@ -41,7 +41,9 @@
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Role Index" href="../roles/index.html" />
+    <link rel="prev" title="Foreman Operations Collection" href="../README.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -87,10 +89,15 @@
             
             
               <p class="caption"><span class="caption-text">User documentation</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../README.html">Foreman Operations Collection </a></li>
-<li class="toctree-l1"><a class="reference internal" href="../plugins/index.html">Theforeman.Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Role Index</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Theforeman.Operations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#plugin-index">Plugin Index</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../roles/index.html">Role Index</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer documentation</span></p>
 <ul>
@@ -144,13 +151,13 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>theforeman.operations.postgresql_upgrade</li>
+      <li>Theforeman.Operations</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/roles/postgresql_upgrade.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/plugins/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -163,17 +170,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="theforeman-operations-postgresql-upgrade">
-<h1>theforeman.operations.postgresql_upgrade<a class="headerlink" href="#theforeman-operations-postgresql-upgrade" title="Permalink to this headline">¶</a></h1>
-<p>Upgrade Foreman’s PostgreSQL from 10 to 12 on EL8.</p>
-<div class="section" id="example-playbooks">
-<h2>Example Playbooks<a class="headerlink" href="#example-playbooks" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
-<span class="p p-Indicator">-</span> <span class="nt">hosts</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span>
-  <span class="nt">gather_facts</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-  <span class="nt">roles</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">postgresql_upgrade</span>
-</pre></div>
+  <div class="section" id="theforeman-operations">
+<span id="plugins-in-theforeman-operations"></span><h1>Theforeman.Operations<a class="headerlink" href="#theforeman-operations" title="Permalink to this headline">¶</a></h1>
+<p>Collection version 0.4.0-dev</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="plugin-index">
+<h2>Plugin Index<a class="headerlink" href="#plugin-index" title="Permalink to this headline">¶</a></h2>
+<p>There are no plugins in the theforeman.operations collection with automatically generated documentation.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>List of <a class="reference external" href="https://docs.ansible.com/ansible/latest/collections/index.html#list-of-collections" title="(in Ansible v4)"><span class="xref std std-ref">collections</span></a> with docs hosted here.</p>
+</div>
+<div class="toctree-wrapper compound">
 </div>
 </div>
 </div>
@@ -183,6 +192,10 @@
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../roles/index.html" class="btn btn-neutral float-right" title="Role Index" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../README.html" class="btn btn-neutral float-left" title="Foreman Operations Collection" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 
