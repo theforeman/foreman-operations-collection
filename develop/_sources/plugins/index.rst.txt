@@ -17,6 +17,7 @@ There are no plugins in the theforeman.operations collection with automatically 
 
 
 
+
 .. seealso::
 
     List of :ref:`collections <list_of_collections>` with docs hosted here.
