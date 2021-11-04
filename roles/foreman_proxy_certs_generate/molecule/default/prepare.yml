@@ -17,3 +17,4 @@
         foreman_installer_package: foreman-installer-katello
         foreman_installer_options:
           - '--disable-system-checks'
+          - '--verbose-log-level debug'
