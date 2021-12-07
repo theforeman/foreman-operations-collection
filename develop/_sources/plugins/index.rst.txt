@@ -4,7 +4,7 @@
 Theforeman.Operations
 =====================
 
-Collection version 0.4.0-dev
+Collection version 1.0.0-dev
 
 .. toctree::
     :maxdepth: 1
