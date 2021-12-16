@@ -79,7 +79,7 @@
 <h2>Role Variables<a class="headerlink" href="#role-variables" title="Permalink to this headline"></a></h2>
 <p>Required:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_scenario</span></code>: The installer scenario to run, this is required to be set</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_scenario</span></code>: The installer scenario to run, this is required to be set. You can find the list of all scenario available by running <code class="docutils literal notranslate"><span class="pre">foreman-installer</span> <span class="pre">--list-scenarios</span></code> command.</p></li>
 </ul>
 <p>Optional:</p>
 <ul class="simple">
@@ -95,8 +95,10 @@
 <p>Run the installer setting the initial admin password:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">hosts</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">target-host</span>
   <span class="nt">roles</span><span class="p">:</span>
+    <span class="c1"># Run installer with katello scenario</span>
     <span class="p p-Indicator">-</span> <span class="nt">role</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">theforeman.operations.installer</span>
       <span class="nt">vars</span><span class="p">:</span>
+        <span class="nt">foreman_installer_scenario</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">katello</span>
         <span class="nt">foreman_installer_options</span><span class="p">:</span>
           <span class="p p-Indicator">-</span> <span class="s">&#39;--foreman-initial-admin-password</span><span class="nv"> </span><span class="s">changeme&#39;</span>
 </pre></div>
