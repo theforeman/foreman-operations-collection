@@ -8,7 +8,7 @@ Role Variables
 
 Required:
 
-- `foreman_installer_scenario`: The installer scenario to run, this is required to be set
+- `foreman_installer_scenario`: The installer scenario to run, this is required to be set. You can find the list of all scenario available by running `foreman-installer --list-scenarios` command.
 
 Optional:
 
@@ -26,8 +26,10 @@ Run the installer setting the initial admin password:
 ```yaml
 - hosts: target-host
   roles:
+    # Run installer with katello scenario
     - role: theforeman.operations.installer
       vars:
+        foreman_installer_scenario: katello
         foreman_installer_options:
           - '--foreman-initial-admin-password changeme'
 ```
