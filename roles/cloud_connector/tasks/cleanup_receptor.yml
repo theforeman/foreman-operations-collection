@@ -1,0 +1,52 @@
+---
+- name: Identify Satellite ID from Satellite
+  ansible.builtin.uri:
+    url: "{{ foreman_cloud_connector_url }}/api/settings?search=name%20%3D%20instance_id"
+    user: "{{ foreman_cloud_connector_user }}"
+    password: "{{ foreman_cloud_connector_password }}"
+    return_content: true
+    validate_certs: true
+    force_basic_auth: true
+  register: satellite_uuid_json
+
+- name: Find receptor configs
+  find:
+    paths: /etc/receptor
+    file_type: directory
+  register: receptor_configs
+
+- include_tasks: delete_source.yaml
+  loop: "{{ receptor_configs['files'] }}"
+
+- name: Check if foreman-maintain installed
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: Collect service facts
+  ansible.builtin.service_facts:
+
+- name: Stop any receptor services
+  ansible.builtin.service:
+    state: stopped
+    enabled: false
+    name: "{{ item.name }}"
+  loop: "{{ ansible_facts.services.values() | selectattr('name', 'regex', 'receptor\\@.+.service') | list }}"
+
+- name: Remove receptor packages
+  yum:
+    state: absent
+    name:
+      - receptor
+      - python3-receptor-satellite
+      - ansiblerole-satellite-receptor-installer
+    disable_plugin: foreman-protector
+
+- name: Cleanup receptor config
+  file:
+    state: absent
+    path: /etc/receptor
+
+- name: Remove receptor service file
+  file:
+    state: absent
+    path: /etc/systemd/system/receptor@.service
