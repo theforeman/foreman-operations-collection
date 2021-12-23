@@ -1,0 +1,62 @@
+---
+- name: Install yggdrasil-worker-forwarder and rhc
+  yum:
+    name:
+      - rhc
+      - yggdrasil-worker-forwarder
+    disable_plugin: foreman-protector
+
+- name: Create workers directory
+  file:
+    state: directory
+    path: "/etc/rhc/workers"
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Configure rhc-cloud-connector-worker
+  ansible.builtin.template:
+    src: "foreman_rh_cloud.toml.j2"
+    dest: "{{ foreman_cloud_connector_config_file }}"
+    owner: root
+    group: root
+    mode: 0640
+
+- name: Create rhcd worker
+  ansible.builtin.copy:
+    dest: /usr/libexec/rhc/foreman-rh-cloud-worker
+    content: |
+      #!/bin/bash
+
+      CONFIG_FILE="{{ foreman_cloud_connector_config_file }}" exec /usr/libexec/yggdrasil-worker-forwarder
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Ensure rhcd started
+  service:
+    name: rhcd
+    state: started
+
+- name: Read client ID from CN of consumer
+  ansible.builtin.command: openssl x509 -in /etc/pki/consumer/cert.pem -subject -noout
+  register: cert_output
+  when: cert_output is not defined
+
+- name: Set client ID in Satellite
+  ansible.builtin.uri:
+    url: "{{ foreman_cloud_connector_url }}/api/settings/rhc_instance_id"
+    user: "{{ foreman_cloud_connector_user }}"
+    password: "{{ foreman_cloud_connector_password }}"
+    body:
+      setting:
+        value: "{{ client_id }}"
+    method: "PUT"
+    validate_certs: "{{ foreman_cloud_connector_validate_certs }}"
+    force_basic_auth: true
+    body_format: json
+  vars:
+    client_id: "{{ cert_output.stdout.replace('subject= /CN=', '') }}"
+
+- name: Cleanup receptor
+  include: cleanup_receptor.yml

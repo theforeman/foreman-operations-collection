@@ -1,0 +1,8 @@
+exec = "/usr/libexec/yggdrasil-worker-forwarder"
+protocol = "grpc"
+env = [
+  "FORWARDER_USER={{ foreman_cloud_connector_user }}",
+  "FORWARDER_PASSWORD={{ foreman_cloud_connector_password }}",
+  "FORWARDER_URL={{ foreman_cloud_connector_url }}",
+  "FORWARDER_HANDLER=foreman_rh_cloud"
+]

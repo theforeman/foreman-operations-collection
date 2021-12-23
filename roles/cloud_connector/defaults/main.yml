@@ -1,0 +1,4 @@
+---
+foreman_cloud_connector_console_redhat_host: cert.cloud.redhat.com
+foreman_cloud_connector_config_file: /etc/rhc/workers/foreman_rh_cloud.toml
+foreman_cloud_connector_validate_certs: true
