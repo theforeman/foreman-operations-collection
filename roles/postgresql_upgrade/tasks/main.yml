@@ -23,6 +23,7 @@
       shell: psql --list --tuples-only | grep -E "^\s+postgres"
       become: true
       become_user: postgres
+      changed_when: false
       register: postgres_output
 
     - name: Set collate and ctype facts
