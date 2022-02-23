@@ -55,7 +55,7 @@
           - postgresql-upgrade
         state: latest
 
-    - name: Run postgresql-setup --upgrade
+    - name: Run postgresql-setup --upgrade  # noqa no-changed-when
       command: postgresql-setup --upgrade
       environment:
         PGSETUP_INITDB_OPTIONS: "--lc-collate={{ collate }} --lc-ctype={{ ctype }} --locale={{ collate }}"
