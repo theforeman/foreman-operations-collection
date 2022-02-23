@@ -134,9 +134,4 @@ jobs:
       - name: Run tests
         env:
           DRIVER_NAME: docker
-        run: |
-          for roledir in roles/*/molecule; do
-            pushd $(dirname $roledir)
-            molecule test --all
-            popd
-          done
+        run: ./tests/molecule.sh
