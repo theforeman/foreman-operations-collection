@@ -2,11 +2,13 @@
 - name: Prepare
   hosts: all
   gather_facts: true
-  roles:
-    - puppet_repositories
-    - role: foreman_repositories
-      vars:
-        foreman_repositories_version: 2.3
-    - role: installer
-      vars:
-        foreman_installer_scenario: foreman
+  tasks:
+    - name: Install PostgreSQL 10
+      dnf:
+        name: '@postgresql:10/server'
+        state: present
+
+    - name: Run postgresql-setup --initdb
+      command: postgresql-setup --initdb
+      args:
+        creates: /var/lib/pgsql/data/PG_VERSION
