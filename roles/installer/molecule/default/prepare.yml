@@ -3,8 +3,6 @@
   hosts: all
   gather_facts: true
   become: true
-  vars:
-    foreman_repositories_version: 'nightly'  # Testing Ruby 2.7 enable, switch to 2.5 when released
   roles:
     - puppet_repositories
     - foreman_repositories
