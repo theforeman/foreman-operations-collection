@@ -20,6 +20,12 @@
       when:
         - (package_info.results | map(attribute='version') | max) is version("2.5", ">=")
 
+# This is a workaround for https://projects.theforeman.org/issues/34468
+- name: "Install hostname"
+  package:
+    name: hostname
+    state: present
+
 - name: "Install {{ foreman_installer_package }}"
   package:
     name: "{{ foreman_installer_package }}"
