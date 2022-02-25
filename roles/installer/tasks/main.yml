@@ -31,7 +31,7 @@
     name: "{{ foreman_installer_package }}"
     state: present
 
-- name: 'Run installer'
+- name: Run installer
   command: >
     {{ foreman_installer_command }}
     --scenario {{ foreman_installer_scenario }}
@@ -39,9 +39,21 @@
     {{ (foreman_installer_no_colors|bool) | ternary("--no-colors", "") }}
     {{ foreman_installer_options | join(' ') }}
     --detailed-exitcodes
-  register: foreman_installer_run
-  changed_when: foreman_installer_run.rc == 2
-  failed_when: foreman_installer_run.rc not in [0, 2]
+  async: "{{ foreman_installer_timeout }}"  # avoid connection timeouts
+  changed_when: false  # async always returns changed, check in async_status instead
+  poll: 0
+  register: async_results
   environment:
     LC_ALL: "{{ foreman_installer_locale }}"
     LANG: "{{ foreman_installer_locale }}"
+
+- name: Check async status for foreman-installer
+  async_status:
+    jid: "{{ async_results.ansible_job_id }}"
+  register: async_poll_results
+  until: async_poll_results.finished
+  changed_when: async_poll_results.rc is defined and async_poll_results.rc == 2
+  failed_when:
+    - (not async_poll_results.finished) or (async_poll_results.rc is defined and async_poll_results.rc not in [0, 2])
+  retries: "{{ ((foreman_installer_timeout | int) / 5) | round | int }}"
+  delay: 5
