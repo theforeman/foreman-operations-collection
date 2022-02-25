@@ -18,6 +18,7 @@ Optional:
 - `foreman_installer_no_colors`: Disables color output from the installer
 - `foreman_installer_command`: Installer command to run, can be used by derivative projects to specify a branded command
 - `foreman_installer_locale`: Locale to run the installer with, this must not be ```C```, defaults to ```en_US.UTF-8```
+- `foreman_installer_timeout`: Time allowed for installer to run before it is assumed failed, defaults to 30m
 
 Example Playbooks
 -----------------
