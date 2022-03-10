@@ -113,7 +113,6 @@ jobs:
   molecule:
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 4
       matrix:
         ansible:
           - stable-2.9
