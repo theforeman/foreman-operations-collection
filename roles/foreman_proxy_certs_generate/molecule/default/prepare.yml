@@ -10,6 +10,11 @@
     - foreman_repositories
     - puppet_repositories
   post_tasks:
+    - name: Ensure langpacks on EL8
+      dnf:
+        name: glibc-langpack-en
+        state: present
+      when: ansible_facts['os_family'] == 'RedHat'
     - include_role:
         name: installer
       vars:
