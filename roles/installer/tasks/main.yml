@@ -36,3 +36,6 @@
   register: foreman_installer_run
   changed_when: foreman_installer_run.rc == 2
   failed_when: foreman_installer_run.rc not in [0, 2]
+  environment:
+    LC_ALL: "{{ foreman_installer_locale }}"
+    LANG: "{{ foreman_installer_locale }}"

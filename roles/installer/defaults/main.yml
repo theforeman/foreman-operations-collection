@@ -4,3 +4,4 @@ foreman_installer_package: foreman-installer
 foreman_installer_verbose: true
 foreman_installer_no_colors: false
 foreman_installer_options: []
+foreman_installer_locale: 'en_US.UTF-8'
