@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>theforeman.operations.installer &mdash; Foreman Operations Collection  documentation</title>
+  <title>theforeman.operations.ansible_repositories &mdash; Foreman Operations Collection  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/ansible-basic-sphinx-ext.css" type="text/css" />
@@ -62,9 +62,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>theforeman.operations.installer</li>
+      <li>theforeman.operations.ansible_repositories</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/roles/installer.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/roles/ansible_repositories.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -72,36 +72,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="theforeman-operations-installer">
-<h1>theforeman.operations.installer<a class="headerlink" href="#theforeman-operations-installer" title="Permalink to this headline"></a></h1>
-<p>Run the foreman-installer</p>
+  <section id="theforeman-operations-ansible-repositories">
+<h1>theforeman.operations.ansible_repositories<a class="headerlink" href="#theforeman-operations-ansible-repositories" title="Permalink to this headline"></a></h1>
+<p>Sets up Ansible repositories</p>
 <section id="role-variables">
 <h2>Role Variables<a class="headerlink" href="#role-variables" title="Permalink to this headline"></a></h2>
-<p>Required:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_scenario</span></code>: The installer scenario to run, this is required to be set. You can find the list of all scenario available by running <code class="docutils literal notranslate"><span class="pre">foreman-installer</span> <span class="pre">--list-scenarios</span></code> command.</p></li>
-</ul>
-<p>Optional:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_package</span></code>: Package containing the installer scenario</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_options</span></code>: Array of options to pass to the installer</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_verbose</span></code>: Enables verbose output mode in the installer</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_no_colors</span></code>: Disables color output from the installer</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_command</span></code>: Installer command to run, can be used by derivative projects to specify a branded command</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_locale</span></code>: Locale to run the installer with, this must not be <code class="docutils literal notranslate"><span class="pre">C</span></code>, defaults to <code class="docutils literal notranslate"><span class="pre">en_US.UTF-8</span></code></p></li>
-</ul>
+<p>None</p>
 </section>
 <section id="example-playbooks">
 <h2>Example Playbooks<a class="headerlink" href="#example-playbooks" title="Permalink to this headline"></a></h2>
-<p>Run the installer setting the initial admin password:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">target-host</span><span class="w"></span>
+<p>Setup repositories for default Ansible 2.9 for use by installer:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span><span class="w"></span>
+<span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 <span class="w">  </span><span class="nt">roles</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="c1"># Run installer with katello scenario</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">theforeman.operations.installer</span><span class="w"></span>
-<span class="w">      </span><span class="nt">vars</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">foreman_installer_scenario</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">katello</span><span class="w"></span>
-<span class="w">        </span><span class="nt">foreman_installer_options</span><span class="p">:</span><span class="w"></span>
-<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;--foreman-initial-admin-password</span><span class="nv"> </span><span class="s">changeme&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible_repositories</span><span class="w"></span>
 </pre></div>
 </div>
 </section>

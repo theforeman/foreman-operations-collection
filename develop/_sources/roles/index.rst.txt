@@ -2,6 +2,7 @@ Role Index
 ==========
 
 
+ * :doc:`ansible_repositories`
  * :doc:`foreman_proxy_certs_generate`
  * :doc:`foreman_repositories`
  * :doc:`installer`
