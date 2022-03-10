@@ -1,5 +1,5 @@
 ---
-- name: 'Install centos-release-scl-rh'  # noqa package-latest
+- name: 'Install centos-release-scl-rh on CentOS7'  # noqa package-latest
   yum:
     name: centos-release-scl-rh
     state: latest
@@ -51,5 +51,5 @@
     - name: Enable powertools
       command: dnf config-manager --set-enabled powertools
       when:
-        - ansible_distribution == 'CentOS'
         - "'powertools' in disabled_repos.stdout"
+        - ansible_distribution != 'RedHat'
