@@ -1,2 +1,2 @@
 flake8
-ansible-lint
+ansible-lint<6
