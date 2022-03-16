@@ -18,38 +18,19 @@
   tags:
     - packages
 
-- name: 'Enable foreman:el8 module'
-  command: dnf module enable -y foreman:el8
-  # can't use the `dnf` module for modules without a default stream
-  # https://github.com/ansible/ansible/issues/56504
-  # https://github.com/ansible/ansible/issues/64852
-  args:
-    warn: false
-    creates: /etc/dnf/modules.d/foreman.module
-  when:
-    - foreman_repositories_version == "nightly" or foreman_repositories_version is version('3.2', '>=')
-    - ansible_distribution_major_version == '8'
-  tags:
-    - packages
-
 - name: 'Setup Katello {{ foreman_repositories_katello_version }} Repository'
   yum:
     name: https://yum.theforeman.org/katello/{{ foreman_repositories_katello_version }}/katello/el{{ ansible_distribution_major_version }}/x86_64/katello-repos-latest.rpm
     disable_gpg_check: true
     state: present
-  when: foreman_repositories_katello_version is defined
-
-- name: 'Enable katello:el8 module'
-  command: dnf module enable -y katello:el8
-  # can't use the `dnf` module for modules without a default stream
-  # https://github.com/ansible/ansible/issues/56504
-  # https://github.com/ansible/ansible/issues/64852
-  args:
-    warn: false
-    creates: /etc/dnf/modules.d/katello.module
+  tags:
+    - packages
   when:
     - foreman_repositories_katello_version is defined
-    - foreman_repositories_katello_version == "nightly" or foreman_repositories_katello_version is version('4.4', '>=')
+
+- name: 'Enable modules on EL8'
+  include_tasks: redhat-modules.yml
+  when:
     - ansible_distribution_major_version == '8'
 
 - when:
@@ -60,15 +41,6 @@
       package:
         name: dnf-plugins-core
         state: present
-
-    - name: Get pki-core module info
-      command: dnf module list --enabled
-      register: enabled_modules
-      changed_when: false
-
-    - name: Enable pki-core module
-      command: dnf module enable pki-core -y
-      when: "'pki-core' not in enabled_modules.stdout"
 
     - name: Check if powertools repository is disabled
       command: dnf repolist --disabled powertools
