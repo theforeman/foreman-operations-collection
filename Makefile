@@ -62,7 +62,6 @@ clean_%: FORCE $(MANIFEST)
 setup: test-setup
 
 test-setup:
-	pip install --upgrade 'pip<20'
 	pip install --upgrade -r requirements-dev.txt
 
 $(MANIFEST): $(NAMESPACE)-$(NAME)-$(VERSION).tar.gz
