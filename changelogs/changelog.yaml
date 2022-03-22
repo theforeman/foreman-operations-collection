@@ -6,3 +6,8 @@ releases:
     release_date: '2021-02-11'
   0.3.0:
     release_date: '2021-04-06'
+  1.0.0:
+    changes:
+      release_summary: This is the first stable release of the ``theforeman.operations``
+        collection.
+    release_date: '2022-03-22'
