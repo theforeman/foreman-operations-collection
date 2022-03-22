@@ -11,5 +11,5 @@
     - name: check foreman repos exists
       assert:
         that:
-          - "'deb http://deb.theforeman.org buster 3.1' in repos['content'] | b64decode"
-          - "'deb http://deb.theforeman.org plugins 3.1' in repos['content'] | b64decode"
+          - "'deb http://deb.theforeman.org buster 3.2' in repos['content'] | b64decode"
+          - "'deb http://deb.theforeman.org plugins 3.2' in repos['content'] | b64decode"
