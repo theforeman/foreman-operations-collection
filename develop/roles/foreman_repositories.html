@@ -79,29 +79,29 @@
 <h2>Role Variables<a class="headerlink" href="#role-variables" title="Permalink to this headline"></a></h2>
 <p>Optional:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">foreman_repositories_version</span></code>: Version of Foreman to setup repositories for (default: 3.1)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_repositories_version</span></code>: Version of Foreman to setup repositories for (default: 3.2)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">foreman_repositories_katello_version</span></code>: Version of Katello to setup repositories for, set a value for this to configure Katello repositories otherwise no Katello repositories will be configured (default: null)</p></li>
 </ul>
 </section>
 <section id="example-playbooks">
 <h2>Example Playbooks<a class="headerlink" href="#example-playbooks" title="Permalink to this headline"></a></h2>
-<p>Setup repositories for Foreman 3.1:</p>
+<p>Setup repositories for Foreman 3.2:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span><span class="w"></span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span><span class="w"></span>
 <span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 <span class="w">  </span><span class="nt">vars</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">foreman_repositories_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.1&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">foreman_repositories_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.2&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="nt">roles</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foreman_repositories</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Setup repositories for Katello 4.0 and Foreman 3.1:</p>
+<p>Setup repositories for Katello 4.4 and Foreman 3.2:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span><span class="w"></span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span><span class="w"></span>
 <span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 <span class="w">  </span><span class="nt">vars</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">foreman_repositories_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.1&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">foreman_repositories_katello_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4.3&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">foreman_repositories_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.2&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">foreman_repositories_katello_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4.4&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="nt">roles</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foreman_repositories</span><span class="w"></span>
 </pre></div>
