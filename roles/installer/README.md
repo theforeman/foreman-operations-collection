@@ -23,15 +23,15 @@ Optional:
 Example Playbooks
 -----------------
 
-Run the installer setting the initial admin password:
+Run the installer with the `katello` scenario, setting the initial organization and admin password:
 
 ```yaml
 - hosts: target-host
   roles:
-    # Run installer with katello scenario
     - role: theforeman.operations.installer
       vars:
         foreman_installer_scenario: katello
         foreman_installer_options:
+          - '--foreman-initial-organization "ACME Inc"'
           - '--foreman-initial-admin-password changeme'
 ```
