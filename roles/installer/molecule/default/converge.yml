@@ -6,6 +6,9 @@
     foreman_installer_scenario: foreman
   roles:
     - role: installer
+      vars:
+        foreman_installer_options:
+          - '--foreman-initial-organization "Test Org"'
     - role: installer
       vars:
         foreman_installer_options:
