@@ -18,6 +18,7 @@ tags:
   - katello
   - satellite
   - orcharhino
+  - infrastructure
 readme: "README.md"
 homepage: "https://theforeman.org/"
 repository: "https://github.com/theforeman/foreman-operations-collection"
