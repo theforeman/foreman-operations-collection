@@ -1,2 +1,4 @@
-flake8
+flake8<4
+yamllint
 ansible-lint<6
+galaxy-importer

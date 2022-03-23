@@ -42,6 +42,9 @@ info:
 	@echo " $(foreach PLUGIN_TYPE,$(PLUGIN_TYPES), $(PLUGIN_TYPE):\n $(foreach PLUGIN,$(basename $(notdir $(_$(PLUGIN_TYPE)))),   - $(PLUGIN)\n)\n)"
 
 lint: $(MANIFEST)
+	yamllint -f parsable roles
+	ansible-lint -v roles/*
+	GALAXY_IMPORTER_CONFIG=tests/galaxy-importer.cfg python -m galaxy_importer.main $(NAMESPACE)-$(NAME)-$(VERSION).tar.gz
 
 sanity: $(MANIFEST)
 	# Fake a fresh git repo for ansible-test
