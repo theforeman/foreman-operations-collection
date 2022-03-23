@@ -1,3 +1,4 @@
+PyYAML
 docker
 rstcheck
 cryptography<3.1; python_version < '3.6'
