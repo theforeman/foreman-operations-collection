@@ -13,7 +13,7 @@
         name: katello-repos
         state: present
 
-    - name:
+    - name: stat foreman.repo
       stat:
         path: /etc/yum.repos.d/foreman.repo
       register: foreman_repo
@@ -23,7 +23,7 @@
         that:
           - foreman_repo.stat.exists
 
-    - name:
+    - name: stat foreman-plugins.repo
       stat:
         path: /etc/yum.repos.d/foreman-plugins.repo
       register: foreman_plugins_repo
@@ -33,7 +33,7 @@
         that:
           - foreman_plugins_repo.stat.exists
 
-    - name:
+    - name: stat katello.repo
       stat:
         path: /etc/yum.repos.d/katello.repo
       register: katello_repo

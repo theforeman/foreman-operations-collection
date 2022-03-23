@@ -8,7 +8,8 @@
         path: /var/lib/pgsql/data/PG_VERSION
       register: pg_version
 
-    - debug:
+    - name: Print PostgreSQL version
+      debug:
         msg: "{{ pg_version['content'] | b64decode }}"
 
     - name: Assure postgresql version is 12

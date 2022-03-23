@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name:
+    - name: get sources.list
       slurp:
         path: /etc/apt/sources.list.d/deb_theforeman_org.list
       register: repos
