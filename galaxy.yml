@@ -10,7 +10,7 @@ authors:
   - "Kyle Williams <kyle.williams@thetradedesk.com>"
   - "Matthias Dellweg <2500@gmx.de>"
   - "willtome <willtome@gmail.com>"
-version: "1.1.0-dev"
+version: "1.0.1"
 license:
   - "GPL-3.0-or-later"
 tags:
