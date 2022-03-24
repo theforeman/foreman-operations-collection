@@ -11,3 +11,8 @@ releases:
       release_summary: This is the first stable release of the ``theforeman.operations``
         collection.
     release_date: '2022-03-22'
+  1.0.1:
+    changes:
+      bugfixes:
+      - correct collection metadata, so it can be uploaded to Galaxy
+    release_date: '2022-03-24'
