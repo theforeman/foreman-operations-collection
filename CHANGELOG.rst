@@ -5,6 +5,14 @@ theforeman.operations Release Notes
 .. contents:: Topics
 
 
+v1.0.2
+======
+
+Bugfixes
+--------
+
+- installer role - don't fail execution in check mode
+
 v1.0.1
 ======
 
