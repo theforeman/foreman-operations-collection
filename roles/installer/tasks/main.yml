@@ -39,7 +39,7 @@
     {{ (foreman_installer_no_colors|bool) | ternary("--no-colors", "") }}
     {{ foreman_installer_options | join(' ') }}
     --detailed-exitcodes
-  async: "{{ foreman_installer_timeout }}"  # avoid connection timeouts
+  async: "{{ ansible_check_mode | ternary(0, foreman_installer_timeout) }}"  # avoid connection timeouts
   changed_when: false  # async always returns changed, check in async_status instead
   poll: 0
   register: async_results
@@ -57,3 +57,5 @@
     - (not async_poll_results.finished) or (async_poll_results.rc is defined and async_poll_results.rc not in [0, 2])
   retries: "{{ ((foreman_installer_timeout | int) / 5) | round | int }}"
   delay: 5
+  when:
+    - not ansible_check_mode
