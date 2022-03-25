@@ -16,3 +16,10 @@ releases:
       bugfixes:
       - correct collection metadata, so it can be uploaded to Galaxy
     release_date: '2022-03-24'
+  1.0.2:
+    changes:
+      bugfixes:
+      - installer role - don't fail execution in check mode
+    fragments:
+    - installer-checkmode-fix.yml
+    release_date: '2022-03-25'

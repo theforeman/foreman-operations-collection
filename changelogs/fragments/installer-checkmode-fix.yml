@@ -1,2 +1,0 @@
-bugfixes:
-  - installer role - don't fail execution in check mode
