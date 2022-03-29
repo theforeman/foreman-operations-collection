@@ -7,6 +7,36 @@ Theforeman.Operations
 
 Collection version 1.1.0-dev
 
+.. contents::
+   :local:
+   :depth: 1
+
+Description
+-----------
+
+Foreman operations tasks such as install, upgrade and maintenance
+
+**Authors:**
+
+* Baptiste Agasse <bagasse@redhat.com>
+* Eric D. Helms <ericdhelms@gmail.com>
+* Evgeni Golov <evgeni@golov.de>
+* Ewoud Kohl van Wijngaarden <ewoud@kohlvanwijngaarden.nl>
+* Jeffrey van Pelt <jeff@vanpelt.one>
+* Kyle Williams <kyle.williams@thetradedesk.com>
+* Matthias Dellweg <2500@gmx.de>
+* willtome <willtome@gmail.com>
+
+.. raw:: html
+
+  <p class="ansible-links">
+    <a href="https://github.com/theforeman/foreman-operations-collection/issues" aria-role="button" target="_blank" rel="noopener external">Issue Tracker</a>
+    <a href="https://theforeman.org/" aria-role="button" target="_blank" rel="noopener external">Homepage</a>
+    <a href="https://github.com/theforeman/foreman-operations-collection" aria-role="button" target="_blank" rel="noopener external">Repository (Sources)</a>
+  </p>
+
+
+
 .. toctree::
     :maxdepth: 1
 
