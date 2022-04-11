@@ -5,7 +5,6 @@
   # https://github.com/ansible/ansible/issues/56504
   # https://github.com/ansible/ansible/issues/64852
   args:
-    warn: false
     creates: /etc/dnf/modules.d/foreman.module
   tags:
     - packages
@@ -18,7 +17,6 @@
   # https://github.com/ansible/ansible/issues/56504
   # https://github.com/ansible/ansible/issues/64852
   args:
-    warn: false
     creates: /etc/dnf/modules.d/katello.module
   tags:
     - packages
@@ -32,7 +30,6 @@
   # https://github.com/ansible/ansible/issues/56504
   # https://github.com/ansible/ansible/issues/64852
   args:
-    warn: false
     creates: /etc/dnf/modules.d/pki-core.module
   tags:
     - packages
