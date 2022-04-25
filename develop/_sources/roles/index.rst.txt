@@ -3,6 +3,7 @@ Role Index
 
 
  * :doc:`ansible_repositories`
+ * :doc:`cloud_connector`
  * :doc:`foreman_proxy_certs_generate`
  * :doc:`foreman_repositories`
  * :doc:`installer`
