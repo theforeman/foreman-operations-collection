@@ -1,5 +1,5 @@
 docker
-rstcheck
+rstcheck==3.3.1 # from https://github.com/ansible/ansible/raw/devel/test/sanity/code-smell/rstcheck.requirements.txt
 cryptography<3.1; python_version < '3.6'
 -r requirements-lint.txt
 -r requirements.txt
