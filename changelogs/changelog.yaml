@@ -23,3 +23,7 @@ releases:
     fragments:
     - installer-checkmode-fix.yml
     release_date: '2022-03-25'
+  1.1.0:
+    minor_changes:
+    - cloud_connector - new role for installing Cloud Connector
+    release_date: '2022-04-25'
