@@ -18,10 +18,6 @@
 - include_tasks: delete_source.yaml
   loop: "{{ receptor_configs['files'] }}"
 
-- name: Check if foreman-maintain installed
-  ansible.builtin.package_facts:
-    manager: auto
-
 - name: Collect service facts
   ansible.builtin.service_facts:
 
