@@ -5,13 +5,21 @@ theforeman.operations Release Notes
 .. contents:: Topics
 
 
+v1.1.1
+======
+
+Bugfixes
+--------
+
+- update FORWARDER_URL for cloud connector
+
 v1.1.0
 ======
 
 Minor Changes
 -------------
 
-- cloud_connector - new role for installing Cloud Connector
+- cloud_connector - new role for installing Cloud Connector (https://github.com/theforeman/foreman-operations-collection/pull/85)
 
 v1.0.2
 ======
