@@ -6,11 +6,12 @@ authors:
   - "Eric D. Helms <ericdhelms@gmail.com>"
   - "Evgeni Golov <evgeni@golov.de>"
   - "Ewoud Kohl van Wijngaarden <ewoud@kohlvanwijngaarden.nl>"
+  - "Jeremy Audet <audet.jeremy@pm.me>"
   - "Jeffrey van Pelt <jeff@vanpelt.one>"
   - "Kyle Williams <kyle.williams@thetradedesk.com>"
   - "Matthias Dellweg <2500@gmx.de>"
   - "willtome <willtome@gmail.com>"
-version: "1.2.0-dev"
+version: "1.1.1"
 license:
   - "GPL-3.0-or-later"
 tags:
