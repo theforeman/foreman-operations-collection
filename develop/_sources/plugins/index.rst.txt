@@ -22,6 +22,7 @@ Foreman operations tasks such as install, upgrade and maintenance
 * Eric D. Helms <ericdhelms@gmail.com>
 * Evgeni Golov <evgeni@golov.de>
 * Ewoud Kohl van Wijngaarden <ewoud@kohlvanwijngaarden.nl>
+* Jeremy Audet <audet.jeremy@pm.me>
 * Jeffrey van Pelt <jeff@vanpelt.one>
 * Kyle Williams <kyle.williams@thetradedesk.com>
 * Matthias Dellweg <2500@gmx.de>
