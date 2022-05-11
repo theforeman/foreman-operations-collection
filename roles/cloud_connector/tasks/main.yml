@@ -58,5 +58,9 @@
   vars:
     client_id: "{{ cert_output.stdout.replace('subject= /CN=', '') }}"
 
+- name: Configure HTTP proxy
+  include: http_proxy.yml
+  when: foreman_cloud_connector_http_proxy is defined
+
 - name: Cleanup receptor
   include: cleanup_receptor.yml
