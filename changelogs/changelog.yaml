@@ -24,14 +24,19 @@ releases:
     - installer-checkmode-fix.yml
     release_date: '2022-03-25'
   1.1.0:
-    release_date: '2022-04-25'
     changes:
       minor_changes:
       - cloud_connector - new role for installing Cloud Connector (https://github.com/theforeman/foreman-operations-collection/pull/85)
     fragments:
     - 85-fix-forwarder-url.yml
+    release_date: '2022-04-25'
   1.1.1:
     changes:
       bugfixes:
       - update FORWARDER_URL for cloud connector
     release_date: '2022-05-09'
+  1.2.0:
+    changes:
+      minor_changes:
+      - add HTTP proxy support for cloud connector
+    release_date: '2022-05-16'

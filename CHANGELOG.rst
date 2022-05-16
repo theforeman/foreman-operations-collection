@@ -5,6 +5,14 @@ theforeman.operations Release Notes
 .. contents:: Topics
 
 
+v1.2.0
+======
+
+Minor Changes
+-------------
+
+- add HTTP proxy support for cloud connector
+
 v1.1.1
 ======
 
