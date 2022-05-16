@@ -12,6 +12,10 @@ Required:
 - `foreman_cloud_connector_user`: The username cloud connector will use to talk to Foreman API.
 - `foreman_cloud_connector_password`: The password cloud connector will use to talk to Foreman API.
 
+Optional:
+
+- `foreman_cloud_connector_http_proxy`: HTTP proxy for RHC to use
+
 Example Playbooks
 -----------------
 
