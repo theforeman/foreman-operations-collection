@@ -40,3 +40,8 @@ releases:
       minor_changes:
       - add HTTP proxy support for cloud connector
     release_date: '2022-05-16'
+  1.2.1:
+    changes:
+      bugfixes:
+      - fix parsing of openssl certificate subject for EL7 and EL8
+    release_date: '2022-05-23'

@@ -5,6 +5,14 @@ theforeman.operations Release Notes
 .. contents:: Topics
 
 
+v1.2.1
+======
+
+Bugfixes
+--------
+
+- fix parsing of openssl certificate subject for EL7 and EL8
+
 v1.2.0
 ======
 
