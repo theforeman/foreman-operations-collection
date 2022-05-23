@@ -11,7 +11,7 @@ authors:
   - "Kyle Williams <kyle.williams@thetradedesk.com>"
   - "Matthias Dellweg <2500@gmx.de>"
   - "willtome <willtome@gmail.com>"
-version: "1.2.1"
+version: "1.3.0-dev"
 license:
   - "GPL-3.0-or-later"
 tags:
