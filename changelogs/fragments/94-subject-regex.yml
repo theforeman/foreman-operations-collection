@@ -1,0 +1,2 @@
+bugfixes:
+  - cloud_connector role - use a regular expression to parse the CN from the cert
