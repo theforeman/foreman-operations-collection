@@ -45,3 +45,10 @@ releases:
       bugfixes:
       - fix parsing of openssl certificate subject for EL7 and EL8
     release_date: '2022-05-23'
+  1.2.2:
+    changes:
+      bugfixes:
+      - cloud_connector role - use a regular expression to parse the CN from the cert
+    fragments:
+    - 94-subject-regex.yml
+    release_date: '2022-06-08'
