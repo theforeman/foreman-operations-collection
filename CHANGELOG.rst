@@ -5,6 +5,14 @@ theforeman.operations Release Notes
 .. contents:: Topics
 
 
+v1.2.3
+======
+
+Bugfixes
+--------
+
+- foreman_repositories - also enable pulpcore module when enabling katello
+
 v1.2.2
 ======
 
