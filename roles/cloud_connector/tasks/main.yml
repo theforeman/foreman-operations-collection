@@ -37,6 +37,7 @@
   service:
     name: rhcd
     state: started
+    enabled: true
 
 - name: Read client ID from CN of consumer
   ansible.builtin.command: openssl x509 -in /etc/pki/consumer/cert.pem -subject -noout
