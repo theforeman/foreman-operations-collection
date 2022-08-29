@@ -21,7 +21,6 @@ jobs:
           - stable-2.11
           - stable-2.12
           - stable-2.13
-          - devel
         include:
           - python: "2.7"
             ansible: "stable-2.11"
@@ -117,19 +116,23 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        python:
+          - "3.8"
         ansible:
           - stable-2.9
           - stable-2.10
           - stable-2.11
           - stable-2.12
           - stable-2.13
-          - devel
+        include:
+          - python: "3.9"
+            ansible: "devel"
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.8"
+          python-version: ${{ matrix.python }}
       - name: Install Ansible
         run: pip install --upgrade https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz
       - name: Install dependencies
