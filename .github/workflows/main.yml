@@ -119,6 +119,7 @@ jobs:
         python:
           - "3.8"
         ansible:
+          - stable-2.9
           - stable-2.10
           - stable-2.11
           - stable-2.12
