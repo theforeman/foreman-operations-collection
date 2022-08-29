@@ -1,0 +1,22 @@
+#!/bin/bash -eu
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
+DESTINATION={{ foreman_backup_destination }}
+KEEP_FULL={{ foreman_backup_keep_full }}
+
+if [[ $(date +%w) -eq 0 ]]; then
+  foreman-maintain backup {{ foreman_backup_type }} --assumeyes $DESTINATION
+
+  FULL_BACKUPS=$(grep -l 'incremental: false' $DESTINATION/*/metadata.yml| xargs -n1 dirname)
+
+  if [[ $(echo "${FULL_BACKUPS}" | wc -l) -gt ${KEEP_FULL} ]]; then
+    REF=$(ls -td -- ${FULL_BACKUPS} | tail -n 2 | head -n 1)
+    echo "deleting everything BEFORE $REF"
+    find $DESTINATION -maxdepth 1 -mindepth 1 -type d ! -newer "$REF" ! -path "$REF" -exec rm -rf '{}' \;
+  else
+    echo "nothing to delete"
+  fi
+else
+  LAST=$(ls -td -- $DESTINATION/*/ | head -n 1)
+  foreman-maintain backup {{ foreman_backup_type }} --assumeyes --incremental "$LAST" $DESTINATION
+fi
