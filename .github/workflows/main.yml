@@ -137,6 +137,9 @@ jobs:
         run: pip install --upgrade https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz
       - name: Install dependencies
         run: make test-setup
+      - name: Install Ansible 2.9 compatible molecule
+        run: pip install --upgrade 'molecule[docker,lint]<4.0'
+        if: matrix.ansible == 'stable-2.9'
       - name: Run tests
         env:
           DRIVER_NAME: docker
