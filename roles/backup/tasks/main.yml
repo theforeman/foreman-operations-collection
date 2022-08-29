@@ -1,0 +1,8 @@
+---
+- name: Configure backup cronjob
+  template:
+    src: templates/foreman-backup.sh.j2
+    dest: /etc/cron.daily/foreman-backup
+    owner: root
+    group: root
+    mode: '0750'

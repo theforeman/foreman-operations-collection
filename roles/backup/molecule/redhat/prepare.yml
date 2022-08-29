@@ -1,0 +1,10 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: true
+  pre_tasks:
+    - name: install crontabs
+      package:
+        name: crontabs
+  roles:
+    - backup

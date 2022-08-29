@@ -1,0 +1,4 @@
+---
+foreman_backup_destination: /var/backup/foreman
+foreman_backup_type: online
+foreman_backup_keep_full: 2
