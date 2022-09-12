@@ -5,4 +5,4 @@ build_arg_defaults:
   EE_BASE_IMAGE: 'quay.io/ansible/ansible-runner:latest'
 
 dependencies:
-  python: ../requirements.txt
+  python: requirements.txt
