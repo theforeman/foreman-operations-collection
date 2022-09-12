@@ -12,14 +12,6 @@ platforms:
       - /tmp:exec,mode=777
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-  - name: centos7
-    image: centos:7
-    command: /sbin/init
-    tmpfs:
-      - /run
-      - /tmp:exec,mode=777
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:
   name: ansible
 verifier:
