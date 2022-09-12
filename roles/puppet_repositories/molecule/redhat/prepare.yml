@@ -3,6 +3,6 @@
   hosts: all
   gather_facts: true
   vars:
-    foreman_puppet_repositories_version: 5
+    foreman_puppet_repositories_version: 6
   roles:
     - puppet_repositories
