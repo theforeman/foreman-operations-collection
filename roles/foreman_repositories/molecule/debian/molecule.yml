@@ -4,8 +4,8 @@ dependency:
 driver:
   name: ${DRIVER_NAME:-podman}
 platforms:
-  - name: debian-buster
-    image: debian:buster
+  - name: debian-bullseye
+    image: debian:11
 provisioner:
   name: ansible
 verifier:
