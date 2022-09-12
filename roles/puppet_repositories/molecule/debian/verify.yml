@@ -8,7 +8,12 @@
         name: puppet5-release
         state: absent
 
-    - name: Ensure puppet6-release package is present
+    - name: Ensure puppet6-release package is absent
       package:
         name: puppet6-release
+        state: absent
+
+    - name: Ensure puppet7-release package is present
+      package:
+        name: puppet7-release
         state: present
