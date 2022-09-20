@@ -37,7 +37,7 @@ After the installation, the assets are available as `theforeman.operations.<name
 
 ### Installation via RPM
 
-The collection is planned to be available as `ansible-collection-theforeman-operations` from the `client` repository on `yum.theforeman.org` starting with a future Foreman release.
+The collection is planned to be available as `ansible-collection-theforeman-operations` from the `plugins` repository on `yum.theforeman.org` starting with a future Foreman release.
 
 After installing the RPM, you can use the modules in the same way as when they are installed directly from Ansible Galaxy.
 
