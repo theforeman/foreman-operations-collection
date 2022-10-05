@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Role Index &mdash; Foreman Operations Collection  documentation</title>
+  <title>theforeman.operations.backup &mdash; Foreman Operations Collection  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/ansible-basic-sphinx-ext.css" type="text/css" />
@@ -20,9 +20,7 @@
         <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Testing Foreman Operations Collection" href="../testing.html" />
-    <link rel="prev" title="Theforeman.Operations" href="../plugins/index.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,10 +39,10 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">User documentation</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../README.html">Foreman Operations Collection </a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins/index.html">Theforeman.Operations</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Role Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Role Index</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
 <ul>
@@ -66,9 +64,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Role Index</li>
+      <li>theforeman.operations.backup</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/roles/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/roles/backup.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -76,29 +74,34 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="role-index">
-<h1>Role Index<a class="headerlink" href="#role-index" title="Permalink to this heading"></a></h1>
-<blockquote>
-<div><ul class="simple">
-<li><p><a class="reference internal" href="ansible_repositories.html"><span class="doc">theforeman.operations.ansible_repositories</span></a></p></li>
-<li><p><a class="reference internal" href="backup.html"><span class="doc">theforeman.operations.backup</span></a></p></li>
-<li><p><a class="reference internal" href="cloud_connector.html"><span class="doc">theforeman.operations.cloud_connector</span></a></p></li>
-<li><p><a class="reference internal" href="foreman_proxy_certs_generate.html"><span class="doc">theforeman.operations.foreman_proxy_certs_generate</span></a></p></li>
-<li><p><a class="reference internal" href="foreman_repositories.html"><span class="doc">theforeman.operations.foreman_repositories</span></a></p></li>
-<li><p><a class="reference internal" href="installer.html"><span class="doc">theforeman.operations.installer</span></a></p></li>
-<li><p><a class="reference internal" href="postgresql_upgrade.html"><span class="doc">theforeman.operations.postgresql_upgrade</span></a></p></li>
-<li><p><a class="reference internal" href="puppet_repositories.html"><span class="doc">theforeman.operations.puppet_repositories</span></a></p></li>
+  <section id="theforeman-operations-backup">
+<h1>theforeman.operations.backup<a class="headerlink" href="#theforeman-operations-backup" title="Permalink to this heading"></a></h1>
+<p>Sets up backup cronjob using <code class="docutils literal notranslate"><span class="pre">foreman_maintain</span></code>, creating one full backup each Sunday and incremental ones otherwise.</p>
+<section id="role-variables">
+<h2>Role Variables<a class="headerlink" href="#role-variables" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_backup_destination</span></code>: Destination where to write the backups to, defaults to <code class="docutils literal notranslate"><span class="pre">/var/backup/foreman</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_backup_type</span></code>: Backup type, can be either <code class="docutils literal notranslate"><span class="pre">online</span></code> or <code class="docutils literal notranslate"><span class="pre">offline</span></code>, defaults to <code class="docutils literal notranslate"><span class="pre">online</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_backup_keep_full</span></code>: How many full (weekly) backups to keep, defaults to <code class="docutils literal notranslate"><span class="pre">2</span></code></p></li>
 </ul>
-</div></blockquote>
+<p>None</p>
+</section>
+<section id="example-playbooks">
+<h2>Example Playbooks<a class="headerlink" href="#example-playbooks" title="Permalink to this heading"></a></h2>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span><span class="w"></span>
+<span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">  </span><span class="nt">roles</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backup</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../plugins/index.html" class="btn btn-neutral float-left" title="Theforeman.Operations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../testing.html" class="btn btn-neutral float-right" title="Testing Foreman Operations Collection" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 
