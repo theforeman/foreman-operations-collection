@@ -29,6 +29,10 @@ Foreman operations tasks such as install, upgrade and maintenance
 * Matthias Dellweg <2500@gmx.de>
 * willtome <willtome@gmail.com>
 
+**Supported ansible-core versions:**
+
+* 2.9 or newer
+
 .. raw:: html
 
   <p class="ansible-links">
