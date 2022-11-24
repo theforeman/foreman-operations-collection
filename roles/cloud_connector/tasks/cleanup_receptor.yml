@@ -15,7 +15,8 @@
     file_type: directory
   register: receptor_configs
 
-- include_tasks: delete_source.yml
+- name: Delete sources
+  include_tasks: delete_source.yml
   loop: "{{ receptor_configs['files'] }}"
 
 - name: Collect service facts

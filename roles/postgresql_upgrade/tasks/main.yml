@@ -11,7 +11,8 @@
     path: /var/lib/pgsql/data/PG_VERSION
   register: pg_version
 
-- when:
+- name: Perform PostgreSQL upgrade
+  when:
     - "'10' in pg_version['content']|b64decode"
   block:
     - name: Start postgresql
