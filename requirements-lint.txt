@@ -1,4 +1,4 @@
 flake8<4
 yamllint
-ansible-lint<6
+ansible-lint>=6.1.0
 galaxy-importer

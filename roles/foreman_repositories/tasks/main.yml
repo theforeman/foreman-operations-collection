@@ -1,2 +1,3 @@
 ---
-- include_tasks: "{{ ansible_os_family|lower }}.yml"
+- name: Load OS specific repository tasks
+  include_tasks: "{{ ansible_os_family | lower }}.yml"
