@@ -57,9 +57,6 @@ jobs:
         run: pip install --upgrade https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz
       - name: Install dependencies
         run: make test-setup
-      - name: Install required collections for ansible-base (2.10+)
-        run: ansible-galaxy collection install community.general
-        if: matrix.ansible != 'stable-2.9'
       - name: Run sanity tests
         run: make SANITY_OPTS="--local" sanity
         if: matrix.ansible != 'stable-2.9' && matrix.ansible != 'stable-2.10' && matrix.ansible != 'stable-2.11'
