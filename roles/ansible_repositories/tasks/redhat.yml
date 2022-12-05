@@ -1,6 +1,6 @@
 ---
 - name: 'Install centos-release-ansible29 on EL8'  # noqa package-latest
-  dnf:
+  ansible.builtin.dnf:
     name: centos-release-ansible-29
     state: latest
     update_cache: true

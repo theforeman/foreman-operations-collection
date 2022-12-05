@@ -4,11 +4,11 @@
   gather_facts: false
   tasks:
     - name: Find proxy certs file
-      stat:
+      ansible.builtin.stat:
         path: /root/proxy.example.com.tar.gz
       register: cert_tarball
 
     - name: Check proxy certs file exists
-      assert:
+      ansible.builtin.assert:
         that:
           - cert_tarball.stat.exists

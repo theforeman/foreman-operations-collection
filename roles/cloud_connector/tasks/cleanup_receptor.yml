@@ -10,13 +10,13 @@
   register: satellite_uuid_json
 
 - name: Find receptor configs
-  find:
+  ansible.builtin.find:
     paths: /etc/receptor
     file_type: directory
   register: receptor_configs
 
 - name: Delete sources
-  include_tasks: delete_source.yml
+  ansible.builtin.include_tasks: delete_source.yml
   loop: "{{ receptor_configs['files'] }}"
 
 - name: Collect service facts
@@ -30,7 +30,7 @@
   loop: "{{ ansible_facts.services.values() | selectattr('name', 'regex', 'receptor\\@.+.service') | list }}"
 
 - name: Remove receptor packages
-  yum:
+  ansible.builtin.yum:
     state: absent
     name:
       - receptor
@@ -39,11 +39,11 @@
     disable_plugin: foreman-protector
 
 - name: Cleanup receptor config
-  file:
+  ansible.builtin.file:
     state: absent
     path: /etc/receptor
 
 - name: Remove receptor service file
-  file:
+  ansible.builtin.file:
     state: absent
     path: /etc/systemd/system/receptor@.service

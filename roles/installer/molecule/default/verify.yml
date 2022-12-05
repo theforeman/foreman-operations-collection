@@ -4,24 +4,24 @@
   gather_facts: false
   tasks:
     - name: Foreman is installed
-      package:
+      ansible.builtin.package:
         name: foreman
         state: present
 
     - name: Find installer flag file
-      stat:
+      ansible.builtin.stat:
         path: /etc/foreman-installer/scenarios.d/.installed
       register: installed_file
     - name: Assert installer flag file exists
-      assert:
+      ansible.builtin.assert:
         that:
           - installed_file.stat.exists
 
     - name: Find tasks config file
-      stat:
+      ansible.builtin.stat:
         path: /etc/foreman/plugins/foreman-tasks.yaml
       register: foreman_tasks_yaml
     - name: Check tasks config file exists
-      assert:
+      ansible.builtin.assert:
         that:
           - foreman_tasks_yaml.stat.exists

@@ -4,11 +4,11 @@
   gather_facts: true
   tasks:
     - name: Install PostgreSQL 10
-      dnf:
+      ansible.builtin.dnf:
         name: '@postgresql:10/server'
         state: present
 
     - name: Run postgresql-setup --initdb
-      command: postgresql-setup --initdb
+      ansible.builtin.command: postgresql-setup --initdb
       args:
         creates: /var/lib/pgsql/data/PG_VERSION

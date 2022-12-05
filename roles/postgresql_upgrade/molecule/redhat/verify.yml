@@ -4,15 +4,15 @@
   gather_facts: false
   tasks:
     - name: Get version of postgres data directory
-      slurp:
+      ansible.builtin.slurp:
         path: /var/lib/pgsql/data/PG_VERSION
       register: pg_version
 
     - name: Print PostgreSQL version
-      debug:
+      ansible.builtin.debug:
         msg: "{{ pg_version['content'] | b64decode }}"
 
     - name: Assure postgresql version is 12
-      assert:
+      ansible.builtin.assert:
         that:
           - "'12' in pg_version['content'] | b64decode"

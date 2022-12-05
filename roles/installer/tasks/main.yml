@@ -1,6 +1,6 @@
 ---
 - name: Check that necessary variables are defined
-  assert:
+  ansible.builtin.assert:
     that:
       - foreman_installer_scenario is defined
 
@@ -10,12 +10,12 @@
     - ansible_os_family == 'RedHat'
   block:
     - name: Get foreman-installer version
-      dnf:
+      ansible.builtin.dnf:
         list: foreman-installer
       register: package_info
 
     - name: Enable ruby:2.7 module
-      dnf:
+      ansible.builtin.dnf:
         name: '@ruby:2.7'
         state: present
       when:
@@ -23,17 +23,17 @@
 
 # This is a workaround for https://projects.theforeman.org/issues/34468
 - name: "Install hostname"
-  package:
+  ansible.builtin.package:
     name: hostname
     state: present
 
 - name: "Install {{ foreman_installer_package }}"
-  package:
+  ansible.builtin.package:
     name: "{{ foreman_installer_package }}"
     state: present
 
 - name: Run installer
-  command: >
+  ansible.builtin.command: >
     {{ foreman_installer_command }}
     --scenario {{ foreman_installer_scenario }}
     {{ (foreman_installer_verbose | bool) | ternary("-v", "") }}
@@ -49,7 +49,7 @@
     LANG: "{{ foreman_installer_locale }}"
 
 - name: Check async status for foreman-installer
-  async_status:
+  ansible.builtin.async_status:
     jid: "{{ async_results.ansible_job_id }}"
   register: async_poll_results
   until: async_poll_results.finished

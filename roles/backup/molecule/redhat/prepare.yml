@@ -4,7 +4,7 @@
   gather_facts: true
   pre_tasks:
     - name: Install crontabs
-      package:
+      ansible.builtin.package:
         name: crontabs
   roles:
     - backup

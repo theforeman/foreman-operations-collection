@@ -1,13 +1,13 @@
 ---
 - name: Install yggdrasil-worker-forwarder and rhc
-  yum:
+  ansible.builtin.yum:
     name:
       - rhc
       - yggdrasil-worker-forwarder
     disable_plugin: foreman-protector
 
 - name: Create workers directory
-  file:
+  ansible.builtin.file:
     state: directory
     path: "/etc/rhc/workers"
     owner: root
@@ -34,7 +34,7 @@
     mode: 0755
 
 - name: Ensure rhcd started
-  service:
+  ansible.builtin.service:
     name: rhcd
     state: started
     enabled: true
@@ -60,8 +60,8 @@
     client_id: "{{ cert_output.stdout | regex_search('CN\\s?=\\s?([a-z0-9-]+)', '\\1') | first }}"
 
 - name: Configure HTTP proxy
-  include_tasks: http_proxy.yml
+  ansible.builtin.include_tasks: http_proxy.yml
   when: foreman_cloud_connector_http_proxy is defined
 
 - name: Cleanup receptor
-  include_tasks: cleanup_receptor.yml
+  ansible.builtin.include_tasks: cleanup_receptor.yml

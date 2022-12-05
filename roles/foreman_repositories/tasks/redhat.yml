@@ -1,6 +1,6 @@
 ---
 - name: 'Install centos-release-scl-rh on CentOS7'  # noqa package-latest
-  yum:
+  ansible.builtin.yum:
     name: centos-release-scl-rh
     state: latest
     update_cache: true
@@ -11,7 +11,7 @@
     - ansible_distribution_major_version == '7'
 
 - name: 'Setup repository for Foreman {{ foreman_repositories_version }}'
-  yum:
+  ansible.builtin.yum:
     name: https://yum.theforeman.org/releases/{{ foreman_repositories_version }}/el{{ ansible_distribution_major_version }}/x86_64/foreman-release.rpm
     disable_gpg_check: true
     state: present
@@ -19,7 +19,7 @@
     - packages
 
 - name: 'Setup repository for Katello {{ foreman_repositories_katello_version }}'
-  yum:
+  ansible.builtin.yum:
     name: https://yum.theforeman.org/katello/{{ foreman_repositories_katello_version }}/katello/el{{ ansible_distribution_major_version }}/x86_64/katello-repos-latest.rpm
     disable_gpg_check: true
     state: present
@@ -29,7 +29,7 @@
     - foreman_repositories_katello_version is defined
 
 - name: 'Enable modules on EL8'
-  include_tasks: redhat-modules.yml
+  ansible.builtin.include_tasks: redhat-modules.yml
   when:
     - ansible_distribution_major_version == '8'
 
@@ -39,17 +39,17 @@
     - ansible_distribution_major_version == '8'
   block:
     - name: Install dnf-config-manager
-      package:
+      ansible.builtin.package:
         name: dnf-plugins-core
         state: present
 
     - name: Check if powertools repository is disabled
-      command: dnf repolist --disabled powertools
+      ansible.builtin.command: dnf repolist --disabled powertools
       register: disabled_repos
       changed_when: false
 
     - name: Enable powertools
-      command: dnf config-manager --set-enabled powertools
+      ansible.builtin.command: dnf config-manager --set-enabled powertools
       when:
         - "'powertools' in disabled_repos.stdout"
         - ansible_distribution != 'RedHat'

@@ -4,16 +4,16 @@
   gather_facts: false
   tasks:
     - name: Ensure puppet5-release package is absent
-      package:
+      ansible.builtin.package:
         name: puppet5-release
         state: absent
 
     - name: Ensure puppet6-release package is absent
-      package:
+      ansible.builtin.package:
         name: puppet6-release
         state: absent
 
     - name: Ensure puppet7-release package is present
-      package:
+      ansible.builtin.package:
         name: puppet7-release
         state: present
