@@ -5,12 +5,12 @@
     dest: /etc/apt/trusted.gpg.d/foreman.asc
     mode: '0444'
 
-- name: 'Setup Foreman {{ foreman_repositories_version }} repository'
+- name: 'Setup repository for Foreman {{ foreman_repositories_version }}'
   apt_repository:
     repo: deb http://deb.theforeman.org {{ ansible_distribution_release }} {{ foreman_repositories_version }}
     state: present
 
-- name: 'Setup Foreman {{ foreman_repositories_version }} plugins repository'
+- name: 'Setup repository for Foreman Plugins {{ foreman_repositories_version }}'
   apt_repository:
     repo: deb http://deb.theforeman.org plugins {{ foreman_repositories_version }}
     state: present

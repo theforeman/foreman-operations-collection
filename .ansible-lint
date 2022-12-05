@@ -1,6 +1,5 @@
 ---
 warn_list:
   - fqcn[action-core]
-  - name[template]
 enable_list:
   - only-builtins
