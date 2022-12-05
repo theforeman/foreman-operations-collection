@@ -3,12 +3,12 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: get sources.list
+    - name: Get sources.list
       slurp:
         path: /etc/apt/sources.list.d/deb_theforeman_org.list
       register: repos
 
-    - name: check foreman repos exists
+    - name: Check Foreman repos exists
       assert:
         that:
           - "'deb http://deb.theforeman.org bullseye 3.2' in repos['content'] | b64decode"

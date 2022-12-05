@@ -2,6 +2,5 @@
 warn_list:
   - fqcn[action-core]
   - name[template]
-  - name[casing]
 enable_list:
   - only-builtins

@@ -13,32 +13,32 @@
         name: katello-repos
         state: present
 
-    - name: stat foreman.repo
+    - name: Stat foreman.repo
       stat:
         path: /etc/yum.repos.d/foreman.repo
       register: foreman_repo
 
-    - name: check foreman_repo file exists
+    - name: Check foreman_repo file exists
       assert:
         that:
           - foreman_repo.stat.exists
 
-    - name: stat foreman-plugins.repo
+    - name: Stat foreman-plugins.repo
       stat:
         path: /etc/yum.repos.d/foreman-plugins.repo
       register: foreman_plugins_repo
 
-    - name: check foreman_plugins_repo file exists
+    - name: Check foreman_plugins_repo file exists
       assert:
         that:
           - foreman_plugins_repo.stat.exists
 
-    - name: stat katello.repo
+    - name: Stat katello.repo
       stat:
         path: /etc/yum.repos.d/katello.repo
       register: katello_repo
 
-    - name: check katello_repo file exists
+    - name: Check katello_repo file exists
       assert:
         that:
           - katello_repo.stat.exists

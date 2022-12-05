@@ -3,12 +3,12 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: get cronjob file
+    - name: Get cronjob file
       slurp:
         path: /etc/cron.daily/foreman-backup
       register: backupcron
 
-    - name: check foreman cronjob content
+    - name: Check foreman cronjob content
       assert:
         that:
           - "'/var/backup/foreman' in crobjobcontent"
