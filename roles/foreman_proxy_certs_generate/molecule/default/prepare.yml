@@ -11,12 +11,12 @@
     - puppet_repositories
   post_tasks:
     - name: Ensure langpacks on EL8
-      dnf:
+      ansible.builtin.dnf:
         name: glibc-langpack-en
         state: present
       when: ansible_facts['os_family'] == 'RedHat'
     - name: Run installer
-      include_role:
+      ansible.builtin.include_role:
         name: installer
       vars:
         foreman_installer_scenario: katello

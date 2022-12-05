@@ -8,7 +8,7 @@
     - foreman_repositories
   tasks:
     - name: Ensure langpacks on EL8
-      dnf:
+      ansible.builtin.dnf:
         name: glibc-langpack-en
         state: present
       when: ansible_facts['os_family'] == 'RedHat'

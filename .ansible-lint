@@ -1,5 +1,3 @@
 ---
-warn_list:
-  - fqcn[action-core]
 enable_list:
   - only-builtins

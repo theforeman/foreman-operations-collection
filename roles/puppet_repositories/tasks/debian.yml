@@ -1,18 +1,18 @@
 ---
 - name: Install GPG package
-  package:
+  ansible.builtin.package:
     name: gpg
     state: present
     update_cache: true
 
 - name: Install Puppet repository
-  apt:
+  ansible.builtin.apt:
     deb: "https://apt.puppet.com/puppet{{ foreman_puppet_repositories_version }}-release-{{ ansible_distribution_release }}.deb"
     state: present
   register: puppet_apt_deb_install
 
 - name: Update apt cache if necessary
-  apt:
+  ansible.builtin.apt:
     update_cache: true
     force_apt_get: true
   when: puppet_apt_deb_install.changed

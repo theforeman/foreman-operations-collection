@@ -4,41 +4,41 @@
   gather_facts: false
   tasks:
     - name: Ensure foreman-release is installed
-      package:
+      ansible.builtin.package:
         name: foreman-release
         state: present
 
     - name: Ensure katello-repos is installed
-      package:
+      ansible.builtin.package:
         name: katello-repos
         state: present
 
     - name: Stat foreman.repo
-      stat:
+      ansible.builtin.stat:
         path: /etc/yum.repos.d/foreman.repo
       register: foreman_repo
 
     - name: Check foreman_repo file exists
-      assert:
+      ansible.builtin.assert:
         that:
           - foreman_repo.stat.exists
 
     - name: Stat foreman-plugins.repo
-      stat:
+      ansible.builtin.stat:
         path: /etc/yum.repos.d/foreman-plugins.repo
       register: foreman_plugins_repo
 
     - name: Check foreman_plugins_repo file exists
-      assert:
+      ansible.builtin.assert:
         that:
           - foreman_plugins_repo.stat.exists
 
     - name: Stat katello.repo
-      stat:
+      ansible.builtin.stat:
         path: /etc/yum.repos.d/katello.repo
       register: katello_repo
 
     - name: Check katello_repo file exists
-      assert:
+      ansible.builtin.assert:
         that:
           - katello_repo.stat.exists
