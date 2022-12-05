@@ -15,7 +15,7 @@
         name: glibc-langpack-en
         state: present
       when: ansible_facts['os_family'] == 'RedHat'
-    - name: run installer
+    - name: Run installer
       include_role:
         name: installer
       vars:

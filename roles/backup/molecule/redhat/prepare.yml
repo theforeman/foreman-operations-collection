@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: true
   pre_tasks:
-    - name: install crontabs
+    - name: Install crontabs
       package:
         name: crontabs
   roles:
