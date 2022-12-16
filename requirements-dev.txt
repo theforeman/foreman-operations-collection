@@ -7,4 +7,4 @@ pylint==2.6.0; python_version >= '3.6'
 voluptuous==0.12.1 # from https://github.com/ansible/ansible/raw/devel/test/lib/ansible_test/_data/requirements/sanity.validate-modules.txt
 yamllint
 molecule[docker,lint]
-ansible-lint<6
+ansible-lint

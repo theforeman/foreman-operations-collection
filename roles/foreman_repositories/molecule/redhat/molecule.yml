@@ -19,4 +19,4 @@ verifier:
 lint: |
   set -e
   yamllint -c ../../.yamllint .
-  ansible-lint .
+  YAMLLINT_CONFIG_FILE=../../.yamllint ansible-lint .
