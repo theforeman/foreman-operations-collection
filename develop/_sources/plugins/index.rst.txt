@@ -53,12 +53,3 @@ Plugin Index
 There are no plugins in the theforeman.operations collection with automatically generated documentation.
 
 
-
-.. seealso::
-
-    List of :ref:`collections <list_of_collections>` with docs hosted here.
-
-.. toctree::
-    :maxdepth: 1
-    :hidden:
-
