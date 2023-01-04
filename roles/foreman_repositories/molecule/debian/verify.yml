@@ -11,5 +11,5 @@
     - name: Check Foreman repos exists
       ansible.builtin.assert:
         that:
-          - "'deb http://deb.theforeman.org bullseye 3.2' in repos['content'] | b64decode"
-          - "'deb http://deb.theforeman.org plugins 3.2' in repos['content'] | b64decode"
+          - "'deb http://deb.theforeman.org bullseye 3.5' in repos['content'] | b64decode"
+          - "'deb http://deb.theforeman.org plugins 3.5' in repos['content'] | b64decode"
