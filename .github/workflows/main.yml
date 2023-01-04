@@ -103,16 +103,18 @@ jobs:
     strategy:
       matrix:
         python:
-          - "3.8"
+          - "3.9"
         ansible:
-          - stable-2.9
-          - stable-2.10
           - stable-2.11
           - stable-2.12
           - stable-2.13
+          - stable-2.14
+          - devel
         include:
-          - python: "3.9"
-            ansible: "devel"
+          - python: "3.8"
+            ansible: "stable-2.9"
+          - python: "3.8"
+            ansible: "stable-2.10"
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
