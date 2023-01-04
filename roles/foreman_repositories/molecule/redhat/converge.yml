@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: true
   vars:
-    foreman_repositories_version: "3.2"
-    foreman_repositories_katello_version: "4.4"
+    foreman_repositories_version: "3.5"
+    foreman_repositories_katello_version: "4.7"
   roles:
     - foreman_repositories
