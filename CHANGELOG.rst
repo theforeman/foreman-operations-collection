@@ -5,6 +5,22 @@ theforeman.operations Release Notes
 .. contents:: Topics
 
 
+v1.3.0
+======
+
+Minor Changes
+-------------
+
+- new role to configure backups using ``foreman-maintain``
+- update default Foreman to 3.5
+- update default Puppet to 7
+
+Bugfixes
+--------
+
+- cloud_connector role - Ensure ``rhcd.service`` starts after system reboots
+- fix paths in execution-environment.yml (https://bugzilla.redhat.com/show_bug.cgi?id=2156941)
+
 v1.2.3
 ======
 

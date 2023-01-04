@@ -57,3 +57,13 @@ releases:
       bugfixes:
       - foreman_repositories - also enable pulpcore module when enabling katello
     release_date: '2022-06-17'
+  1.3.0:
+    changes:
+      bugfixes:
+      - cloud_connector role - Ensure ``rhcd.service`` starts after system reboots
+      - fix paths in execution-environment.yml (https://bugzilla.redhat.com/show_bug.cgi?id=2156941)
+      minor_changes:
+      - new role to configure backups using ``foreman-maintain``
+      - update default Foreman to 3.5
+      - update default Puppet to 7
+    release_date: '2023-01-04'
