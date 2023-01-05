@@ -6,7 +6,7 @@
 Theforeman.Operations
 =====================
 
-Collection version 1.3.0-dev
+Collection version 1.4.0-dev
 
 .. contents::
    :local:
@@ -23,10 +23,11 @@ Foreman operations tasks such as install, upgrade and maintenance
 * Eric D. Helms <ericdhelms@gmail.com>
 * Evgeni Golov <evgeni@golov.de>
 * Ewoud Kohl van Wijngaarden <ewoud@kohlvanwijngaarden.nl>
-* Jeremy Audet <audet.jeremy@pm.me>
 * Jeffrey van Pelt <jeff@vanpelt.one>
+* Jeremy Audet <audet.jeremy@pm.me>
 * Kyle Williams <kyle.williams@thetradedesk.com>
 * Matthias Dellweg <2500@gmx.de>
+* Robert Rettig <robert@rettig.bayern>
 * willtome <willtome@gmail.com>
 
 **Supported ansible-core versions:**
