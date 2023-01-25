@@ -31,6 +31,7 @@ Run the installer with the `katello` scenario, setting the initial organization 
     - role: theforeman.operations.installer
       vars:
         foreman_installer_scenario: katello
+        foreman_installer_package: foreman-installer-katello
         foreman_installer_options:
           - '--foreman-initial-organization "ACME Inc"'
           - '--foreman-initial-admin-password changeme'
