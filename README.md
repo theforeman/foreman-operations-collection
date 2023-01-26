@@ -27,7 +27,7 @@ Ansible only supports Python 2.7 and 3.5 (and higher). These are also the only P
 
 ## Installation
 
-There are currently two ways to use the modules in your setup: install from Ansible Galaxy or via RPM. RPM installation is planned for a future release.
+There are currently two ways to use the modules in your setup: install directly from Ansible Galaxy or via packages.
 
 ### Installation from Ansible Galaxy
 
@@ -35,11 +35,11 @@ You can install the collection from [Ansible Galaxy](https://galaxy.ansible.com/
 
 After the installation, the assets are available as `theforeman.operations.<name>`. Please see the [Using Ansible collections documentation](https://docs.ansible.com/ansible/devel/user_guide/collections_using.html) for further details.
 
-### Installation via RPM
+### Installation via packages
 
-The collection is planned to be available as `ansible-collection-theforeman-operations` from the `plugins` repository on `yum.theforeman.org` starting with a future Foreman release.
+The collection is also available as `ansible-collection-theforeman-operations` from the `plugins` repository on `yum.theforeman.org` for Enterprise Linux systems and from the `plugins` repository on `deb.theforeman.org` for Debian and Ubuntu systems.
 
-After installing the RPM, you can use the modules in the same way as when they are installed directly from Ansible Galaxy.
+After installing the package, you can use the modules in the same way as when they are installed directly from Ansible Galaxy.
 
 ## Dependencies
 
