@@ -4,23 +4,6 @@
     that:
       - foreman_installer_scenario is defined
 
-- name: Enable the ruby module
-  when:
-    - ansible_distribution_major_version == '8'
-    - ansible_os_family == 'RedHat'
-  block:
-    - name: Get foreman-installer version
-      ansible.builtin.dnf:
-        list: foreman-installer
-      register: package_info
-
-    - name: Enable ruby:2.7 module
-      ansible.builtin.dnf:
-        name: '@ruby:2.7'
-        state: present
-      when:
-        - (package_info.results | map(attribute='version') | max) is version("2.5", ">=")
-
 # This is a workaround for https://projects.theforeman.org/issues/34468
 - name: "Install hostname"
   ansible.builtin.package:
