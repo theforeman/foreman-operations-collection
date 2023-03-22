@@ -12,7 +12,7 @@
     path: "/etc/rhc/workers"
     owner: root
     group: root
-    mode: 0755
+    mode: '0755'
 
 - name: Configure rhc-cloud-connector-worker
   ansible.builtin.template:
@@ -20,7 +20,7 @@
     dest: "{{ foreman_cloud_connector_config_file }}"
     owner: root
     group: root
-    mode: 0640
+    mode: '0640'
 
 - name: Create rhcd worker
   ansible.builtin.copy:
@@ -31,7 +31,7 @@
       CONFIG_FILE="{{ foreman_cloud_connector_config_file }}" exec /usr/libexec/yggdrasil-worker-forwarder
     owner: root
     group: root
-    mode: 0755
+    mode: '0755'
 
 - name: Ensure rhcd started
   ansible.builtin.service:
@@ -42,6 +42,7 @@
 - name: Read client ID from CN of consumer
   ansible.builtin.command: openssl x509 -in /etc/pki/consumer/cert.pem -subject -noout
   register: cert_output
+  changed_when: false
   when: cert_output is not defined
 
 - name: Set client ID in Satellite
