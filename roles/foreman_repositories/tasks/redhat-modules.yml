@@ -1,4 +1,15 @@
 ---
+- name: Enable ruby:2.7 module
+  ansible.builtin.dnf:
+    name: '@ruby:2.7'
+    state: present
+  tags:
+    - packages
+  when:
+    - foreman_repositories_version != 'nightly'
+    - foreman_repositories_version is version('2.5', '>=')
+    - foreman_repositories_version is version('3.2', '<')
+
 - name: 'Enable foreman:el8 module'
   ansible.builtin.command: dnf module enable -y foreman:el8
   # can't use the `dnf` module for modules without a default stream
