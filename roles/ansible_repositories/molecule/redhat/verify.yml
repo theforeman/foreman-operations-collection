@@ -1,9 +1,0 @@
----
-- name: Verify
-  hosts: all
-  gather_facts: false
-  tasks:
-    - name: Ensure centos-release-ansible-29 RPM is installed
-      ansible.builtin.package:
-        name: centos-release-ansible-29
-        state: present
