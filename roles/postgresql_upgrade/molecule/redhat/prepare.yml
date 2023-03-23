@@ -3,6 +3,11 @@
   hosts: all
   gather_facts: true
   tasks:
+    - name: Ensure langpacks on EL8
+      ansible.builtin.dnf:
+        name: glibc-langpack-en
+        state: present
+
     - name: Install PostgreSQL 10
       ansible.builtin.dnf:
         name: '@postgresql:10/server'
