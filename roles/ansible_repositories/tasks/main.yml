@@ -1,3 +1,0 @@
----
-- name: 'Include {{ ansible_os_family }}'
-  ansible.builtin.include_tasks: '{{ ansible_os_family | lower }}.yml'
