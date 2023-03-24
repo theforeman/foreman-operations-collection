@@ -2,7 +2,6 @@ Role Index
 ==========
 
 
- * :doc:`ansible_repositories`
  * :doc:`backup`
  * :doc:`cloud_connector`
  * :doc:`foreman_proxy_certs_generate`
