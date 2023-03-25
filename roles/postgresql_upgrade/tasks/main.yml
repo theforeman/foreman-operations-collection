@@ -21,7 +21,9 @@
         state: started
 
     - name: Collect postgres data
-      ansible.builtin.shell: psql --list --tuples-only | grep -E "^\s+postgres"
+      ansible.builtin.shell: |
+        set -o pipefail
+        psql --list --tuples-only | grep -E "^\s+postgres"
       become: true
       become_user: postgres
       changed_when: false
