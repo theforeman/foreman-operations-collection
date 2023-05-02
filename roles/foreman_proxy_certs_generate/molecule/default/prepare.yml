@@ -10,15 +10,6 @@
     - foreman_repositories
     - puppet_repositories
   post_tasks:
-    - name: Wait for systemd
-      ansible.builtin.command: systemctl is-system-running --wait # noqa: command-instead-of-module
-      ignore_errors: true
-      changed_when: false
-      register: result
-      until: "'running' in result.stdout or 'degraded' in result.stdout"
-      retries: 12
-      delay: 10
-
     - name: Ensure langpacks on EL8
       ansible.builtin.dnf:
         name: glibc-langpack-en
