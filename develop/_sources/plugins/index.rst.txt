@@ -6,7 +6,7 @@
 Theforeman.Operations
 =====================
 
-Collection version 1.4.0-dev
+Collection version 2.0.0
 
 .. contents::
    :local:
