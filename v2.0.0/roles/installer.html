@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>theforeman.operations.installer &mdash; Foreman Operations Collection  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/antsibull-minimal.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Foreman Operations Collection
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Foreman Operations Collection </a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/index.html">Theforeman.Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Role Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing Foreman Operations Collection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releasing.html">Releasing the collection</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Foreman Operations Collection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">theforeman.operations.installer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/roles/installer.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="theforeman-operations-installer">
+<h1>theforeman.operations.installer<a class="headerlink" href="#theforeman-operations-installer" title="Permalink to this heading"></a></h1>
+<p>Run the foreman-installer</p>
+<section id="role-variables">
+<h2>Role Variables<a class="headerlink" href="#role-variables" title="Permalink to this heading"></a></h2>
+<p>Required:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_scenario</span></code>: The installer scenario to run, this is required to be set. You can find the list of all scenario available by running <code class="docutils literal notranslate"><span class="pre">foreman-installer</span> <span class="pre">--list-scenarios</span></code> command.</p></li>
+</ul>
+<p>Optional:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_package</span></code>: Package containing the installer scenario</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_options</span></code>: Array of options to pass to the installer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_verbose</span></code>: Enables verbose output mode in the installer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_no_colors</span></code>: Disables color output from the installer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_command</span></code>: Installer command to run, can be used by derivative projects to specify a branded command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_locale</span></code>: Locale to run the installer with, this must not be <code class="docutils literal notranslate"><span class="pre">C</span></code>, defaults to <code class="docutils literal notranslate"><span class="pre">en_US.UTF-8</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_installer_timeout</span></code>: Time allowed for installer to run before it is assumed failed, defaults to 30m</p></li>
+</ul>
+</section>
+<section id="example-playbooks">
+<h2>Example Playbooks<a class="headerlink" href="#example-playbooks" title="Permalink to this heading"></a></h2>
+<p>Run the installer with the <code class="docutils literal notranslate"><span class="pre">katello</span></code> scenario, setting the initial organization and admin password:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">target-host</span>
+<span class="w">  </span><span class="nt">roles</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">theforeman.operations.installer</span>
+<span class="w">      </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">foreman_installer_scenario</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">katello</span>
+<span class="w">        </span><span class="nt">foreman_installer_package</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foreman-installer-katello</span>
+<span class="w">        </span><span class="nt">foreman_installer_options</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;--foreman-initial-organization</span><span class="nv"> </span><span class="s">&quot;ACME</span><span class="nv"> </span><span class="s">Inc&quot;&#39;</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;--foreman-initial-admin-password</span><span class="nv"> </span><span class="s">changeme&#39;</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, The Foreman Project.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
