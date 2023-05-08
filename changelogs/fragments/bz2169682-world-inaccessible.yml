@@ -1,2 +1,0 @@
-minor_changes:
-  - cloud_connector role - don't mark proxy.conf systemd drop-in word-inaccessible, there is no benefit and systemd warns about this (https://bugzilla.redhat.com/show_bug.cgi?id=2169682)

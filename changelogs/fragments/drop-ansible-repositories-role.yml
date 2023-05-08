@@ -1,2 +1,0 @@
-breaking_changes:
-  - ansible_repositories role - removed as it's not required anymore since EL 8.6 contains ``ansible-core``
