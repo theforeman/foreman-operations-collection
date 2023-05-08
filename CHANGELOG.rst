@@ -5,6 +5,19 @@ theforeman.operations Release Notes
 .. contents:: Topics
 
 
+v2.0.0
+======
+
+Minor Changes
+-------------
+
+- cloud_connector role - don't mark proxy.conf systemd drop-in word-inaccessible, there is no benefit and systemd warns about this (https://bugzilla.redhat.com/show_bug.cgi?id=2169682)
+
+Breaking Changes / Porting Guide
+--------------------------------
+
+- ansible_repositories role - removed as it's not required anymore since EL 8.6 contains ``ansible-core``
+
 v1.3.0
 ======
 
