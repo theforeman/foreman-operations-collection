@@ -11,17 +11,17 @@
     - name: Find installer flag file
       ansible.builtin.stat:
         path: /etc/foreman-installer/scenarios.d/.installed
-      register: installed_file
+      register: __foreman_installed_file
     - name: Assert installer flag file exists
       ansible.builtin.assert:
         that:
-          - installed_file.stat.exists
+          - __foreman_installed_file.stat.exists
 
     - name: Find tasks config file
       ansible.builtin.stat:
         path: /etc/foreman/plugins/foreman-tasks.yaml
-      register: foreman_tasks_yaml
+      register: __foreman_tasks_yaml
     - name: Check tasks config file exists
       ansible.builtin.assert:
         that:
-          - foreman_tasks_yaml.stat.exists
+          - __foreman_tasks_yaml.stat.exists

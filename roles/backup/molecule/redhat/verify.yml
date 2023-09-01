@@ -6,11 +6,11 @@
     - name: Get cronjob file
       ansible.builtin.slurp:
         path: /etc/cron.daily/foreman-backup
-      register: backupcron
+      register: __foreman_backupcron
 
     - name: Check foreman cronjob content
       ansible.builtin.assert:
         that:
-          - "'/var/backup/foreman' in crobjobcontent"
+          - "'/var/backup/foreman' in __foreman_crobjobcontent"
       vars:
-        crobjobcontent: "{{ backupcron['content'] | b64decode }}"
+        __foreman_crobjobcontent: "{{ __foreman_backupcron['content'] | b64decode }}"
