@@ -16,7 +16,6 @@ jobs:
         python:
           - "3.10"
         ansible:
-          - stable-2.11
           - stable-2.12
           - stable-2.13
           - stable-2.14
@@ -24,19 +23,9 @@ jobs:
           - devel
         include:
           - python: "3.8"
-            ansible: "stable-2.9"
-          - python: "3.8"
-            ansible: "stable-2.10"
-          - python: "2.7"
-            ansible: "stable-2.11"
-          - python: "3.5"
-            ansible: "stable-2.11"
-          - python: "3.6"
-            ansible: "stable-2.11"
-          - python: "3.7"
-            ansible: "stable-2.11"
+            ansible: "stable-2.12"
           - python: "3.9"
-            ansible: "stable-2.11"
+            ansible: "stable-2.13"
           - python: "3.11"
             ansible: "devel"
     steps:
@@ -55,7 +44,6 @@ jobs:
         run: make test-setup
       - name: Run sanity tests
         run: make SANITY_OPTS="--local" sanity
-        if: matrix.ansible != 'stable-2.9' && matrix.ansible != 'stable-2.10' && matrix.ansible != 'stable-2.11'
 
   docs:
     runs-on: ubuntu-latest
