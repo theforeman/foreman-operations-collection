@@ -6,13 +6,13 @@
     - name: Get version of postgres data directory
       ansible.builtin.slurp:
         path: /var/lib/pgsql/data/PG_VERSION
-      register: pg_version
+      register: __foreman_pg_version
 
     - name: Print PostgreSQL version
       ansible.builtin.debug:
-        msg: "{{ pg_version['content'] | b64decode }}"
+        msg: "{{ __foreman_pg_version['content'] | b64decode }}"
 
     - name: Assure postgresql version is 12
       ansible.builtin.assert:
         that:
-          - "'12' in pg_version['content'] | b64decode"
+          - "'12' in __foreman_pg_version['content'] | b64decode"

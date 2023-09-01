@@ -36,9 +36,9 @@
     - name: Stat katello.repo
       ansible.builtin.stat:
         path: /etc/yum.repos.d/katello.repo
-      register: katello_repo
+      register: foreman_katello_repo
 
     - name: Check katello_repo file exists
       ansible.builtin.assert:
         that:
-          - katello_repo.stat.exists
+          - foreman_katello_repo.stat.exists

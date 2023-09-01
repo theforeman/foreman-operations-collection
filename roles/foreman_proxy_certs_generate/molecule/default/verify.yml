@@ -6,9 +6,9 @@
     - name: Find proxy certs file
       ansible.builtin.stat:
         path: /root/proxy.example.com.tar.gz
-      register: cert_tarball
+      register: __foreman_cert_tarball
 
     - name: Check proxy certs file exists
       ansible.builtin.assert:
         that:
-          - cert_tarball.stat.exists
+          - __foreman_cert_tarball.stat.exists
