@@ -1,0 +1,11 @@
+Role Index
+==========
+
+
+ * :doc:`backup`
+ * :doc:`cloud_connector`
+ * :doc:`foreman_proxy_certs_generate`
+ * :doc:`foreman_repositories`
+ * :doc:`installer`
+ * :doc:`postgresql_upgrade`
+ * :doc:`puppet_repositories`
