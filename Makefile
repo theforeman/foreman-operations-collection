@@ -44,6 +44,8 @@ info:
 lint: $(MANIFEST)
 	yamllint -f parsable roles
 	ansible-lint -v roles/*
+
+galaxy-importer: $(MANIFEST)
 	GALAXY_IMPORTER_CONFIG=tests/galaxy-importer.cfg python -m galaxy_importer.main $(NAMESPACE)-$(NAME)-$(VERSION).tar.gz
 
 sanity: $(MANIFEST)
