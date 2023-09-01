@@ -1,18 +1,18 @@
 ---
 - name: Get source record
   ansible.builtin.uri:
-    url: "https://{{ foreman_cloud_connector_console_redhat_host }}/api/sources/v3.1/sources?filter[source_ref]={{ satellite_uuid_json.json.results[0].value }}"
+    url: "https://{{ foreman_cloud_connector_console_redhat_host }}/api/sources/v3.1/sources?filter[source_ref]={{ foreman_uuid_json.json.results[0].value }}"
     client_cert: "{{ item.path }}/cert.pem"
     client_key: "{{ item.path }}/key.pem"
     return_content: true
-  register: source_record_response
+  register: __foreman_source_record_response
 
 - name: Delete Source
   vars:
-    source_id: "{{ source_record_response.json.data[0].id }}"
-  when: "source_record_response.json.data | length == 1"
+    __foreman_source_id: "{{ __foreman_source_record_response.json.data[0].id }}"
+  when: "__foreman_source_record_response.json.data | length == 1"
   ansible.builtin.uri:
-    url: "https://{{ foreman_cloud_connector_console_redhat_host }}/api/sources/v3.1/sources/{{ source_id }}"
+    url: "https://{{ foreman_cloud_connector_console_redhat_host }}/api/sources/v3.1/sources/{{ __foreman_source_id }}"
     client_cert: "{{ item.path }}/cert.pem"
     client_key: "{{ item.path }}/key.pem"
     method: "DELETE"

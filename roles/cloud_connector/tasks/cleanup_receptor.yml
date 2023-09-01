@@ -7,17 +7,17 @@
     return_content: true
     validate_certs: true
     force_basic_auth: true
-  register: satellite_uuid_json
+  register: foreman_uuid_json
 
 - name: Find receptor configs
   ansible.builtin.find:
     paths: /etc/receptor
     file_type: directory
-  register: receptor_configs
+  register: __foreman_receptor_configs
 
 - name: Delete sources
   ansible.builtin.include_tasks: delete_source.yml
-  loop: "{{ receptor_configs['files'] }}"
+  loop: "{{ __foreman_receptor_configs['files'] }}"
 
 - name: Collect service facts
   ansible.builtin.service_facts:

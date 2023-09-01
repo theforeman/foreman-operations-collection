@@ -45,13 +45,13 @@
 
     - name: Check if powertools repository is disabled
       ansible.builtin.command: dnf repolist --disabled powertools
-      register: disabled_repos
+      register: __foreman_disabled_repos
       changed_when: false
 
     - name: Enable powertools
       ansible.builtin.command: dnf config-manager --set-enabled powertools
-      register: dnf_set_enabled
-      changed_when: dnf_set_enabled.rc is defined and dnf_set_enabled.rc == '0'
+      register: __foreman_dnf_set_enabled
+      changed_when: __foreman_dnf_set_enabled.rc is defined and __foreman_dnf_set_enabled.rc == '0'
       when:
-        - "'powertools' in disabled_repos.stdout"
+        - "'powertools' in __foreman_disabled_repos.stdout"
         - ansible_distribution != 'RedHat'

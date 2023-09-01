@@ -41,9 +41,9 @@
 
 - name: Read client ID from CN of consumer
   ansible.builtin.command: openssl x509 -in /etc/pki/consumer/cert.pem -subject -noout
-  register: cert_output
+  register: __foreman_cert_output
   changed_when: false
-  when: cert_output is not defined
+  when: __foreman_cert_output is not defined
 
 - name: Set client ID in Satellite
   ansible.builtin.uri:
@@ -52,13 +52,13 @@
     password: "{{ foreman_cloud_connector_password }}"
     body:
       setting:
-        value: "{{ client_id }}"
+        value: "{{ __foreman_client_id }}"
     method: "PUT"
     validate_certs: "{{ foreman_cloud_connector_validate_certs }}"
     force_basic_auth: true
     body_format: json
   vars:
-    client_id: "{{ cert_output.stdout | regex_search('CN\\s?=\\s?([a-z0-9-]+)', '\\1') | first }}"
+    __foreman_client_id: "{{ __foreman_cert_output.stdout | regex_search('CN\\s?=\\s?([a-z0-9-]+)', '\\1') | first }}"
 
 - name: Configure HTTP proxy
   ansible.builtin.include_tasks: http_proxy.yml
