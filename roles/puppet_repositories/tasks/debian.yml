@@ -9,12 +9,12 @@
   ansible.builtin.apt:
     deb: "https://apt.puppet.com/puppet{{ foreman_puppet_repositories_version }}-release-{{ ansible_distribution_release }}.deb"
     state: present
-  register: puppet_apt_deb_install
+  register: __foreman_puppet_apt_deb_install
 
 - name: Update apt cache if necessary
   ansible.builtin.apt:
     update_cache: true
     force_apt_get: true
-  when: puppet_apt_deb_install.changed
+  when: __foreman_puppet_apt_deb_install.changed
   tags:
     - skip_ansible_lint  # skip lint since we cannot use handler, and cache must be updated immediately

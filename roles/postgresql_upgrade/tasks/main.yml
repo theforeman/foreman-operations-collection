@@ -9,11 +9,11 @@
 - name: Get version from the PostgreSQL data directory
   ansible.builtin.slurp:
     path: /var/lib/pgsql/data/PG_VERSION
-  register: pg_version
+  register: __foreman_pg_version
 
 - name: Perform PostgreSQL upgrade
   when:
-    - "'10' in pg_version['content']|b64decode"
+    - "'10' in __foreman_pg_version['content']|b64decode"
   block:
     - name: Start postgresql
       ansible.builtin.service:
@@ -27,12 +27,12 @@
       become: true
       become_user: postgres
       changed_when: false
-      register: postgres_output
+      register: __foreman_postgres_output
 
     - name: Set collate and ctype facts
       ansible.builtin.set_fact:
-        collate: "{{ postgres_output.stdout.split('|')[3] | trim }}"
-        ctype: "{{ postgres_output.stdout.split('|')[4] | trim }}"
+        foreman_postgres_collate: "{{ __foreman_postgres_output.stdout.split('|')[3] | trim }}"
+        foreman_postgres_ctype: "{{ __foreman_postgres_output.stdout.split('|')[4] | trim }}"
 
     - name: Stop postgresql
       ansible.builtin.service:
@@ -61,7 +61,7 @@
     - name: Run postgresql-setup --upgrade  # noqa no-changed-when
       ansible.builtin.command: postgresql-setup --upgrade
       environment:
-        PGSETUP_INITDB_OPTIONS: "--lc-collate={{ collate }} --lc-ctype={{ ctype }} --locale={{ collate }}"
+        PGSETUP_INITDB_OPTIONS: "--lc-collate={{ foreman_postgres_collate }} --lc-ctype={{ foreman_postgres_ctype }} --locale={{ foreman_postgres_collate }}"
 
     - name: Start postgresql
       ansible.builtin.service:
