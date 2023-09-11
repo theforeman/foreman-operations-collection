@@ -32,7 +32,7 @@ Foreman operations tasks such as install, upgrade and maintenance
 
 **Supported ansible-core versions:**
 
-* 2.9 or newer
+* 2.9.17 or newer
 
 .. raw:: html
 
