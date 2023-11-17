@@ -1,15 +1,4 @@
 ---
-- name: Enable ruby:2.7 module
-  ansible.builtin.dnf:
-    name: '@ruby:2.7'
-    state: present
-  tags:
-    - packages
-  when:
-    - foreman_repositories_version != 'nightly'
-    - foreman_repositories_version is version('2.5', '>=')
-    - foreman_repositories_version is version('3.2', '<')
-
 - name: 'Enable foreman:el8 module'
   ansible.builtin.command: dnf module enable -y foreman:el8
   # can't use the `dnf` module for modules without a default stream
@@ -19,8 +8,6 @@
     creates: /etc/dnf/modules.d/foreman.module
   tags:
     - packages
-  when:
-    - foreman_repositories_version == "nightly" or foreman_repositories_version is version('3.2', '>=')
 
 - name: 'Enable katello el8 modules'
   ansible.builtin.command: "dnf module enable -y {{ item }}:el8"
@@ -36,18 +23,3 @@
     - pulpcore
   when:
     - foreman_repositories_katello_version is defined
-    - foreman_repositories_katello_version == "nightly" or foreman_repositories_katello_version is version('4.4', '>=')
-
-- name: 'Enable pki-core module'
-  ansible.builtin.command: dnf module enable -y pki-core
-  # can't use the `dnf` module for modules without a default stream
-  # https://github.com/ansible/ansible/issues/56504
-  # https://github.com/ansible/ansible/issues/64852
-  args:
-    creates: /etc/dnf/modules.d/pki-core.module
-  tags:
-    - packages
-  when:
-    - foreman_repositories_katello_version is defined
-    - foreman_repositories_katello_version != "nightly"
-    - foreman_repositories_katello_version is version('4.3', '<=')
