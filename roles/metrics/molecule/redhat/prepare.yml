@@ -1,0 +1,30 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Configure Foreman rpeositories
+      ansible.builtin.include_role:
+        name: foreman_repositories
+      vars:
+        foreman_repositories_version: 'nightly'
+
+    - name: Ensure langpacks on EL8
+      ansible.builtin.package:
+        name: glibc-langpack-en
+        state: present
+
+    - name: Install PostgreSQL
+      ansible.builtin.package:
+        name: postgresql-server
+        state: present
+
+    - name: Init PostgreSQL data
+      ansible.builtin.command: postgresql-setup --initdb
+      args:
+        creates: /var/lib/pgsql/data/PG_VERSION
+
+    - name: Start PostgreSQL
+      ansible.builtin.service:
+        name: postgresql
+        state: started

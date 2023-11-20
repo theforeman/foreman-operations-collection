@@ -1,0 +1,74 @@
+---
+- name: Install PCP and optional PMDAs
+  ansible.builtin.package:
+    name: "{{ ['foreman-pcp', 'pcp'] + foreman_metrics_pcp_additional_packages + foreman_metrics_pcp_optional_agent_packages }}"
+    state: present
+    disable_plugin: "{{ 'foreman-protector' if ansible_os_family == 'RedHat' else omit }}"
+
+- name: Read pmcd.conf
+  ansible.builtin.slurp:
+    src: /etc/pcp/pmcd/pmcd.conf
+  register: __foreman_pmcd_conf
+
+# see https://pcp.readthedocs.io/en/latest/UAG/InstallingAndConfiguringPcp.html#managing-optional-pmdas
+- name: Ensure optional metric collection agents are enabled
+  ansible.builtin.file:
+    path: "/var/lib/pcp/pmdas/{{ item }}/.NeedInstall"
+    mode: u=rw,g=r,o=r
+    state: touch
+  vars:
+    __foreman_pmcd_enabled_pmdas: "{{ __foreman_pmcd_conf['content'] | b64decode | split('\n') | select('contains', 'pcp/pmdas') | map('split') | map('first') }}"
+  loop: "{{ foreman_metrics_pcp_optional_agents }}"
+  when: item not in __foreman_pmcd_enabled_pmdas
+  notify:
+    - Restart pmcd
+    - Restart pmproxy
+    - Restart pmlogger
+
+- name: Configure OpenMetrics PMDA to read Foreman metrics
+  ansible.builtin.copy:
+    dest: /var/lib/pcp/pmdas/openmetrics/config.d/foreman.url
+    content: "{{ foreman_metrics_url }}"
+    mode: '0644'
+  notify:
+    - Restart pmcd
+    - Restart pmproxy
+    - Restart pmlogger
+
+- name: Configure hotproc PMDA to monitor Foreman processes
+  ansible.builtin.file:
+    path: /var/lib/pcp/pmdas/proc/hotproc.conf
+    src: /etc/pcp/proc/foreman-hotproc.conf
+    state: link
+  notify:
+    - Restart pmcd
+    - Restart pmproxy
+    - Restart pmlogger
+
+- name: Enable pmcd
+  ansible.builtin.service:
+    name: pmcd
+    state: started
+    enabled: true
+
+- name: Enable pmproxy
+  ansible.builtin.service:
+    name: pmproxy
+    state: started
+    enabled: true
+
+- name: Enable pmlogger
+  ansible.builtin.service:
+    name: pmlogger
+    state: started
+    enabled: true
+
+- name: Enable pmie
+  ansible.builtin.service:
+    name: pmie
+    state: started
+    enabled: true
+
+- name: Include Grafana tasks
+  ansible.builtin.include_tasks: grafana.yml
+  when: foreman_metrics_grafana_enabled

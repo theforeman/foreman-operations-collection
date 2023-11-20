@@ -1,0 +1,12 @@
+---
+foreman_metrics_url: "https://{{ ansible_fqdn | default('localhost') }}/metrics"
+foreman_metrics_pcp_additional_packages: "{{ ['pcp-system-tools'] if ansible_os_family == 'RedHat' else ['python3-psycopg2', 'python3-requests'] }}"
+foreman_metrics_pcp_optional_agents:
+  - apache
+  - openmetrics
+  - postgresql
+  - redis
+foreman_metrics_pcp_optional_agent_packages_redhat: "{{ foreman_metrics_pcp_optional_agents | map('regex_replace', '^', 'pcp-pmda-') }}"
+foreman_metrics_pcp_optional_agent_packages: "{{ foreman_metrics_pcp_optional_agent_packages_redhat if ansible_os_family == 'RedHat' else [] }}"
+foreman_metrics_grafana_enabled: "{{ ansible_os_family == 'RedHat' }}"
+foreman_metrics_grafana_pmproxy_url: "http://{{ ansible_fqdn | default('localhost') }}:44322"

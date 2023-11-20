@@ -1,0 +1,20 @@
+---
+- name: Restart pmcd
+  ansible.builtin.service:
+    name: pmcd
+    state: restarted
+
+- name: Restart pmproxy
+  ansible.builtin.service:
+    name: pmproxy
+    state: restarted
+
+- name: Restart pmlogger
+  ansible.builtin.service:
+    name: pmlogger
+    state: restarted
+
+- name: Restart grafana-server
+  ansible.builtin.service:
+    name: grafana-server
+    state: restarted

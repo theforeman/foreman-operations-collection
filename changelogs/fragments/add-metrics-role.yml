@@ -1,0 +1,2 @@
+minor_changes:
+  - metrics role - new role to setup PCP integration with Foreman 3.9 and newer

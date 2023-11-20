@@ -1,0 +1,46 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Ensure PCP is installed
+      ansible.builtin.package:
+        name: pcp
+        state: present
+
+    - name: Read pmcd.conf
+      ansible.builtin.slurp:
+        src: /etc/pcp/pmcd/pmcd.conf
+      register: __foreman_pmcd_conf
+
+    - name: Ensure optional metric collection agents are enabled
+      ansible.builtin.assert:
+        that:
+          - item in __foreman_pmcd_enabled_pmdas
+      loop:
+        - apache
+        - openmetrics
+        - postgresql
+        - redis
+      vars:
+        __foreman_pmcd_enabled_pmdas: "{{ __foreman_pmcd_conf['content'] | b64decode | split('\n') | select('contains', 'pcp/pmdas') | map('split') | map('first') }}"
+
+    - name: Ensure Grafana is installed
+      ansible.builtin.package:
+        name: grafana
+        state: present
+
+    - name: Ensure grafana-server is running
+      ansible.builtin.service:
+        name: grafana-server
+        state: started
+
+    - name: List installed Grafana plugins
+      ansible.builtin.command: grafana-cli plugins ls
+      changed_when: false
+      register: __foreman_grafana_plugins
+
+    - name: Ensure PCP plugin is installed
+      ansible.builtin.assert:
+        that:
+          - "'performancecopilot-pcp-app' in __foreman_grafana_plugins.stdout"
