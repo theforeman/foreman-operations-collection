@@ -1,0 +1,2 @@
+breaking_changes:
+  - postgresql_upgrade role - removed the role as it was only needed for Foreman before 2.5
