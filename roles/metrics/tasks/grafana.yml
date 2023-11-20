@@ -1,0 +1,30 @@
+---
+- name: Install Grafana packages
+  ansible.builtin.package:
+    name:
+      - grafana
+      - grafana-pcp
+    state: present
+    disable_plugin: foreman-protector
+
+- name: Add PCP plugin to Grafana
+  ansible.builtin.copy:
+    src: files/grafana-pcp-provisioning.yaml
+    dest: "/etc/grafana/provisioning/plugins/grafana-pcp.yaml"
+    owner: root
+    group: grafana
+    mode: '0640'
+  notify: Restart grafana-server
+
+- name: Configure PCP datasources in Grafana
+  ansible.builtin.template:
+    src: grafana-pcp-datasources.yaml.j2
+    dest: "/etc/grafana/provisioning/datasources/grafana-pcp.yaml"
+    mode: '0644'
+  notify: Restart grafana-server
+
+- name: Start grafana-server
+  ansible.builtin.service:
+    name: grafana-server
+    state: started
+    enabled: true

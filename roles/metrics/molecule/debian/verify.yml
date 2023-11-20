@@ -1,0 +1,26 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Ensure pcp is installed
+      ansible.builtin.package:
+        name: pcp
+        state: present
+
+    - name: Read pmcd.conf
+      ansible.builtin.slurp:
+        src: /etc/pcp/pmcd/pmcd.conf
+      register: __foreman_pmcd_conf
+
+    - name: Ensure optional metric collection agents are enabled
+      ansible.builtin.assert:
+        that:
+          - item in __foreman_pmcd_enabled_pmdas
+      loop:
+        - apache
+        - openmetrics
+        - postgresql
+        - redis
+      vars:
+        __foreman_pmcd_enabled_pmdas: "{{ __foreman_pmcd_conf['content'] | b64decode | split('\n') | select('contains', 'pcp/pmdas') | map('split') | map('first') }}"
