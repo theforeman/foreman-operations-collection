@@ -2,9 +2,7 @@
 - name: Prepare
   hosts: all
   gather_facts: true
-  pre_tasks:
+  tasks:
     - name: Install crontabs
       ansible.builtin.package:
         name: crontabs
-  roles:
-    - backup
