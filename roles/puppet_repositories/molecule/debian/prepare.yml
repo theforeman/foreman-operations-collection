@@ -2,7 +2,9 @@
 - name: Prepare
   hosts: all
   gather_facts: true
-  vars:
-    foreman_puppet_repositories_version: 6
-  roles:
-    - puppet_repositories
+  tasks:
+    - name: Configure Puppet 6 repositories
+      ansible.builtin.include_role:
+        name: puppet_repositories
+      vars:
+        foreman_puppet_repositories_version: 6

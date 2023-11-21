@@ -3,10 +3,13 @@
   hosts: all
   gather_facts: true
   become: true
-  roles:
-    - puppet_repositories
-    - foreman_repositories
   tasks:
+    - name: Configure Puppet repositories
+      ansible.builtin.include_role:
+        name: puppet_repositories
+    - name: Configure Foreman repositories
+      ansible.builtin.include_role:
+        name: foreman_repositories
     - name: Ensure langpacks on EL8
       ansible.builtin.dnf:
         name: glibc-langpack-en

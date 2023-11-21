@@ -3,13 +3,16 @@
   hosts: all
   gather_facts: true
   become: true
-  vars:
-    foreman_repositories_version: "3.8"
-    foreman_repositories_katello_version: "4.10"
-  roles:
-    - foreman_repositories
-    - puppet_repositories
-  post_tasks:
+  tasks:
+    - name: Configure Puppet repositories
+      ansible.builtin.include_role:
+        name: puppet_repositories
+    - name: Configure Foreman repositories
+      ansible.builtin.include_role:
+        name: foreman_repositories
+      vars:
+        foreman_repositories_version: "3.8"
+        foreman_repositories_katello_version: "4.10"
     - name: Ensure langpacks on EL8
       ansible.builtin.dnf:
         name: glibc-langpack-en
