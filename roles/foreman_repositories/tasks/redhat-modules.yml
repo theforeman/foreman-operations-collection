@@ -9,17 +9,28 @@
   tags:
     - packages
 
-- name: 'Enable katello el8 modules'
-  ansible.builtin.command: "dnf module enable -y {{ item }}:el8"
+- name: 'Enable katello:el8 module'
+  ansible.builtin.command: "dnf module enable -y katello:el8"
   # can't use the `dnf` module for modules without a default stream
   # https://github.com/ansible/ansible/issues/56504
   # https://github.com/ansible/ansible/issues/64852
   args:
-    creates: "/etc/dnf/modules.d/{{ item }}.module"
+    creates: "/etc/dnf/modules.d/katello.module"
   tags:
     - packages
-  loop:
-    - katello
-    - pulpcore
   when:
     - foreman_repositories_katello_version is defined
+
+- name: 'Enable pulpcore:el8 module'
+  ansible.builtin.command: "dnf module enable -y pulpcore:el8"
+  # can't use the `dnf` module for modules without a default stream
+  # https://github.com/ansible/ansible/issues/56504
+  # https://github.com/ansible/ansible/issues/64852
+  args:
+    creates: "/etc/dnf/modules.d/pulpcore.module"
+  tags:
+    - packages
+  when:
+    - foreman_repositories_katello_version is defined
+    - foreman_repositories_katello_version != 'nightly'
+    - foreman_repositories_katello_version is version('4.10', '<=')
