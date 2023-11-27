@@ -1,0 +1,2 @@
+minor_changes:
+  - foreman_repositories role - only enable the Pulpcore module for Katello up to 4.10, later versions use demodularized Pulpcore repos
