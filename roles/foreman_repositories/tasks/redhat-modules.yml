@@ -34,3 +34,13 @@
     - foreman_repositories_katello_version is defined
     - foreman_repositories_katello_version != 'nightly'
     - foreman_repositories_katello_version is version('4.10', '<=')
+
+- name: 'Disable pulpcore:el8 module'
+  ansible.builtin.file:
+    path: /etc/dnf/modules.d/pulpcore.module
+    state: absent
+  tags:
+    - packages
+  when:
+    - foreman_repositories_katello_version is defined
+    - foreman_repositories_katello_version == 'nightly' or foreman_repositories_katello_version is version('4.11', '>=')
