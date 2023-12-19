@@ -63,6 +63,3 @@
 - name: Configure HTTP proxy
   ansible.builtin.include_tasks: http_proxy.yml
   when: foreman_cloud_connector_http_proxy is defined
-
-- name: Cleanup receptor
-  ansible.builtin.include_tasks: cleanup_receptor.yml
