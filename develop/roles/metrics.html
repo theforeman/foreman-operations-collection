@@ -2,10 +2,9 @@
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<meta content="2.6.1" name="antsibull-docs" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index of all Collection Environment Variables &mdash; Foreman Operations Collection  documentation</title>
+  <title>theforeman.operations.metrics &mdash; Foreman Operations Collection  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/antsibull-minimal.css" />
@@ -47,8 +46,8 @@
               <p class="caption" role="heading"><span class="caption-text">User documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../README.html">Foreman Operations Collection </a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Theforeman.Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../roles/index.html">Role Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/index.html">Theforeman.Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Role Index</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
 <ul>
@@ -70,9 +69,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Index of all Collection Environment Variables</li>
+      <li class="breadcrumb-item active">theforeman.operations.metrics</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/plugins/environment_variables.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/roles/metrics.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -80,11 +79,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="index-of-all-collection-environment-variables">
-<span id="list-of-collection-env-vars"></span><h1>Index of all Collection Environment Variables<a class="headerlink" href="#index-of-all-collection-environment-variables" title="Link to this heading"></a></h1>
-<p>The following index documents all environment variables declared by plugins in collections.
-Environment variables used by the ansible-core configuration are documented in <a class="reference external" href="https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-configuration-settings" title="(in Ansible v9)"><span>Ansible Configuration Settings</span></a>.</p>
-<p>No environment variables have been defined.</p>
+  <section id="theforeman-operations-metrics">
+<h1>theforeman.operations.metrics<a class="headerlink" href="#theforeman-operations-metrics" title="Link to this heading"></a></h1>
+<p>Setup Performace Co-Pilot and Grafana to gather metrics of a Foreman installation.</p>
+<p>This role is heavily based on the <a class="reference external" href="https://github.com/performancecopilot/ansible-pcp">performancecopilot.metrics</a> collection.</p>
+<section id="role-variables">
+<h2>Role Variables<a class="headerlink" href="#role-variables" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_metrics_url</span></code>: The URL of the OpenMetrics endpoint of Foreman, defaults to <code class="docutils literal notranslate"><span class="pre">https://{{</span> <span class="pre">ansible_fqdn</span> <span class="pre">|</span> <span class="pre">default('localhost')</span> <span class="pre">}}/metrics</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_metrics_pcp_optional_agents</span></code>: The optional PCP agents to enable, defaults to <code class="docutils literal notranslate"><span class="pre">[apache,</span> <span class="pre">openmetrics,</span> <span class="pre">postgresql,</span> <span class="pre">redis]</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_metrics_grafana_enabled</span></code>: Whether or not Grafana should be installed and configured on the system, defaults to <code class="docutils literal notranslate"><span class="pre">true</span></code> on Red Hat family systems, and to <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foreman_metrics_grafana_pmproxy_url</span></code>: The URL of the <code class="docutils literal notranslate"><span class="pre">pmproxy</span></code> service to be used as the Grafana datasource, defaults to <code class="docutils literal notranslate"><span class="pre">http://{{</span> <span class="pre">ansible_fqdn</span> <span class="pre">|</span> <span class="pre">default('localhost')</span> <span class="pre">}}:44322</span></code>.</p></li>
+</ul>
+</section>
+<section id="example-playbooks">
+<h2>Example Playbooks<a class="headerlink" href="#example-playbooks" title="Link to this heading"></a></h2>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
+<span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">roles</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">metrics</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
