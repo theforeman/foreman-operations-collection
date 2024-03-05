@@ -36,6 +36,8 @@
 - name: Enable powertools for Katello
   when:
     - foreman_repositories_katello_version is defined
+    - foreman_repositories_katello_version != 'nightly'
+    - foreman_repositories_katello_version is version('4.10', '<')
     - ansible_distribution_major_version == '8'
   block:
     - name: Install dnf-config-manager
