@@ -1,0 +1,99 @@
+---
+- name: Check that necessary variables are defined
+  assert:
+    that:
+      - foreman_prepare_realm_freeipa_password is defined
+
+- name: Install foreman-proxy package
+  package:
+    name: foreman-proxy
+
+- name: Add {{ foreman_prepare_realm_user }} user
+  freeipa.ansible_freeipa.ipauser:
+    ipaadmin_principal: "{{ foreman_prepare_realm_freeipa_principal }}"
+    ipaadmin_password: "{{ foreman_prepare_realm_freeipa_password }}"
+    name: "{{ foreman_prepare_realm_user }}"
+    first: Smart
+    last: Proxy
+
+- name: Add Host Enrollment Password permission
+  freeipa.ansible_freeipa.ipapermission:
+    ipaadmin_principal: "{{ foreman_prepare_realm_freeipa_principal }}"
+    ipaadmin_password: "{{ foreman_prepare_realm_freeipa_password }}"
+    name: Add Host Enrollment Password
+    object_type: host
+    right: add
+    attrs:
+      - userpassword
+
+- name: Add Smart Proxy Host Management privilege
+  freeipa.ansible_freeipa.ipaprivilege:
+    ipaadmin_principal: "{{ foreman_prepare_realm_freeipa_principal }}"
+    ipaadmin_password: "{{ foreman_prepare_realm_freeipa_password }}"
+    name: Smart Proxy Host Management
+    description: Smart Proxy Host Management
+    permission:
+      - "System: Manage Host Enrollment Password"
+      - "System: Manage Host Certificates"
+      - "System: Modify Hosts"
+      - "System: Remove Hosts"
+      - "System: Manage Host Keytab"
+      - "System: Modify Services"
+      - "System: Manage Service Keytab"
+      - "System: Add DNS Entries"
+      - "System: Update DNS Entries"
+      - "System: Remove DNS Entries"
+      - "System: Read DNS Entries"
+      - "Retrieve Certificates from the CA"
+      - "Add Host Enrollment Password"
+
+- name: Add Smart Proxy Manager role
+  freeipa.ansible_freeipa.iparole:
+    ipaadmin_principal: "{{ foreman_prepare_realm_freeipa_principal }}"
+    ipaadmin_password: "{{ foreman_prepare_realm_freeipa_password }}"
+    name: Smart Proxy Host Manager
+    description: Smart Proxy Host Management
+    privilege:
+      - Smart Proxy Host Management
+    user:
+      - "{{ foreman_prepare_realm_user }}"
+
+- name: Check if realm keytab file already exist
+  stat:
+    path: "{{ foreman_prepare_realm_keytab_path }}"
+  register: foreman_prepare_realm_keytab_file
+
+- block:
+    - name: Read /etc/ipa/default.conf file
+      slurp:
+        src: /etc/ipa/default.conf
+      register: ipa_default_conf
+      when:
+        - foreman_prepare_realm_freeipa_server is not defined or foreman_prepare_realm_freeipa_realm is not defined
+
+    - name: Set foreman_prepare_realm_freeipa_server var with value found in /etc/ipa/default.conf
+      set_fact:
+        foreman_prepare_realm_freeipa_server: "{{ (ipa_default_conf['content'] | b64decode | regex_findall('server = .*'))[0].split('=')[1] | trim }}"
+      when:
+        - foreman_prepare_realm_freeipa_server is not defined
+
+    - name: Set foreman_prepare_realm_freeipa_realm var with value found in /etc/ipa/default.conf
+      set_fact:
+        foreman_prepare_realm_freeipa_realm: "{{ (ipa_default_conf['content'] | b64decode | regex_findall('realm = .*'))[0].split('=')[1] | trim }}"
+      when:
+        - foreman_prepare_realm_freeipa_realm is not defined
+
+    - name: Get {{ foreman_prepare_realm_user }}@{{ foreman_prepare_realm_freeipa_realm }} keytab
+      shell: |
+        echo {{ foreman_prepare_realm_freeipa_password }}| kinit {{ foreman_prepare_realm_freeipa_principal }}
+        ipa-getkeytab -p {{ foreman_prepare_realm_user }}@{{ foreman_prepare_realm_freeipa_realm }} -s {{ foreman_prepare_realm_freeipa_server }} -k {{ foreman_prepare_realm_keytab_path }}
+      no_log: true
+  when: not foreman_prepare_realm_keytab_file.stat.exists or foreman_prepare_realm_force_keytab_refresh
+
+- name: Ensure keytab file attributes are correct
+  file:
+    path: "{{ foreman_prepare_realm_keytab_path }}"
+    owner: foreman-proxy
+    group: foreman-proxy
+    mode: '0640'
+    state: file

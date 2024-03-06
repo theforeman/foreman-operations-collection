@@ -1,0 +1,5 @@
+---
+foreman_prepare_realm_freeipa_user: admin
+foreman_prepare_realm_user: realm-proxy
+foreman_prepare_realm_keytab_path: /etc/foreman-proxy/realm.keytab
+foreman_prepare_realm_force_keytab_refresh: false
