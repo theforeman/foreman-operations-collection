@@ -21,6 +21,8 @@
     owner: root
     group: root
     mode: '0640'
+  notify:
+    - Restart rhcd
 
 - name: Create rhcd worker
   ansible.builtin.copy:
