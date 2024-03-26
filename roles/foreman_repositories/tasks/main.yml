@@ -1,3 +1,9 @@
 ---
+- name: Verify that foreman_repositories_version is defined
+  ansible.builtin.assert:
+    that:
+      - foreman_repositories_version is defined
+    fail_msg: foreman_repositories_version must be defined for this role to work
+
 - name: Load OS specific repository tasks
   ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}.yml"
