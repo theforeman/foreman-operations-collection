@@ -81,3 +81,31 @@ releases:
     release_date: '2023-05-08'
   2.1.0:
     release_date: '2023-09-01'
+  3.0.0:
+    changes:
+      breaking_changes:
+      - foreman_repositories role - drop default ``foreman_repositories_version``,
+        you now have always to specify which version you want to deploy
+      - foreman_repositories role - drop support for CentOS 7 repositories
+      - foreman_repositories role - drop support for Foreman pre 3.2 / Katello pre
+        4.4 repositories
+      - postgresql_upgrade role - removed the role as it was only needed for Foreman
+        before 2.5
+      - puppet_repositories role - Drop support for Puppet 5
+      minor_changes:
+      - cloud_connector role - Remove receptor cleanup steps in configure cloud connector
+      - cloud_connector role - Restart rhcd after writing out config file
+      - foreman_repositories role - disable Pulpcore module on upgrades to Katello
+        4.11+
+      - foreman_repositories role - only enable the Pulpcore module for Katello up
+        to 4.10, later versions use demodularized Pulpcore repos
+      - metrics role - new role to setup PCP integration with Foreman 3.9 and newer
+      - puppet_repositories role - Add support for Puppet 7 and 8
+    fragments:
+    - add-metrics-role.yml
+    - drop-default-repo.yml
+    - drop-el7.yml
+    - drop-foreman-pre-3.2.yml
+    - drop-postgresql_upgrade-role.yml
+    - pulpcore-module-only-up-to-410.yml
+    release_date: '2024-04-08'

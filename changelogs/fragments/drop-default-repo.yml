@@ -1,2 +1,0 @@
-breaking_changes:
-  - foreman_repositories role - drop default ``foreman_repositories_version``, you now have always to specify which version you want to deploy

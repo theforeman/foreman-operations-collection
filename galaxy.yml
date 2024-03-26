@@ -3,16 +3,18 @@ name: "operations"
 description: Foreman operations tasks such as install, upgrade and maintenance
 authors:
   - "Baptiste Agasse <bagasse@redhat.com>"
+  - "Chris Roberts <chrobert@redhat.com>"
   - "Eric D. Helms <ericdhelms@gmail.com>"
   - "Evgeni Golov <evgeni@golov.de>"
   - "Ewoud Kohl van Wijngaarden <ewoud@kohlvanwijngaarden.nl>"
+  - "Griffin Sullivan <Griffin-Sullivan@users.noreply.github.com>"
   - "Jeffrey van Pelt <jeff@vanpelt.one>"
   - "Jeremy Audet <audet.jeremy@pm.me>"
   - "Kyle Williams <kyle.williams@thetradedesk.com>"
   - "Matthias Dellweg <2500@gmx.de>"
   - "Robert Rettig <robert@rettig.bayern>"
   - "willtome <willtome@gmail.com>"
-version: "2.1.0"
+version: "3.0.0"
 license:
   - "GPL-3.0-or-later"
 tags:
