@@ -1,2 +1,0 @@
-breaking_changes:
-  - foreman_repositories role - drop support for CentOS 7 repositories

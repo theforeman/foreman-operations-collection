@@ -1,2 +1,0 @@
-breaking_changes:
-  - foreman_repositories role - drop support for Foreman pre 3.2 / Katello pre 4.4 repositories
