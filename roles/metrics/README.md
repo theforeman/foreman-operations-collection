@@ -1,7 +1,7 @@
 theforeman.operations.metrics
 =============================
 
-Setup Performace Co-Pilot and Grafana to gather metrics of a Foreman installation.
+Setup Performance Co-Pilot and Grafana to gather metrics of a Foreman installation.
 
 This role is heavily based on the [performancecopilot.metrics](https://github.com/performancecopilot/ansible-pcp) collection.
 
