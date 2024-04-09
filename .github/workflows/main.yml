@@ -6,6 +6,10 @@ on:
   schedule:
     - cron: '0 6 * * *'
 
+concurrency:
+  group: ${{ github.ref_name }}-${{ github.workflow }}
+  cancel-in-progress: true
+
 env:
   COLORTERM: 'yes'
   TERM: 'xterm-256color'
