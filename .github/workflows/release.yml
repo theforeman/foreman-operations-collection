@@ -20,12 +20,15 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install Ansible
-        run: pip install --upgrade ansible
+        run: pip install --upgrade ansible py antsibull-changelog
       - name: Build Ansible Collection
         run: make dist
+      - name: Build Changelog
+        run: antsibull-changelog generate --output release-changelog.txt --only-latest
       - name: Deploy Ansible Collection
         run: make publish GALAXY_API_KEY=${{ secrets.GALAXY_API_KEY }}
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: theforeman-operations-*.tar.gz
+          body_path: release-changelog.txt
