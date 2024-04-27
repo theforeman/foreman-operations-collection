@@ -8,4 +8,7 @@ voluptuous==0.12.1 # from https://github.com/ansible/ansible/raw/devel/test/lib/
 yamllint
 molecule[docker]
 molecule-plugins[docker]; python_version >= '3.9'
+pytest
+pytest-ansible
+pytest-xdist
 ansible-compat<4; python_version >= '3.6' # https://github.com/ansible-community/molecule/issues/3903

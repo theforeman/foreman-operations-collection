@@ -146,10 +146,15 @@ jobs:
       - name: Install Ansible 2.9 compatible molecule and Jinja
         run: pip install --upgrade 'molecule[docker]<4.0' 'Jinja2<3.1'
         if: matrix.ansible == 'v2.9.17'
+      - name: Install collection dependencies
+        run: cd roles/backup && molecule dependency --scenario-name debian
+        env:
+          DRIVER_NAME: docker
       - name: Run tests
         env:
           DRIVER_NAME: docker
-        run: ./tests/molecule.sh
+          MOLECULE_OPTS: --parallel
+        run: pytest -vv --numprocesses 4 --molecule roles/
 
   execution_environment:
     runs-on: ubuntu-latest
