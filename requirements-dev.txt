@@ -11,4 +11,3 @@ molecule-plugins[docker]; python_version >= '3.9'
 pytest
 pytest-ansible
 pytest-xdist
-ansible-compat<4; python_version >= '3.6' # https://github.com/ansible-community/molecule/issues/3903
