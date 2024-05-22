@@ -1,6 +1,6 @@
 ---
 - name: 'Setup repository for Foreman {{ foreman_repositories_version }}'
-  ansible.builtin.yum:
+  ansible.builtin.package:
     name: https://yum.theforeman.org/releases/{{ foreman_repositories_version }}/el{{ ansible_distribution_major_version }}/x86_64/foreman-release.rpm
     disable_gpg_check: true
     state: present
@@ -8,7 +8,7 @@
     - packages
 
 - name: 'Setup repository for Katello {{ foreman_repositories_katello_version }}'
-  ansible.builtin.yum:
+  ansible.builtin.package:
     name: https://yum.theforeman.org/katello/{{ foreman_repositories_katello_version }}/katello/el{{ ansible_distribution_major_version }}/x86_64/katello-repos-latest.rpm
     disable_gpg_check: true
     state: present

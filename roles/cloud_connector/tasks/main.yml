@@ -1,6 +1,6 @@
 ---
 - name: Install yggdrasil-worker-forwarder and rhc
-  ansible.builtin.yum:
+  ansible.builtin.package:
     name:
       - rhc
       - yggdrasil-worker-forwarder
