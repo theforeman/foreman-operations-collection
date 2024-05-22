@@ -11,3 +11,4 @@ molecule-plugins[docker]; python_version >= '3.9'
 pytest
 pytest-ansible
 pytest-xdist
+requests<2.32 # 2.32+ breaks docker
