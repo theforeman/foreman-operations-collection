@@ -1,3 +1,4 @@
+---
 ancestor: null
 releases:
   0.1.0:
@@ -14,98 +15,100 @@ releases:
   1.0.1:
     changes:
       bugfixes:
-      - correct collection metadata, so it can be uploaded to Galaxy
+        - correct collection metadata, so it can be uploaded to Galaxy
     release_date: '2022-03-24'
   1.0.2:
     changes:
       bugfixes:
-      - installer role - don't fail execution in check mode
+        - installer role - don't fail execution in check mode
     fragments:
-    - installer-checkmode-fix.yml
+      - installer-checkmode-fix.yml
     release_date: '2022-03-25'
   1.1.0:
     changes:
       minor_changes:
-      - cloud_connector - new role for installing Cloud Connector (https://github.com/theforeman/foreman-operations-collection/pull/85)
+        - cloud_connector - new role for installing Cloud Connector (https://github.com/theforeman/foreman-operations-collection/pull/85)
     fragments:
-    - 85-fix-forwarder-url.yml
+      - 85-fix-forwarder-url.yml
     release_date: '2022-04-25'
   1.1.1:
     changes:
       bugfixes:
-      - update FORWARDER_URL for cloud connector
+        - update FORWARDER_URL for cloud connector
     release_date: '2022-05-09'
   1.2.0:
     changes:
       minor_changes:
-      - add HTTP proxy support for cloud connector
+        - add HTTP proxy support for cloud connector
     release_date: '2022-05-16'
   1.2.1:
     changes:
       bugfixes:
-      - fix parsing of openssl certificate subject for EL7 and EL8
+        - fix parsing of openssl certificate subject for EL7 and EL8
     release_date: '2022-05-23'
   1.2.2:
     changes:
       bugfixes:
-      - cloud_connector role - use a regular expression to parse the CN from the cert
+        - cloud_connector role - use a regular expression to parse the CN from the
+          cert
     fragments:
-    - 94-subject-regex.yml
+      - 94-subject-regex.yml
     release_date: '2022-06-08'
   1.2.3:
     changes:
       bugfixes:
-      - foreman_repositories - also enable pulpcore module when enabling katello
+        - foreman_repositories - also enable pulpcore module when enabling katello
     release_date: '2022-06-17'
   1.3.0:
     changes:
       bugfixes:
-      - cloud_connector role - Ensure ``rhcd.service`` starts after system reboots
-      - fix paths in execution-environment.yml (https://bugzilla.redhat.com/show_bug.cgi?id=2156941)
+        - cloud_connector role - Ensure ``rhcd.service`` starts after system reboots
+        - fix paths in execution-environment.yml (https://bugzilla.redhat.com/show_bug.cgi?id=2156941)
       minor_changes:
-      - new role to configure backups using ``foreman-maintain``
-      - update default Foreman to 3.5
-      - update default Puppet to 7
+        - new role to configure backups using ``foreman-maintain``
+        - update default Foreman to 3.5
+        - update default Puppet to 7
     release_date: '2023-01-04'
   2.0.0:
     changes:
       breaking_changes:
-      - ansible_repositories role - removed as it's not required anymore since EL
-        8.6 contains ``ansible-core``
+        - ansible_repositories role - removed as it's not required anymore since EL
+          8.6 contains ``ansible-core``
       minor_changes:
-      - cloud_connector role - don't mark proxy.conf systemd drop-in word-inaccessible,
-        there is no benefit and systemd warns about this (https://bugzilla.redhat.com/show_bug.cgi?id=2169682)
+        - cloud_connector role - don't mark proxy.conf systemd drop-in word-inaccessible,
+          there is no benefit and systemd warns about this (https://bugzilla.redhat.com/show_bug.cgi?id=2169682)
     fragments:
-    - bz2169682-world-inaccessible.yml
-    - drop-ansible-repositories-role.yml
+      - bz2169682-world-inaccessible.yml
+      - drop-ansible-repositories-role.yml
     release_date: '2023-05-08'
   2.1.0:
     release_date: '2023-09-01'
   3.0.0:
     changes:
       breaking_changes:
-      - foreman_repositories role - drop default ``foreman_repositories_version``,
-        you now have always to specify which version you want to deploy
-      - foreman_repositories role - drop support for CentOS 7 repositories
-      - foreman_repositories role - drop support for Foreman pre 3.2 / Katello pre
-        4.4 repositories
-      - postgresql_upgrade role - removed the role as it was only needed for Foreman
-        before 2.5
-      - puppet_repositories role - Drop support for Puppet 5
+        - foreman_repositories role - drop default ``foreman_repositories_version``,
+          you now have always to specify which version you want to deploy
+        - foreman_repositories role - drop support for CentOS 7 repositories
+        - foreman_repositories role - drop support for Foreman pre 3.2 / Katello pre
+          4.4 repositories
+        - postgresql_upgrade role - removed the role as it was only needed for Foreman
+          before 2.5
+        - puppet_repositories role - Drop support for Puppet 5
       minor_changes:
-      - cloud_connector role - Remove receptor cleanup steps in configure cloud connector
-      - cloud_connector role - Restart rhcd after writing out config file
-      - foreman_repositories role - disable Pulpcore module on upgrades to Katello
-        4.11+
-      - foreman_repositories role - only enable the Pulpcore module for Katello up
-        to 4.10, later versions use demodularized Pulpcore repos
-      - metrics role - new role to setup PCP integration with Foreman 3.9 and newer
-      - puppet_repositories role - Add support for Puppet 7 and 8
+        - cloud_connector role - Remove receptor cleanup steps in configure cloud
+          connector
+        - cloud_connector role - Restart rhcd after writing out config file
+        - foreman_repositories role - disable Pulpcore module on upgrades to Katello
+          4.11+
+        - foreman_repositories role - only enable the Pulpcore module for Katello
+          up to 4.10, later versions use demodularized Pulpcore repos
+        - metrics role - new role to setup PCP integration with Foreman 3.9 and newer
+        - puppet_repositories role - Add support for Puppet 7 and 8
     fragments:
-    - add-metrics-role.yml
-    - drop-default-repo.yml
-    - drop-el7.yml
-    - drop-foreman-pre-3.2.yml
-    - drop-postgresql_upgrade-role.yml
-    - pulpcore-module-only-up-to-410.yml
+      - add-metrics-role.yml
+      - drop-default-repo.yml
+      - drop-el7.yml
+      - drop-foreman-pre-3.2.yml
+      - drop-postgresql_upgrade-role.yml
+      - pulpcore-module-only-up-to-410.yml
     release_date: '2024-04-08'
