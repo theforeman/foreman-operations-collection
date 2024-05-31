@@ -4,8 +4,8 @@ dependency:
 driver:
   name: ${DRIVER_NAME:-podman}
 platforms:
-  - name: centos8
-    image: quay.io/centos/centos:stream8
+  - name: centos9
+    image: quay.io/centos/centos:stream9
     command: /sbin/init
     tmpfs:
       - /run

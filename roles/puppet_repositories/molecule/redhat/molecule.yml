@@ -4,14 +4,8 @@ dependency:
 driver:
   name: ${DRIVER_NAME:-podman}
 platforms:
-  - name: centos8
-    image: quay.io/centos/centos:stream8
-    command: /sbin/init
-    tmpfs:
-      - /run
-      - /tmp:exec,mode=777
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: centos9
+    image: quay.io/centos/centos:stream9
 provisioner:
   name: ansible
 verifier:

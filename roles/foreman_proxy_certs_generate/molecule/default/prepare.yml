@@ -11,8 +11,8 @@
       ansible.builtin.include_role:
         name: foreman_repositories
       vars:
-        foreman_repositories_version: "3.8"
-        foreman_repositories_katello_version: "4.10"
+        foreman_repositories_version: "3.10"
+        foreman_repositories_katello_version: "4.12"
     - name: Ensure langpacks on EL8
       ansible.builtin.dnf:
         name: glibc-langpack-en
