@@ -30,6 +30,9 @@
     dest: /var/lib/pcp/pmdas/openmetrics/config.d/foreman.url
     content: "{{ foreman_metrics_url }}"
     mode: '0644'
+  when:
+    - foreman_metrics_url is defined
+    - foreman_metrics_url != ''
   notify:
     - Restart pmcd
     - Restart pmproxy
