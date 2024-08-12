@@ -6,12 +6,8 @@ driver:
 platforms:
   - name: foreman.example.com
     image: quay.io/centos/centos:stream9
+    hostname: foreman.example.com
     command: /sbin/init
-    tmpfs:
-      - /run
-      - /tmp:exec,mode=777
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:
   name: ansible
 verifier:

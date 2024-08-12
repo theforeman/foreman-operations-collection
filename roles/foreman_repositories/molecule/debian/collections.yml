@@ -1,5 +1,5 @@
 collections:
-  - name: community.docker
-    version: ">=3,<4"
+  - name: containers.podman
+    version: ">=1.7.0"
   - name: community.general
     version: ">=2,<3"

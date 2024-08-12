@@ -112,7 +112,7 @@ jobs:
           path: theforeman-operations-*.tar.gz
 
   molecule:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -144,15 +144,12 @@ jobs:
       - name: Install dependencies
         run: make test-setup
       - name: Install Ansible 2.9/2.10 compatible molecule and Jinja
-        run: pip install --upgrade 'molecule[docker]<4.0' 'Jinja2<3.1'
+        run: pip install --upgrade 'molecule[podman]<4.0' 'Jinja2<3.1'
         if: matrix.ansible == 'v2.9.17' || matrix.ansible == 'stable-2.10'
       - name: Install collection dependencies
-        run: cd roles/backup && molecule dependency --scenario-name debian
-        env:
-          DRIVER_NAME: docker
+        run: cd roles/installer && molecule dependency && molecule create
       - name: Run tests
         env:
-          DRIVER_NAME: docker
           MOLECULE_OPTS: --parallel
         run: pytest -vv --numprocesses 4 --molecule roles/
 
