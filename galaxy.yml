@@ -1,6 +1,6 @@
 namespace: "theforeman"
 name: "operations"
-description: Foreman operations tasks such as install, upgrade and maintenance
+description: Foreman operations tasks such as install and maintenance
 authors:
   - "Baptiste Agasse <bagasse@redhat.com>"
   - "Chris Roberts <chrobert@redhat.com>"
