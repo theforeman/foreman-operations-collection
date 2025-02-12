@@ -7,5 +7,6 @@ var_naming_pattern: "^(__)?foreman_[a-z_][a-z0-9_]*$"
 exclude_paths:
   - meta/runtime.yml
   - tests/
+  - .ansible/
   - .github/
   - .packit.yaml
