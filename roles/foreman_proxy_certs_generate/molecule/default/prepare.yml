@@ -2,7 +2,6 @@
 - name: Prepare
   hosts: all
   gather_facts: true
-  become: true
   tasks:
     - name: Configure Puppet repositories
       ansible.builtin.include_role:
