@@ -7,7 +7,7 @@
       ansible.builtin.include_role:
         name: foreman_repositories
       vars:
-        foreman_repositories_version: 'nightly'
+        foreman_repositories_version: '3.13'
 
     - name: Install PostgreSQL
       ansible.builtin.package:
