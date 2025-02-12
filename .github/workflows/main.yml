@@ -139,10 +139,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-      - name: Install Ansible
-        run: pip install --upgrade https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz
-      - name: Install dependencies
-        run: make test-setup
+      - name: Install Ansible and dependencies
+        run: pip install --upgrade https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz -r requirements-dev.txt
       - name: Install Ansible 2.9/2.10 compatible molecule and Jinja
         run: pip install --upgrade 'molecule[podman]<4.0' 'Jinja2<3.1'
         if: matrix.ansible == 'v2.9.17' || matrix.ansible == 'stable-2.10'
