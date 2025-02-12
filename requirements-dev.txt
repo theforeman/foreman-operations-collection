@@ -5,7 +5,7 @@ cryptography<3.1; python_version < '3.6'
 pylint==2.6.0; python_version >= '3.6'
 voluptuous==0.12.1 # from https://github.com/ansible/ansible/raw/devel/test/lib/ansible_test/_data/requirements/sanity.validate-modules.txt
 yamllint
-molecule[podman]
+molecule[podman]<25.2.0
 molecule-plugins[podman]; python_version >= '3.9'
 pytest
 pytest-ansible
