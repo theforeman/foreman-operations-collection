@@ -8,12 +8,12 @@ Role Variables
 
 Optional:
 
-- `foreman_puppet_repositories_version`: Version of Puppet to setup repositories for (default: 7)
+- `foreman_puppet_repositories_version`: Version of Puppet to setup repositories for (default: 8)
 
 Example Playbooks
 -----------------
 
-Setup repositories for default Puppet 7 for use by installer:
+Setup repositories for default Puppet 8 for use by installer:
 
 ```yaml
 ---
@@ -23,14 +23,14 @@ Setup repositories for default Puppet 7 for use by installer:
     - puppet_repositories
 ```
 
-Setup repositories for Puppet 6:
+Setup repositories for Puppet 7:
 
 ```yaml
 ---
 - hosts: all
   gather_facts: true
   vars:
-    foreman_puppet_repositories_version: 6
+    foreman_puppet_repositories_version: 7
   roles:
     - puppet_repositories
 ```
