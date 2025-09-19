@@ -1,5 +1,5 @@
 .. meta::
-  :antsibull-docs: 2.16.3
+  :antsibull-docs: 2.21.0
 
 
 .. _plugins_in_theforeman.operations:
@@ -54,6 +54,8 @@ Foreman operations tasks such as install and maintenance
 
 .. toctree::
     :maxdepth: 1
+
+.. _plugin_index_for_theforeman.operations:
 
 Plugin Index
 ------------
