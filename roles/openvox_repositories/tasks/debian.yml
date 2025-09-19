@@ -1,0 +1,20 @@
+---
+- name: Install GPG package
+  ansible.builtin.package:
+    name: gpg
+    state: present
+    update_cache: true
+
+- name: Install OpenVox repository
+  ansible.builtin.apt:
+    deb: "https://apt.voxpupuli.org/openvox{{ foreman_openvox_repositories_version }}-release-{{ ansible_distribution | lower }}{{ ansible_distribution_major_version }}.deb"
+    state: present
+  register: __foreman_openvox_apt_deb_install
+
+- name: Update apt cache if necessary
+  ansible.builtin.apt:
+    update_cache: true
+    force_apt_get: true
+  when: __foreman_openvox_apt_deb_install.changed
+  tags:
+    - skip_ansible_lint  # skip lint since we cannot use handler, and cache must be updated immediately

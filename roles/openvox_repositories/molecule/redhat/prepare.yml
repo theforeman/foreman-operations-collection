@@ -1,0 +1,10 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Configure OpenVox 7 repositories
+      ansible.builtin.include_role:
+        name: openvox_repositories
+      vars:
+        foreman_openvox_repositories_version: 7

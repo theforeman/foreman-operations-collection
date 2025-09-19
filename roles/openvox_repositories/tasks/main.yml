@@ -1,0 +1,9 @@
+---
+- name: Remove any existing OpenVox release packages for versions other than {{ foreman_openvox_repositories_version }}
+  ansible.builtin.package:
+    name: "openvox{{ item }}-release"
+    state: absent
+  loop: "{{ foreman_openvox_repositories_supported_versions | difference([foreman_openvox_repositories_version | string]) }}"
+
+- name: 'Include {{ ansible_os_family }}'
+  ansible.builtin.include_tasks: '{{ ansible_os_family | lower }}.yml'

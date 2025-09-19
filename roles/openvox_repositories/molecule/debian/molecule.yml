@@ -1,0 +1,12 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: ${DRIVER_NAME:-podman}
+platforms:
+  - name: debian-bookworm
+    image: debian:12
+provisioner:
+  name: ansible
+verifier:
+  name: ansible

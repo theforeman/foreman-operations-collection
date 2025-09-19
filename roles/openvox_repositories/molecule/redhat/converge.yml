@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: true
+  vars:
+    foreman_openvox_repositories_version: 8
+  roles:
+    - openvox_repositories

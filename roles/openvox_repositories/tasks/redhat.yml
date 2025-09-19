@@ -1,0 +1,6 @@
+---
+- name: 'Setup OpenVox repository'
+  ansible.builtin.package:
+    name: https://yum.voxpupuli.org/openvox{{ foreman_openvox_repositories_version }}-release-el-{{ ansible_distribution_major_version }}.noarch.rpm
+    disable_gpg_check: true
+    state: present
