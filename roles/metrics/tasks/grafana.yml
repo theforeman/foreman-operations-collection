@@ -6,6 +6,8 @@
       - grafana-pcp
     state: present
     disable_plugin: "{{ 'foreman-protector' if ansible_os_family == 'RedHat' else omit }}"
+  when:
+    - ansible_fqdn == foreman_metrics_grafana_host
 
 - name: Add PCP plugin to Grafana
   ansible.builtin.copy:
@@ -14,17 +16,21 @@
     owner: root
     group: grafana
     mode: '0640'
+  when:
+    - ansible_fqdn == foreman_metrics_grafana_host
   notify: Restart grafana-server
 
 - name: Configure PCP datasources in Grafana
   ansible.builtin.template:
     src: grafana-pcp-datasources.yaml.j2
-    dest: "/etc/grafana/provisioning/datasources/grafana-pcp.yaml"
+    dest: "/etc/grafana/provisioning/datasources/grafana-pcp-{{ ansible_fqdn | default('localhost') }}.yaml"
     mode: '0644'
-  notify: Restart grafana-server
+  delegate_to: "{{ foreman_metrics_grafana_host }}"
 
-- name: Start grafana-server
+- name: Restart grafana-server
   ansible.builtin.service:
     name: grafana-server
-    state: started
-    enabled: true
+    state: restarted
+  delegate_to: "{{ foreman_metrics_grafana_host }}"
+  run_once: true
+...

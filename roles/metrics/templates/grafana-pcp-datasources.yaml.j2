@@ -2,22 +2,25 @@
 apiVersion: 1
 
 datasources:
-- name: PCP Vector
+- name: PCP Vector - {{ ansible_fqdn }}
   type: pcp-vector-datasource
+  {% if ansible_fqdn == foreman_metrics_grafana_host -%}
+  isDefault: true
+  {% endif -%}
   access: proxy
   orgId: 1
   url: {{ foreman_metrics_grafana_pmproxy_url }}
   editable: true
-  isDefault: true
-- name: PCP Redis
+- name: PCP Redis - {{ ansible_fqdn }}
   type: pcp-redis-datasource
   access: proxy
   orgId: 1
   url: {{ foreman_metrics_grafana_pmproxy_url }}
   editable: true
-- name: PCP bpftrace
+- name: PCP bpftrace - {{ ansible_fqdn }}
   type: pcp-bpftrace-datasource
   access: proxy
   orgId: 1
   url: {{ foreman_metrics_grafana_pmproxy_url }}
   editable: true
+...
