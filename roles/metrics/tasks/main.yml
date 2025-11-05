@@ -3,7 +3,7 @@
   ansible.builtin.package:
     name: "{{ ['foreman-pcp', 'pcp'] + foreman_metrics_pcp_additional_packages + foreman_metrics_pcp_optional_agent_packages }}"
     state: present
-    disable_plugin: "{{ 'foreman-protector' if ansible_os_family == 'RedHat' else omit }}"
+    disable_plugin: "{{ 'foreman-protector' if ansible_facts['os_family'] == 'RedHat' else omit }}"
 
 - name: Read pmcd.conf
   ansible.builtin.slurp:

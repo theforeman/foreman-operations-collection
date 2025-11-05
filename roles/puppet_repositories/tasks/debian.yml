@@ -7,7 +7,7 @@
 
 - name: Install Puppet repository
   ansible.builtin.apt:
-    deb: "https://apt.puppet.com/puppet{{ foreman_puppet_repositories_version }}-release-{{ ansible_distribution_release }}.deb"
+    deb: "https://apt.puppet.com/puppet{{ foreman_puppet_repositories_version }}-release-{{ ansible_facts['distribution_release'] }}.deb"
     state: present
   register: __foreman_puppet_apt_deb_install
 
