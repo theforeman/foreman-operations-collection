@@ -16,44 +16,32 @@ env:
   PYTEST_ADDOPTS: '--color=yes'
 
 jobs:
-  build:
-    runs-on: ubuntu-24.04
+  sanity:
+    name: Sanity (Ⓐ${{ matrix.ansible }})
     strategy:
-      fail-fast: false
       matrix:
-        python:
-          - "3.12"
         ansible:
           - stable-2.15
           - stable-2.16
+          - stable-2.17
+          - stable-2.18
+          - stable-2.19
+          - stable-2.20
           - devel
-        include:
-          - python: "3.8"
-            ansible: "stable-2.12"
-          - python: "3.9"
-            ansible: "stable-2.13"
-          - python: "3.10"
-            ansible: "stable-2.14"
-          - python: "3.11"
-            ansible: "stable-2.14"
-          - python: "3.12"
-            ansible: "devel"
+
+    runs-on: ubuntu-24.04
+
     steps:
-      - uses: actions/checkout@v6
-      - name: Set up Python
-        uses: actions/setup-python@v6
+      # Run sanity tests inside a Docker container.
+      # The docker container has all the pinned dependencies that are
+      # required and all Python versions Ansible supports.
+      - name: Perform sanity testing
+        uses: ansible-community/ansible-test-gh-action@release/v1
         with:
-          python-version: ${{ matrix.python }}
-          cache: 'pip'
-          cache-dependency-path: '**/requirements*.txt'
-      - name: Install libyaml-dev for PyYAML
-        run: sudo apt-get install -y libyaml-dev
-      - name: Install Ansible
-        run: pip install --upgrade https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz
-      - name: Install dependencies
-        run: make test-setup
-      - name: Run sanity tests
-        run: make SANITY_OPTS="--local" sanity
+          ansible-core-version: ${{ matrix.ansible }}
+          testing-type: sanity
+          pull-request-change-detection: false
+          coverage: never
 
   docs:
     runs-on: ubuntu-24.04
