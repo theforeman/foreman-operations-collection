@@ -8,4 +8,5 @@ Role Index
  * :doc:`foreman_repositories`
  * :doc:`installer`
  * :doc:`metrics`
+ * :doc:`openvox_repositories`
  * :doc:`puppet_repositories`
