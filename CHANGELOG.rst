@@ -4,6 +4,19 @@ theforeman.operations Release Notes
 
 .. contents:: Topics
 
+v4.0.0
+======
+
+Minor Changes
+-------------
+
+- metrics role - allow disabling pulling the OpenMetrics endpoint
+
+Breaking Changes / Porting Guide
+--------------------------------
+
+- Drop support for Ansible 2.9/2.10/2.11
+
 v3.0.0
 ======
 

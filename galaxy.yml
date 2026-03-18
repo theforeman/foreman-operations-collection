@@ -12,9 +12,11 @@ authors:
   - "Jeremy Audet <audet.jeremy@pm.me>"
   - "Kyle Williams <kyle.williams@thetradedesk.com>"
   - "Matthias Dellweg <2500@gmx.de>"
+  - "Pablo Méndez Hernández <pablomh@redhat.com>"
   - "Robert Rettig <robert@rettig.bayern>"
+  - "Sayan Das <saydas@redhat.com>"
   - "willtome <willtome@gmail.com>"
-version: "3.0.0"
+version: "4.0.0"
 license:
   - "GPL-3.0-or-later"
 tags:

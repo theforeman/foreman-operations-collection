@@ -112,3 +112,13 @@ releases:
       - drop-postgresql_upgrade-role.yml
       - pulpcore-module-only-up-to-410.yml
     release_date: '2024-04-08'
+  4.0.0:
+    changes:
+      breaking_changes:
+        - Drop support for Ansible 2.9/2.10/2.11
+      minor_changes:
+        - metrics role - allow disabling pulling the OpenMetrics endpoint
+    fragments:
+      - drop-pre-212.yml
+      - metrics-optional-endpoint.yml
+    release_date: '2026-03-18'
