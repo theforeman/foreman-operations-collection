@@ -1,0 +1,12 @@
+Role Index
+==========
+
+
+ * :doc:`backup`
+ * :doc:`cloud_connector`
+ * :doc:`foreman_proxy_certs_generate`
+ * :doc:`foreman_repositories`
+ * :doc:`installer`
+ * :doc:`metrics`
+ * :doc:`openvox_repositories`
+ * :doc:`puppet_repositories`
