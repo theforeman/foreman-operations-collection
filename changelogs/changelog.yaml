@@ -122,3 +122,10 @@ releases:
       - drop-pre-212.yml
       - metrics-optional-endpoint.yml
     release_date: '2026-03-18'
+  4.0.1:
+    changes:
+      bugfixes:
+        - openvox_repositories - fix repository setup on Ubuntu
+    fragments:
+      - openvox-ubuntu.yml
+    release_date: '2026-06-16'

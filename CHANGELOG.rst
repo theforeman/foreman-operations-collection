@@ -4,6 +4,14 @@ theforeman.operations Release Notes
 
 .. contents:: Topics
 
+v4.0.1
+======
+
+Bugfixes
+--------
+
+- openvox_repositories - fix repository setup on Ubuntu
+
 v4.0.0
 ======
 

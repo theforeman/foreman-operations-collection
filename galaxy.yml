@@ -16,7 +16,7 @@ authors:
   - "Robert Rettig <robert@rettig.bayern>"
   - "Sayan Das <saydas@redhat.com>"
   - "willtome <willtome@gmail.com>"
-version: "4.0.0"
+version: "4.0.1"
 license:
   - "GPL-3.0-or-later"
 tags:
