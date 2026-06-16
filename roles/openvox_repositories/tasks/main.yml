@@ -5,5 +5,5 @@
     state: absent
   loop: "{{ foreman_openvox_repositories_supported_versions | difference([foreman_openvox_repositories_version | string]) }}"
 
-- name: 'Include {{ ansible_os_family }}'
-  ansible.builtin.include_tasks: '{{ ansible_os_family | lower }}.yml'
+- name: 'Include {{ ansible_facts["os_family"] }}'
+  ansible.builtin.include_tasks: '{{ ansible_facts["os_family"] | lower }}.yml'
