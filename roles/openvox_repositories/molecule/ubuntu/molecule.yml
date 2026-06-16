@@ -1,0 +1,12 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: ${DRIVER_NAME:-podman}
+platforms:
+  - name: ubuntu
+    image: ubuntu:22.04
+provisioner:
+  name: ansible
+verifier:
+  name: ansible

@@ -1,0 +1,14 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Ensure openvox7-release package is absent
+      ansible.builtin.package:
+        name: openvox7-release
+        state: absent
+
+    - name: Ensure openvox8-release package is present
+      ansible.builtin.package:
+        name: openvox8-release
+        state: present
