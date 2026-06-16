@@ -1,0 +1,65 @@
+.. meta::
+  :antsibull-docs: 2.24.0
+
+
+.. _plugins_in_theforeman.operations:
+
+Theforeman.Operations
+=====================
+
+Collection version 4.0.1
+
+.. contents::
+   :local:
+   :depth: 1
+
+Description
+-----------
+
+Foreman operations tasks such as install and maintenance
+
+**Authors:**
+
+* Baptiste Agasse <bagasse@redhat.com>
+* Chris Roberts <chrobert@redhat.com>
+* Eric D. Helms <ericdhelms@gmail.com>
+* Evgeni Golov <evgeni@golov.de>
+* Ewoud Kohl van Wijngaarden <ewoud@kohlvanwijngaarden.nl>
+* Griffin Sullivan <Griffin-Sullivan@users.noreply.github.com>
+* Jeffrey van Pelt <jeff@vanpelt.one>
+* Jeremy Audet <audet.jeremy@pm.me>
+* Kyle Williams <kyle.williams@thetradedesk.com>
+* Matthias Dellweg <2500@gmx.de>
+* Pablo Méndez Hernández <pablomh@redhat.com>
+* Robert Rettig <robert@rettig.bayern>
+* Sayan Das <saydas@redhat.com>
+* willtome <willtome@gmail.com>
+
+**Supported ansible-core versions:**
+
+* 2.12.0 or newer
+
+.. ansible-links::
+
+  - title: "Issue Tracker"
+    url: "https://github.com/theforeman/foreman-operations-collection/issues"
+    external: true
+  - title: "Homepage"
+    url: "https://theforeman.org/"
+    external: true
+  - title: "Repository (Sources)"
+    url: "https://github.com/theforeman/foreman-operations-collection"
+    external: true
+
+
+
+
+.. toctree::
+    :maxdepth: 1
+
+.. _plugin_index_for_theforeman.operations:
+
+Plugin Index
+------------
+
+There are no plugins in the theforeman.operations collection with automatically generated documentation.
