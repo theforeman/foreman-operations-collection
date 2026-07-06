@@ -1,0 +1,107 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: true
+  roles:
+    # ESX with debug and all standard fields
+    - role: virt_who
+      vars:
+        foreman_virt_who_identifier: virt-who-config-esx
+        foreman_virt_who_hypervisor_type: esx
+        foreman_virt_who_hypervisor_server: vcenter.example.com
+        foreman_virt_who_hypervisor_username: readonly@vsphere.local
+        foreman_virt_who_hypervisor_password: changeme
+        foreman_virt_who_hypervisor_id: hostname
+        foreman_virt_who_satellite_url: satellite.example.com
+        foreman_virt_who_organization_label: Default_Organization
+        foreman_virt_who_service_user: virt_who_reporter_1
+        foreman_virt_who_service_user_password: secret
+        foreman_virt_who_interval: 3600
+        foreman_virt_who_debug: true
+
+    # Libvirt — no encrypted_password in config
+    - role: virt_who
+      vars:
+        foreman_virt_who_identifier: virt-who-config-libvirt
+        foreman_virt_who_hypervisor_type: libvirt
+        foreman_virt_who_hypervisor_server: qemu+ssh://root@kvm.example.com/system
+        foreman_virt_who_hypervisor_username: root
+        foreman_virt_who_hypervisor_id: hostname
+        foreman_virt_who_satellite_url: satellite.example.com
+        foreman_virt_who_organization_label: Default_Organization
+        foreman_virt_who_service_user: virt_who_reporter_2
+        foreman_virt_who_service_user_password: secret2
+        foreman_virt_who_interval: 7200
+        foreman_virt_who_debug: false
+
+    # KubeVirt — no server/username/password, has kubeconfig
+    - role: virt_who
+      vars:
+        foreman_virt_who_identifier: virt-who-config-kubevirt
+        foreman_virt_who_hypervisor_type: kubevirt
+        foreman_virt_who_kubeconfig_path: /etc/virt-who/kubeconfig
+        foreman_virt_who_hypervisor_id: uuid
+        foreman_virt_who_satellite_url: satellite.example.com
+        foreman_virt_who_organization_label: Default_Organization
+        foreman_virt_who_service_user: virt_who_reporter_3
+        foreman_virt_who_service_user_password: secret3
+        foreman_virt_who_interval: 3600
+        foreman_virt_who_debug: false
+
+    # AHV with prism_central and ahv_internal_debug
+    - role: virt_who
+      vars:
+        foreman_virt_who_identifier: virt-who-config-ahv
+        foreman_virt_who_hypervisor_type: ahv
+        foreman_virt_who_hypervisor_server: prism.example.com
+        foreman_virt_who_hypervisor_username: admin
+        foreman_virt_who_hypervisor_password: nutanix123
+        foreman_virt_who_hypervisor_id: hostname
+        foreman_virt_who_satellite_url: satellite.example.com
+        foreman_virt_who_organization_label: Default_Organization
+        foreman_virt_who_service_user: virt_who_reporter_4
+        foreman_virt_who_service_user_password: secret4
+        foreman_virt_who_prism_flavor: element
+        foreman_virt_who_ahv_internal_debug: '1'
+        foreman_virt_who_interval: 7200
+        foreman_virt_who_debug: false
+
+    # ESX with whitelist filtering and proxy
+    - role: virt_who
+      vars:
+        foreman_virt_who_identifier: virt-who-config-filtered
+        foreman_virt_who_hypervisor_type: esx
+        foreman_virt_who_hypervisor_server: vcenter2.example.com
+        foreman_virt_who_hypervisor_username: readonly@vsphere.local
+        foreman_virt_who_hypervisor_password: changeme
+        foreman_virt_who_hypervisor_id: hwuuid
+        foreman_virt_who_satellite_url: satellite.example.com
+        foreman_virt_who_organization_label: Default_Organization
+        foreman_virt_who_service_user: virt_who_reporter_5
+        foreman_virt_who_service_user_password: secret5
+        foreman_virt_who_filtering_mode: whitelist
+        foreman_virt_who_whitelist: host1.example.com,host2.example.com
+        foreman_virt_who_filter_host_parents: cluster1,cluster2
+        foreman_virt_who_http_proxy: http://proxy.example.com:8080
+        foreman_virt_who_no_proxy: satellite.example.com,internal.example.com
+        foreman_virt_who_interval: 3600
+        foreman_virt_who_debug: false
+
+    # ESX with blacklist filtering
+    - role: virt_who
+      vars:
+        foreman_virt_who_identifier: virt-who-config-blacklist
+        foreman_virt_who_hypervisor_type: esx
+        foreman_virt_who_hypervisor_server: vcenter3.example.com
+        foreman_virt_who_hypervisor_username: readonly@vsphere.local
+        foreman_virt_who_hypervisor_password: changeme
+        foreman_virt_who_hypervisor_id: hostname
+        foreman_virt_who_satellite_url: satellite.example.com
+        foreman_virt_who_organization_label: Default_Organization
+        foreman_virt_who_service_user: virt_who_reporter_6
+        foreman_virt_who_service_user_password: secret6
+        foreman_virt_who_filtering_mode: blacklist
+        foreman_virt_who_blacklist: dev-host1.example.com
+        foreman_virt_who_exclude_host_parents: dev-cluster
+        foreman_virt_who_interval: 3600
+        foreman_virt_who_debug: false

@@ -1,0 +1,5 @@
+---
+- name: Restart virt-who
+  ansible.builtin.service:
+    name: virt-who
+    state: restarted

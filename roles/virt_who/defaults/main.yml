@@ -1,0 +1,17 @@
+---
+foreman_virt_who_identifier: virt-who-config
+foreman_virt_who_hypervisor_id: hostname
+foreman_virt_who_interval: 7200
+foreman_virt_who_debug: false
+foreman_virt_who_filtering_mode: none
+foreman_virt_who_whitelist: ''
+foreman_virt_who_blacklist: ''
+foreman_virt_who_filter_host_parents: ''
+foreman_virt_who_exclude_host_parents: ''
+foreman_virt_who_http_proxy: ''
+foreman_virt_who_no_proxy: ''
+foreman_virt_who_prism_flavor: central
+foreman_virt_who_ahv_internal_debug: ''
+foreman_virt_who_minimum_version: '0.24.2'
+foreman_virt_who_config_dir: /etc/virt-who.d
+foreman_virt_who_global_config_path: /etc/virt-who.conf

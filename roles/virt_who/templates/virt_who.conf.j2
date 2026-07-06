@@ -1,0 +1,22 @@
+### This configuration file is managed via the virt-who configure plugin
+### manual edits will be deleted.
+[global]
+debug={{ 1 if foreman_virt_who_debug else 0 }}
+interval={{ foreman_virt_who_interval }}
+oneshot=False
+
+[system_environment]
+{% if foreman_virt_who_http_proxy | length > 0 -%}
+{% if '://' in foreman_virt_who_http_proxy -%}
+{% if foreman_virt_who_http_proxy.startswith('https') -%}
+https_proxy={{ foreman_virt_who_http_proxy }}
+{% else -%}
+http_proxy={{ foreman_virt_who_http_proxy }}
+{% endif -%}
+{% else -%}
+http_proxy={{ foreman_virt_who_http_proxy }}
+{% endif -%}
+{% endif -%}
+{% if foreman_virt_who_no_proxy | length > 0 -%}
+no_proxy={{ foreman_virt_who_no_proxy }}
+{% endif -%}

@@ -1,0 +1,160 @@
+---
+- name: Check that required variables are defined
+  ansible.builtin.assert:
+    that:
+      - foreman_virt_who_hypervisor_type is defined and foreman_virt_who_hypervisor_type | length > 0
+      - foreman_virt_who_hypervisor_type in ['esx', 'hyperv', 'libvirt', 'kubevirt', 'ahv']
+      - foreman_virt_who_satellite_url is defined and foreman_virt_who_satellite_url | length > 0
+      - foreman_virt_who_organization_label is defined and foreman_virt_who_organization_label | length > 0
+      - foreman_virt_who_service_user is defined and foreman_virt_who_service_user | length > 0
+      - foreman_virt_who_service_user_password is defined and foreman_virt_who_service_user_password | length > 0
+    fail_msg: >-
+      Required variables must be defined and non-empty: foreman_virt_who_hypervisor_type (esx, hyperv, libvirt, kubevirt, ahv),
+      foreman_virt_who_satellite_url, foreman_virt_who_organization_label,
+      foreman_virt_who_service_user, foreman_virt_who_service_user_password
+
+- name: Check that hypervisor server and username are defined
+  ansible.builtin.assert:
+    that:
+      - foreman_virt_who_hypervisor_server is defined and foreman_virt_who_hypervisor_server | length > 0
+      - foreman_virt_who_hypervisor_username is defined and foreman_virt_who_hypervisor_username | length > 0
+    fail_msg: >-
+      foreman_virt_who_hypervisor_server and foreman_virt_who_hypervisor_username
+      are required for {{ foreman_virt_who_hypervisor_type }}
+  when: foreman_virt_who_hypervisor_type != 'kubevirt'
+
+- name: Check that hypervisor password is defined
+  ansible.builtin.assert:
+    that:
+      - foreman_virt_who_hypervisor_password is defined and foreman_virt_who_hypervisor_password | length > 0
+    fail_msg: >-
+      foreman_virt_who_hypervisor_password is required for {{ foreman_virt_who_hypervisor_type }}
+  when: foreman_virt_who_hypervisor_type in ['esx', 'hyperv', 'ahv']
+
+- name: Check that kubeconfig path is defined for kubevirt
+  ansible.builtin.assert:
+    that:
+      - foreman_virt_who_kubeconfig_path is defined and foreman_virt_who_kubeconfig_path | length > 0
+    fail_msg: foreman_virt_who_kubeconfig_path is required for kubevirt
+  when: foreman_virt_who_hypervisor_type == 'kubevirt'
+
+- name: Check if virt-who is already installed # noqa command-instead-of-module
+  ansible.builtin.command: rpm -q virt-who
+  register: __foreman_virt_who_installed
+  changed_when: false
+  failed_when: false
+
+- name: Install virt-who
+  when: __foreman_virt_who_installed.rc != 0
+  block:
+    - name: Check for satellite-maintain # noqa command-instead-of-module
+      ansible.builtin.command: rpm -q satellite-maintain
+      register: __foreman_virt_who_satellite_maintain
+      changed_when: false
+      failed_when: false
+
+    - name: Check for foreman-maintain # noqa command-instead-of-module
+      ansible.builtin.command: rpm -q rubygem-foreman_maintain
+      register: __foreman_virt_who_foreman_maintain
+      changed_when: false
+      failed_when: false
+      when: __foreman_virt_who_satellite_maintain.rc != 0
+
+    - name: Install virt-who using satellite-maintain # noqa no-changed-when
+      when: __foreman_virt_who_satellite_maintain.rc == 0
+      block:
+        - name: Unlock packages via satellite-maintain # noqa no-changed-when
+          ansible.builtin.command: satellite-maintain packages unlock
+
+        - name: Install virt-who via satellite-maintain # noqa no-changed-when
+          ansible.builtin.command: satellite-maintain advanced procedure run packages-install --packages virt-who --assumeyes
+
+        - name: Lock packages via satellite-maintain # noqa no-changed-when
+          ansible.builtin.command: satellite-maintain packages lock
+
+    - name: Install virt-who using foreman-maintain # noqa no-changed-when
+      when:
+        - __foreman_virt_who_satellite_maintain.rc != 0
+        - __foreman_virt_who_foreman_maintain.rc == 0
+      block:
+        - name: Unlock packages via foreman-maintain # noqa no-changed-when
+          ansible.builtin.command: foreman-maintain packages unlock
+
+        - name: Install virt-who via foreman-maintain # noqa no-changed-when
+          ansible.builtin.command: foreman-maintain advanced procedure run packages-install --packages virt-who --assumeyes
+
+        - name: Lock packages via foreman-maintain # noqa no-changed-when
+          ansible.builtin.command: foreman-maintain packages lock
+
+    - name: Install virt-who via package manager
+      ansible.builtin.package:
+        name: virt-who
+        state: present
+      when:
+        - __foreman_virt_who_satellite_maintain.rc != 0
+        - __foreman_virt_who_foreman_maintain.rc | default(1) != 0
+
+- name: Get installed virt-who version # noqa command-instead-of-module
+  ansible.builtin.command: rpm -q --queryformat '%{VERSION}' virt-who
+  register: __foreman_virt_who_installed_version
+  changed_when: false
+
+- name: Verify minimum virt-who version
+  ansible.builtin.assert:
+    that:
+      - __foreman_virt_who_installed_version.stdout is version(foreman_virt_who_minimum_version, '>=')
+    fail_msg: >-
+      virt-who {{ __foreman_virt_who_installed_version.stdout }} does not meet minimum requirements,
+      minimum version is {{ foreman_virt_who_minimum_version }}
+
+- name: Encrypt hypervisor password
+  ansible.builtin.command: virt-who-password --password '{{ foreman_virt_who_hypervisor_password }}'
+  register: __foreman_virt_who_cr_password_result
+  changed_when: false
+  no_log: true
+  when: foreman_virt_who_hypervisor_type in ['esx', 'hyperv', 'ahv']
+
+- name: Encrypt service user password
+  ansible.builtin.command: virt-who-password --password '{{ foreman_virt_who_service_user_password }}'
+  register: __foreman_virt_who_service_user_password_result
+  changed_when: false
+  no_log: true
+
+- name: Set encrypted password facts
+  ansible.builtin.set_fact:
+    __foreman_virt_who_cr_encrypted_password: "{{ __foreman_virt_who_cr_password_result.stdout | default('') }}"
+    __foreman_virt_who_service_user_encrypted_password: "{{ __foreman_virt_who_service_user_password_result.stdout }}"
+  no_log: true
+
+- name: Ensure virt-who config directory exists
+  ansible.builtin.file:
+    path: "{{ foreman_virt_who_config_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Deploy virt-who per-config configuration
+  ansible.builtin.template:
+    src: virt_who_config.conf.j2
+    dest: "{{ foreman_virt_who_config_dir }}/{{ foreman_virt_who_identifier }}.conf"
+    owner: root
+    group: root
+    mode: '0640'
+  notify:
+    - Restart virt-who
+
+- name: Deploy virt-who global configuration
+  ansible.builtin.template:
+    src: virt_who.conf.j2
+    dest: "{{ foreman_virt_who_global_config_path }}"
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Restart virt-who
+
+- name: Enable virt-who service
+  ansible.builtin.service:
+    name: virt-who
+    enabled: true

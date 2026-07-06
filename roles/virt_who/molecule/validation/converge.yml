@@ -1,0 +1,93 @@
+---
+- name: Converge - test validation failures
+  hosts: all
+  gather_facts: true
+  tasks:
+    # Missing required variable should fail
+    - name: Test missing hypervisor_type fails
+      block:
+        - name: Run role without hypervisor_type
+          ansible.builtin.include_role:
+            name: virt_who
+          vars:
+            foreman_virt_who_satellite_url: satellite.example.com
+            foreman_virt_who_organization_label: Default_Organization
+            foreman_virt_who_service_user: virt_who_reporter_1
+            foreman_virt_who_service_user_password: secret
+
+        - name: Fail if role did not error
+          ansible.builtin.fail:
+            msg: Role should have failed due to missing hypervisor_type
+      rescue:
+        - name: Confirm expected failure for missing hypervisor_type
+          ansible.builtin.debug:
+            msg: "Correctly failed: missing hypervisor_type"
+
+    # Empty password should fail for ESX
+    - name: Test empty password fails for ESX
+      block:
+        - name: Run role with empty hypervisor_password
+          ansible.builtin.include_role:
+            name: virt_who
+          vars:
+            foreman_virt_who_hypervisor_type: esx
+            foreman_virt_who_hypervisor_server: vcenter.example.com
+            foreman_virt_who_hypervisor_username: root
+            foreman_virt_who_hypervisor_password: ''
+            foreman_virt_who_satellite_url: satellite.example.com
+            foreman_virt_who_organization_label: Default_Organization
+            foreman_virt_who_service_user: virt_who_reporter_1
+            foreman_virt_who_service_user_password: secret
+
+        - name: Fail if role did not error
+          ansible.builtin.fail:
+            msg: Role should have failed due to empty hypervisor_password
+      rescue:
+        - name: Confirm expected failure for empty password
+          ansible.builtin.debug:
+            msg: "Correctly failed: empty hypervisor_password for ESX"
+
+    # Invalid hypervisor type should fail
+    - name: Test invalid hypervisor_type fails
+      block:
+        - name: Run role with invalid hypervisor_type
+          ansible.builtin.include_role:
+            name: virt_who
+          vars:
+            foreman_virt_who_hypervisor_type: vmware
+            foreman_virt_who_hypervisor_server: vcenter.example.com
+            foreman_virt_who_hypervisor_username: root
+            foreman_virt_who_hypervisor_password: changeme
+            foreman_virt_who_satellite_url: satellite.example.com
+            foreman_virt_who_organization_label: Default_Organization
+            foreman_virt_who_service_user: virt_who_reporter_1
+            foreman_virt_who_service_user_password: secret
+
+        - name: Fail if role did not error
+          ansible.builtin.fail:
+            msg: Role should have failed due to invalid hypervisor_type
+      rescue:
+        - name: Confirm expected failure for invalid type
+          ansible.builtin.debug:
+            msg: "Correctly failed: invalid hypervisor_type"
+
+    # KubeVirt without kubeconfig should fail
+    - name: Test kubevirt without kubeconfig fails
+      block:
+        - name: Run role with kubevirt but no kubeconfig_path
+          ansible.builtin.include_role:
+            name: virt_who
+          vars:
+            foreman_virt_who_hypervisor_type: kubevirt
+            foreman_virt_who_satellite_url: satellite.example.com
+            foreman_virt_who_organization_label: Default_Organization
+            foreman_virt_who_service_user: virt_who_reporter_1
+            foreman_virt_who_service_user_password: secret
+
+        - name: Fail if role did not error
+          ansible.builtin.fail:
+            msg: Role should have failed due to missing kubeconfig_path
+      rescue:
+        - name: Confirm expected failure for missing kubeconfig
+          ansible.builtin.debug:
+            msg: "Correctly failed: missing kubeconfig_path for kubevirt"

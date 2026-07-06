@@ -1,0 +1,42 @@
+### This configuration file is managed via the virt-who configure plugin
+### manual edits will be deleted.
+[{{ foreman_virt_who_identifier }}]
+type={{ foreman_virt_who_hypervisor_type }}
+hypervisor_id={{ foreman_virt_who_hypervisor_id }}
+owner={{ foreman_virt_who_organization_label }}
+{% if foreman_virt_who_hypervisor_type == 'libvirt' -%}
+server={{ foreman_virt_who_hypervisor_server }}
+username={{ foreman_virt_who_hypervisor_username }}
+{% elif foreman_virt_who_hypervisor_type != 'kubevirt' -%}
+server={{ foreman_virt_who_hypervisor_server }}
+username={{ foreman_virt_who_hypervisor_username }}
+encrypted_password={{ __foreman_virt_who_cr_encrypted_password }}
+{% endif -%}
+{% if foreman_virt_who_filtering_mode == 'whitelist' -%}
+{% if foreman_virt_who_whitelist | length > 0 -%}
+filter_hosts={{ foreman_virt_who_whitelist }}
+{% endif -%}
+{% if foreman_virt_who_filter_host_parents | length > 0 -%}
+filter_host_parents={{ foreman_virt_who_filter_host_parents }}
+{% endif -%}
+{% elif foreman_virt_who_filtering_mode == 'blacklist' -%}
+{% if foreman_virt_who_blacklist | length > 0 -%}
+exclude_hosts={{ foreman_virt_who_blacklist }}
+{% endif -%}
+{% if foreman_virt_who_exclude_host_parents | length > 0 -%}
+exclude_host_parents={{ foreman_virt_who_exclude_host_parents }}
+{% endif -%}
+{% endif -%}
+rhsm_hostname={{ foreman_virt_who_satellite_url }}
+rhsm_username={{ foreman_virt_who_service_user }}
+rhsm_encrypted_password={{ __foreman_virt_who_service_user_encrypted_password }}
+rhsm_prefix=/rhsm
+{% if foreman_virt_who_hypervisor_type == 'kubevirt' -%}
+kubeconfig={{ foreman_virt_who_kubeconfig_path }}
+{% endif -%}
+{% if foreman_virt_who_hypervisor_type == 'ahv' -%}
+prism_central={{ (foreman_virt_who_prism_flavor == 'central') | lower }}
+{% if foreman_virt_who_ahv_internal_debug | length > 0 -%}
+ahv_internal_debug={{ foreman_virt_who_ahv_internal_debug }}
+{% endif -%}
+{% endif -%}

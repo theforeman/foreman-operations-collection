@@ -1,0 +1,165 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    # --- Package and service ---
+    - name: Ensure virt-who is installed
+      ansible.builtin.package:
+        name: virt-who
+        state: present
+
+    - name: Ensure virt-who service is enabled
+      ansible.builtin.service:
+        name: virt-who
+        enabled: true
+
+    # --- ESX config ---
+    - name: Read ESX config file
+      ansible.builtin.slurp:
+        src: /etc/virt-who.d/virt-who-config-esx.conf
+      register: __foreman_virt_who_esx
+
+    - name: Assert ESX config contains expected values
+      ansible.builtin.assert:
+        that:
+          - "'[virt-who-config-esx]' in __foreman_virt_who_content"
+          - "'type=esx' in __foreman_virt_who_content"
+          - "'hypervisor_id=hostname' in __foreman_virt_who_content"
+          - "'owner=Default_Organization' in __foreman_virt_who_content"
+          - "'server=vcenter.example.com' in __foreman_virt_who_content"
+          - "'username=readonly@vsphere.local' in __foreman_virt_who_content"
+          - "'encrypted_password=' in __foreman_virt_who_content"
+          - "'rhsm_hostname=satellite.example.com' in __foreman_virt_who_content"
+          - "'rhsm_username=virt_who_reporter_1' in __foreman_virt_who_content"
+          - "'rhsm_encrypted_password=' in __foreman_virt_who_content"
+          - "'rhsm_prefix=/rhsm' in __foreman_virt_who_content"
+          - "'filter_hosts=' not in __foreman_virt_who_content"
+          - "'kubeconfig=' not in __foreman_virt_who_content"
+          - "'prism_central=' not in __foreman_virt_who_content"
+      vars:
+        __foreman_virt_who_content: "{{ __foreman_virt_who_esx['content'] | b64decode }}"
+
+    # --- Libvirt config ---
+    - name: Read libvirt config file
+      ansible.builtin.slurp:
+        src: /etc/virt-who.d/virt-who-config-libvirt.conf
+      register: __foreman_virt_who_libvirt
+
+    - name: Assert libvirt config has server and username but no encrypted_password
+      ansible.builtin.assert:
+        that:
+          - "'[virt-who-config-libvirt]' in __foreman_virt_who_content"
+          - "'type=libvirt' in __foreman_virt_who_content"
+          - "'server=qemu+ssh://root@kvm.example.com/system' in __foreman_virt_who_content"
+          - "'username=root' in __foreman_virt_who_content"
+          - "'encrypted_password=' not in __foreman_virt_who_content"
+      vars:
+        __foreman_virt_who_content: "{{ __foreman_virt_who_libvirt['content'] | b64decode }}"
+
+    # --- KubeVirt config ---
+    - name: Read kubevirt config file
+      ansible.builtin.slurp:
+        src: /etc/virt-who.d/virt-who-config-kubevirt.conf
+      register: __foreman_virt_who_kubevirt
+
+    - name: Assert kubevirt config has kubeconfig but no server or password
+      ansible.builtin.assert:
+        that:
+          - "'[virt-who-config-kubevirt]' in __foreman_virt_who_content"
+          - "'type=kubevirt' in __foreman_virt_who_content"
+          - "'hypervisor_id=uuid' in __foreman_virt_who_content"
+          - "'kubeconfig=/etc/virt-who/kubeconfig' in __foreman_virt_who_content"
+          - "'server=' not in __foreman_virt_who_content"
+          - "'username=' not in __foreman_virt_who_content"
+          - "'encrypted_password=' not in __foreman_virt_who_content"
+      vars:
+        __foreman_virt_who_content: "{{ __foreman_virt_who_kubevirt['content'] | b64decode }}"
+
+    # --- AHV config ---
+    - name: Read AHV config file
+      ansible.builtin.slurp:
+        src: /etc/virt-who.d/virt-who-config-ahv.conf
+      register: __foreman_virt_who_ahv
+
+    - name: Assert AHV config has prism and debug options
+      ansible.builtin.assert:
+        that:
+          - "'[virt-who-config-ahv]' in __foreman_virt_who_content"
+          - "'type=ahv' in __foreman_virt_who_content"
+          - "'server=prism.example.com' in __foreman_virt_who_content"
+          - "'encrypted_password=' in __foreman_virt_who_content"
+          - "'prism_central=false' in __foreman_virt_who_content"
+          - "'ahv_internal_debug=1' in __foreman_virt_who_content"
+      vars:
+        __foreman_virt_who_content: "{{ __foreman_virt_who_ahv['content'] | b64decode }}"
+
+    # --- Whitelist filtering + proxy config ---
+    - name: Read whitelist-filtered config file
+      ansible.builtin.slurp:
+        src: /etc/virt-who.d/virt-who-config-filtered.conf
+      register: __foreman_virt_who_filtered
+
+    - name: Assert whitelist filtering is present
+      ansible.builtin.assert:
+        that:
+          - "'[virt-who-config-filtered]' in __foreman_virt_who_content"
+          - "'hypervisor_id=hwuuid' in __foreman_virt_who_content"
+          - "'filter_hosts=host1.example.com,host2.example.com' in __foreman_virt_who_content"
+          - "'filter_host_parents=cluster1,cluster2' in __foreman_virt_who_content"
+          - "'exclude_hosts=' not in __foreman_virt_who_content"
+      vars:
+        __foreman_virt_who_content: "{{ __foreman_virt_who_filtered['content'] | b64decode }}"
+
+    # --- Blacklist filtering config ---
+    - name: Read blacklist-filtered config file
+      ansible.builtin.slurp:
+        src: /etc/virt-who.d/virt-who-config-blacklist.conf
+      register: __foreman_virt_who_blacklist
+
+    - name: Assert blacklist filtering is present
+      ansible.builtin.assert:
+        that:
+          - "'[virt-who-config-blacklist]' in __foreman_virt_who_content"
+          - "'exclude_hosts=dev-host1.example.com' in __foreman_virt_who_content"
+          - "'exclude_host_parents=dev-cluster' in __foreman_virt_who_content"
+          - "'filter_hosts=' not in __foreman_virt_who_content"
+      vars:
+        __foreman_virt_who_content: "{{ __foreman_virt_who_blacklist['content'] | b64decode }}"
+
+    # --- Global config (last role invocation wins) ---
+    - name: Read global config file
+      ansible.builtin.slurp:
+        src: /etc/virt-who.conf
+      register: __foreman_virt_who_global
+
+    - name: Assert global config contains expected values
+      ansible.builtin.assert:
+        that:
+          - "'[global]' in __foreman_virt_who_content"
+          - "'interval=' in __foreman_virt_who_content"
+          - "'oneshot=False' in __foreman_virt_who_content"
+          - "'[system_environment]' in __foreman_virt_who_content"
+      vars:
+        __foreman_virt_who_content: "{{ __foreman_virt_who_global['content'] | b64decode }}"
+
+    # --- Verify all six config files coexist ---
+    - name: Check all config files exist
+      ansible.builtin.stat:
+        path: "/etc/virt-who.d/{{ item }}.conf"
+      register: __foreman_virt_who_all_configs
+      loop:
+        - virt-who-config-esx
+        - virt-who-config-libvirt
+        - virt-who-config-kubevirt
+        - virt-who-config-ahv
+        - virt-who-config-filtered
+        - virt-who-config-blacklist
+
+    - name: Assert all config files exist
+      ansible.builtin.assert:
+        that:
+          - item.stat.exists
+      loop: "{{ __foreman_virt_who_all_configs.results }}"
+      loop_control:
+        label: "{{ item.item }}"
