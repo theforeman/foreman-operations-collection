@@ -14,27 +14,27 @@ Optional:
 Example Playbooks
 -----------------
 
-Setup repositories for Foreman 3.5:
+Setup repositories for Foreman 3.19:
 
 ```yaml
 ---
 - hosts: all
   gather_facts: true
   vars:
-    foreman_repositories_version: "3.5"
+    foreman_repositories_version: "3.19"
   roles:
     - foreman_repositories
 ```
 
-Setup repositories for Katello 4.7 and Foreman 3.5:
+Setup repositories for Katello 4.21 and Foreman 3.19:
 
 ```yaml
 ---
 - hosts: all
   gather_facts: true
   vars:
-    foreman_repositories_version: "3.5"
-    foreman_repositories_katello_version: "4.7"
+    foreman_repositories_version: "3.19"
+    foreman_repositories_katello_version: "4.21"
   roles:
     - foreman_repositories
 ```
