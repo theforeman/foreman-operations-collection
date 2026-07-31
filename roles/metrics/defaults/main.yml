@@ -4,6 +4,7 @@ foreman_metrics_pcp_additional_packages: "{{ ['pcp-system-tools'] if ansible_fac
 foreman_metrics_pcp_optional_agents:
   - apache
   - openmetrics
+  - podman
   - postgresql
   - redis
 foreman_metrics_pcp_optional_agent_packages_redhat: "{{ foreman_metrics_pcp_optional_agents | map('regex_replace', '^', 'pcp-pmda-') }}"
