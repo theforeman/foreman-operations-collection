@@ -1,0 +1,2 @@
+minor_changes:
+  - Add prepare_realm role to help integrate FreeIPA domain as realm provider in foreman (https://github.com/theforeman/foreman-operations-collection/pull/57)
