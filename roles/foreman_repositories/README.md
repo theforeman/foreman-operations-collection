@@ -8,7 +8,7 @@ Role Variables
 
 Optional:
 
-- `foreman_repositories_version`: Version of Foreman to setup repositories for (default: 3.5)
+- `foreman_repositories_version`: Version of Foreman to setup repositories for.
 - `foreman_repositories_katello_version`: Version of Katello to setup repositories for, set a value for this to configure Katello repositories otherwise no Katello repositories will be configured (default: null)
 
 Example Playbooks
