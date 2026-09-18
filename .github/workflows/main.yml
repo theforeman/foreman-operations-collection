@@ -28,6 +28,7 @@ jobs:
           - stable-2.19
           - stable-2.20
           - stable-2.21
+          - stable-2.22
           - devel
 
     runs-on: ubuntu-24.04
@@ -113,6 +114,7 @@ jobs:
           - stable-2.19
           - stable-2.20
           - stable-2.21
+          - stable-2.22
           - devel
         include:
           - python: "3.9"
