@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: foreman
+  gather_facts: true
+  roles:
+    - role: prepare_realm
+      vars:
+        foreman_prepare_realm_freeipa_password: changeme

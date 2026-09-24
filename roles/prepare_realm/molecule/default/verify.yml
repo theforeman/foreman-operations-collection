@@ -1,0 +1,19 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Foreman proxy is installed
+      package:
+        name: foreman-proxy
+        state: present
+
+    - name: Keytab file is present
+      stat:
+        path: /etc/foreman-proxy/realm.keytab
+      register: keytab_file
+
+    - name: Assert keytab file exists
+      assert:
+        that:
+          - keytab_file.stat.exists

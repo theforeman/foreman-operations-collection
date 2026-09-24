@@ -1,0 +1,35 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: ${DRIVER_NAME:-podman}
+platforms:
+  - name: foreman.example.com
+    groups:
+      - foreman
+    image: centos:8
+    command: /sbin/init
+    tmpfs:
+      - /run
+      - /tmp:exec,mode=777
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: ipa.example.com
+    groups:
+      - ipa
+    image:
+    command: -U --realm EXAMPLE.COM --admin-password=changeme --ds-password=changeme
+    tmpfs:
+      - /data
+      - /run
+      - /tmp:exec,mode=777
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+provisioner:
+  name: ansible
+verifier:
+  name: ansible
+lint: |
+  set -e
+  yamllint -c ../../.yamllint .
+  ansible-lint .
